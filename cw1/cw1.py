@@ -36,26 +36,32 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
 
+
 #define functions
 
-#set rules
+#print out the rules
 def rules():
     print ("\n* RULES *")
     print ("• Player 1 is Red, Player 2 is Black.")
     print ("• Aim to remove all of the other players pieces.")
     print ("• Move the pieces diagonally forward to remove the other players pieces.")
-    print ("• Moving a piece to the opponents side will make that piece into a King,")
-    print ("  King pieces can move back and forth diagonally.\n")
+    print ("• Moving a piece to the opponents side will make that piece into a King.")
+    print ("• King pieces can move back and forth diagonally.\n"
+    )
 
 #print board
 #create a loop to print out board using i
 def print_grid():
-    print ("--------------------------------------")
+    print ("  +-------------------------------+")
     i = 0
-    while i < 8:
-        print (" "+b_grid[i][0]+"  | "+b_grid[i][1]+"  | "+b_grid[i][2]+"  | "+b_grid[i][3]+"  | "+b_grid[i][4]+"  | "+b_grid[i][5]+"  |  "+b_grid[i][6]+" | "+b_grid[i][7]+" ")
-        print ("--------------------------------------")
+    j = 0
+    #print same lines 8 times, i increments by 1 each loop
+    while i < len(b_grid):
+        print (str(j) + " | "+b_grid[i][0]+" | "+b_grid[i][1]+" | "+b_grid[i][2]+" | "+b_grid[i][3]+" | "+b_grid[i][4]+" | "+b_grid[i][5]+" | "+b_grid[i][6]+" | "+b_grid[i][7]+ " |")
+        print ("  +-------------------------------+")
         i += 1
+        j += 1
+    print (" 0   1   2   3   4   5   6   7 ")
 
 ########
 # GAME #
