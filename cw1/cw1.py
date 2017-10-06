@@ -40,12 +40,10 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
 #define functions
 
 #print out the rules
-######### add how to move pieces too!! ########
 def startup_rules():
-
     print ("Aim to remove all of the opponents pieces!")
     print ("Type 'move' to move a piece")
-    print ("Type 'rules' for rules.")
+    print ("Type 'rules' for how to play.")
     print ("Type 'exit' to quit.\n")
 
 def rules():
@@ -80,7 +78,7 @@ def print_grid():
 print ("Now playing: Checkers!\n")
 startup_rules()
 
-user_input = input("Please press enter to start:")
+user_input = input("Please press enter to start: \n")
 while (user_input != 'exit'):
     print_grid()
 
@@ -89,11 +87,27 @@ while (user_input != 'exit'):
         rules()
 
     elif user_input == 'move':
-        print("Please enter the co-ordinates of the piece you would like to move:")
+        #co-ord to move from
+        print("Please enter the co-ordinates of the piece you would like to move (along(x),up/down(y)): ")
         move_from = input("> ") #input co-ord to move from
         split_from = move_from.split(',') #var to split by comma (creates into array)
         split_fromX = int(split_from[0])
         split_fromY = int(split_from[1])
+
+        #co-ord to move to
+        print ("Where would you like to move your choice?")
+        print ("1   2")
+        print ("  "+ player_1 +"  ") ###### change to current_player
+        print ("3   4")
+        move_to = input("Please enter your choice: ")
+        if (move_to == '1'):
+            #check that grid square -1,-1 is free
+            #to move the piece change...
+            #grid[original][original] = " " blank
+            #grid[original - 1][original - 1] = b or r
+
+        #update grid
+        b_grid[split_fromY][split_fromX] = " "
 
     elif user_input == '2':
         print ("\nlol bye\n")
