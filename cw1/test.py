@@ -1,213 +1,86 @@
 #test.py
-#used for testing stufffff
 
+##########
+# SETUP #
+#########
 
-p_1 = "x"
-p_2 = "o"
-p1_win = "Player 1 wins!"
-p2_win = "Player 2 wins!"
-this_player = ""
-move_turn = 0
-user_move = input()
-
-#make the grid
-b_grid = [[' ',' ',' '],
-          [' ',' ',' '],
-          [' ',' ',' ']]
-
-#define a function to build board via print
-def print_grid():
-    print ("your board:")
-    print (" "+b_grid[0][0]+" | "+b_grid[0][1]+" | "+b_grid[0][2]+" ")
-    print ("-----------")
-    print (" "+b_grid[1][0]+" | "+b_grid[1][1]+" | "+b_grid[1][2]+" ")
-    print ("-----------")
-    print (" "+b_grid[2][0]+" | "+b_grid[2][1]+" | "+b_grid[2][2]+" ")
-
-def p1_p2():
-    if move_turn % 2 == 0:
-        this_player = p_2
-    else:
-        this_player = p_1
-    print (this_player)
-
-# def results():
-#     if ((b_grid[0][0] and b_grid[0][1] and b_grid[0][2] != " ")and
-#         (b_grid[1][0] and b_grid[1][1] and b_grid[1][2] != " ")and
-#         (b_grid[2][0] and b_grid[2][1] and b_grid[2][2] != " ")):
-#         print ("Its a draw fam")
-#         user_move = ("exit")
-#         break
-#
-#     if ((b_grid[0][0] and b_grid[0][1] and b_grid[0][2] == p_1) or
-#         (b_grid[1][0] and b_grid[1][1] and b_grid[1][2] == p_1) or
-#         (b_grid[2][0] and b_grid[2][1] and b_grid[2][2] == p_1) or
-#         (b_grid[0][0] and b_grid[1][0] and b_grid[2][0] == p_1) or
-#         (b_grid[0][1] and b_grid[1][1] and b_grid[2][1] == p_1) or
-#         (b_grid[0][2] and b_grid[1][2] and b_grid[2][2] == p_1) or
-#         (b_grid[0][0] and b_grid[1][1] and b_grid[2][2] == p_1) or
-#         (b_grid[0][2] and b_grid[1][1] and b_grid[2][0] == p_1)):
-#         print ("Player 1 wins!")
-#         user_move = ("exit")
-#         break
-#
-#     if ((b_grid[0][0] and b_grid[0][1] and b_grid[0][2] == p_2) or
-#         (b_grid[1][0] and b_grid[1][1] and b_grid[1][2] == p_2) or
-#         (b_grid[2][0] and b_grid[2][1] and b_grid[2][2] == p_2) or
-#         (b_grid[0][0] and b_grid[1][0] and b_grid[2][0] == p_2) or
-#         (b_grid[0][1] and b_grid[1][1] and b_grid[2][1] == p_2) or
-#         (b_grid[0][2] and b_grid[1][2] and b_grid[2][2] == p_2) or
-#         (b_grid[0][0] and b_grid[1][1] and b_grid[2][2] == p_2) or
-#         (b_grid[0][2] and b_grid[1][1] and b_grid[2][0] == p_2)):
-#         print ("Player 1 wins!")
-#         user_move = ("exit")
-#         break
-
-############
-### GAME ###
-############
+#http://www.darkfish.com/checkers/rules.html (rules)
 
 #setup vars
+player_1 = "r"
+player_2 = "b"
+move_turn = 0 #var for incrementing turns
+current_turn = 0
+current_player = ""
+user_input = input("Please press enter to start:")
 
-#while loop, allow user to quit with "exit"
-#put user input into
-while (user_move != "exit"):
+#create grid
+b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
+          ['b',' ','b',' ','b',' ','b',' '],
+          [' ','b',' ','b',' ','b',' ','b'],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
+          ['r',' ','r',' ','r',' ','r',' '],
+          [' ','r',' ','r',' ','r',' ','r'],
+          ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
+
+
+#define functions
+
+#print out the rules
+######### add how to move pieces too!! ########
+def startup_rules():
+    print ("Type 'rules' for rules.")
+    print ("Type 'exit' to quit.\n")
+    print ("Aim to remove all of the opponents pieces!")
+    print ("Enter the co-ordinates of the piece you would like to move.")
+    # print ("Type 1 to move upwards left.")
+    # print ("Type 2 to move upwards right.")
+    # print ("3 and 4 *King only!*")
+    print ("1   2\n  "+current_player+"   \n3   4")
+
+def rules():
+    print ("\n* RULES *")
+    print ("• Player 1 is Red, Player 2 is Black.")
+    print ("• Move the pieces diagonally forward to remove the other players pieces.")
+    print ("• Moving a piece to the opponents side will make that piece into a King.")
+    print ("• King pieces can move back and forth diagonally.\n")
+
+#print board
+#create a loop to print out board using i
+def print_grid():
+    print ("    0   1   2   3   4   5   6   7 ")
+    print ("  +-------------------------------+")
+    i = 0
+    j = 0
+    #print same lines 8 times, i and j increment by 1 each loop
+    while i < 8:
+        print (str(j) + " | "+b_grid[i][0]+" | "+b_grid[i][1]+" | "+b_grid[i][2]+" | "+b_grid[i][3]+" | "+b_grid[i][4]+" | "+b_grid[i][5]+" | "+b_grid[i][6]+" | "+b_grid[i][7]+ " |")
+        # to make board look nicer, print different horizontal line
+        if i < 7:
+            print ("  +---+---+---+---+---+---+---+---+")
+        i += 1
+        j += 1
+    print ("  +-------------------------------+")
+
+
+########
+# GAME #
+########
+
+print ("Hello World!\n")
+
+while (user_input != 'exit'):
     print_grid()
-    if ((b_grid[0][0] != " " and b_grid[0][1] != " " and b_grid[0][2] != " ")and
-        (b_grid[1][0] != " " and b_grid[1][1] != " " and b_grid[1][2] != " ")and
-        (b_grid[2][0] != " " and b_grid[2][1] != " " and b_grid[2][2] != " ")):
-        print ("Its a draw fam")
-        user_move = ("exit")
-        break
 
-    if ((b_grid[0][0] == p_1 and b_grid[0][1] == p_1 and b_grid[0][2] == p_1) or
-        (b_grid[1][0] == p_1 and b_grid[1][1] == p_1 and b_grid[1][2] == p_1) or
-        (b_grid[2][0] == p_1 and b_grid[2][1] == p_1 and b_grid[2][2] == p_1) or
-        (b_grid[0][0] == p_1 and b_grid[1][0] == p_1 and b_grid[2][0] == p_1) or
-        (b_grid[0][1] == p_1 and b_grid[1][1] == p_1 and b_grid[2][1] == p_1) or
-        (b_grid[0][2] == p_1 and b_grid[1][2] == p_1 and b_grid[2][2] == p_1) or
-        (b_grid[0][0] == p_1 and b_grid[1][1] == p_1 and b_grid[2][2] == p_1) or
-        (b_grid[0][2] == p_1 and b_grid[1][1] == p_1 and b_grid[2][0] == p_1)):
-        print ("Player 1 wins!")
-        user_move = ("exit")
-        break
-
-    if ((b_grid[0][0] == p_2 and b_grid[0][1] == p_2 and b_grid[0][2] == p_2) or
-        (b_grid[1][0] == p_2 and b_grid[1][1] == p_2 and b_grid[1][2] == p_2) or
-        (b_grid[2][0] == p_2 and b_grid[2][1] == p_2 and b_grid[2][2] == p_2) or
-        (b_grid[0][0] == p_2 and b_grid[1][0] == p_2 and b_grid[2][0] == p_2) or
-        (b_grid[0][1] == p_2 and b_grid[1][1] == p_2 and b_grid[2][1] == p_2) or
-        (b_grid[0][2] == p_2 and b_grid[1][2] == p_2 and b_grid[2][2] == p_2) or
-        (b_grid[0][0] == p_2 and b_grid[1][1] == p_2 and b_grid[2][2] == p_2) or
-        (b_grid[0][2] == p_2 and b_grid[1][1] == p_2 and b_grid[2][0] == p_2)):
-        print ("Player 1 wins!")
-        user_move = ("exit")
-        break
-
-    user_move = input("> ")
-    if user_move == ("1"):
-        if b_grid[0][0] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[0][0] = this_player
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("2"):
-        if b_grid[0][1] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[0][1] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("3"):
-        if b_grid[0][2] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[0][2] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("4"):
-        if b_grid[1][0] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[1][0] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("5"):
-        if b_grid[1][1] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[1][1] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("6"):
-        if b_grid[1][2] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[1][2] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("7"):
-        if b_grid[2][0] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[2][0] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("8"):
-        if b_grid[2][1] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[2][1] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
-    elif user_move == ("9"):
-        if b_grid[2][2] == (" "):
-            move_turn += 1
-            if move_turn % 2 == 0:
-                this_player = p_2
-            else:
-                this_player = p_1
-            b_grid[2][2] = (this_player)
-        else:
-            print("thats been  T A K E N\nchoose another space pls\n")
+    user_input = input("> ")
+    if user_input == 'rules':
+        rules()
+    elif user_input == 'move':
+        print("Please enter the co-ordinates of the piece you would like to move:")
+        from_piece = input("> ")
+    elif user_input == '2':
+        print ("\nhaha farewell\n")
     else:
         break
-    print ("Current player:", (this_player))
-    print ("Current turn:", str(move_turn))
- #""MOVE TURN"" :)))))))))
-    #imlement counter to be shown at end
-
-#winning lines
-#(1,2,3) (4,5,6) (7,8,9)
-#(1,4,7) (2,5,8) (3,6,9)
-#(1,5,9) (3,5,7)
-
-#store score
-#winners.append(winner)
-
-#please let me pass this year thank u
+print ("\nThanks for playing!\n")

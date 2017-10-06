@@ -40,6 +40,14 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
 #define functions
 
 #print out the rules
+######### add how to move pieces too!! ########
+def startup_rules():
+
+    print ("Aim to remove all of the opponents pieces!")
+    print ("Type 'move' to move a piece")
+    print ("Type 'rules' for rules.")
+    print ("Type 'exit' to quit.\n")
+
 def rules():
     print ("\n* RULES *")
     print ("• Player 1 is Red, Player 2 is Black.")
@@ -50,6 +58,7 @@ def rules():
 #print board
 #create a loop to print out board using i
 def print_grid():
+    print ("    0   1   2   3   4   5   6   7 ")
     print ("  +-------------------------------+")
     i = 0
     j = 0
@@ -62,13 +71,32 @@ def print_grid():
         i += 1
         j += 1
     print ("  +-------------------------------+")
-    print ("    0   1   2   3   4   5   6   7 ")
+
 
 ########
 # GAME #
 ########
 
-print ("Hello World!\n")
-print_grid()
-rules()
-print ("End of program!\n")
+print ("Now playing: Checkers!\n")
+startup_rules()
+
+user_input = input("Please press enter to start:")
+while (user_input != 'exit'):
+    print_grid()
+
+    user_input = input("> ")
+    if user_input == 'rules':
+        rules()
+
+    elif user_input == 'move':
+        print("Please enter the co-ordinates of the piece you would like to move:")
+        move_from = input("> ") #input co-ord to move from
+        split_from = move_from.split(',') #var to split by comma (creates into array)
+        split_fromX = int(split_from[0])
+        split_fromY = int(split_from[1])
+
+    elif user_input == '2':
+        print ("\nlol bye\n")
+    else:
+        break
+print ("\nThanks for playing!\n")
