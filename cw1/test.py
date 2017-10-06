@@ -1,4 +1,17 @@
-#test.py
+#cw1.py
+#create a game like checkers
+
+# Your game should record play history, i.e. the sequence of moves that the players make during a game,
+# so that each game that is played can be recorded and replayed.
+# Your game should support undo and redo, again selecting the most appropriate data structures
+# to enable these functionalities.
+# Finally, your game should implement an algorithm that enables the computer to choose
+# which moves to make during their own turn, i.e. a simple AI player. Your choice
+# of algorithm for the AI player may be from the literature, or of your own design. Whichever your
+# choice you must be able to evaluate and justify your selection of both data structures and algorithms.
+# The game should run from the command line, using a text based interface in the first instance.
+
+# PLS LET ME PASS LOL
 
 ##########
 # SETUP #
@@ -12,7 +25,6 @@ player_2 = "b"
 move_turn = 0 #var for incrementing turns
 current_turn = 0
 current_player = ""
-user_input = input("Please press enter to start:")
 
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
@@ -28,16 +40,11 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
 #define functions
 
 #print out the rules
-######### add how to move pieces too!! ########
 def startup_rules():
-    print ("Type 'rules' for rules.")
-    print ("Type 'exit' to quit.\n")
     print ("Aim to remove all of the opponents pieces!")
-    print ("Enter the co-ordinates of the piece you would like to move.")
-    # print ("Type 1 to move upwards left.")
-    # print ("Type 2 to move upwards right.")
-    # print ("3 and 4 *King only!*")
-    print ("1   2\n  "+current_player+"   \n3   4")
+    print ("Type 'move' to move a piece")
+    print ("Type 'rules' for how to play.")
+    print ("Type 'exit' to quit.\n")
 
 def rules():
     print ("\n* RULES *")
@@ -68,19 +75,46 @@ def print_grid():
 # GAME #
 ########
 
-print ("Hello World!\n")
+print ("Now playing: Checkers!\n")
+startup_rules()
 
+user_input = input("Please press enter to start: \n")
 while (user_input != 'exit'):
     print_grid()
 
     user_input = input("> ")
     if user_input == 'rules':
         rules()
+
     elif user_input == 'move':
-        print("Please enter the co-ordinates of the piece you would like to move:")
-        from_piece = input("> ")
+        #co-ord to move from
+        print("\nPlease enter the co-ordinates of the piece you would like to move: \n")
+        move_from = input("> ") #input co-ord to move from
+        split_from = move_from.split(',') #var to split by comma (creates into array)
+        split_fromX = int(split_from[0])
+        split_fromY = int(split_from[1])
+
+        #co-ord to move to
+        print ("Where would you like to move your choice?")
+        print ("1   2")
+        print ("  "+ player_1 +"  ") ###### change to current_player
+        print ("3   4\n")
+        move_to = input("Please enter your choice: \n")
+        if (move_to == '1'):
+            if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
+                (b_grid[split_fromY - 1][split_fromX - 1]) = (player_1)
+            else:
+                print ("This space is not empty")
+            #check that grid square -1,-1 is free
+            #to move the piece change...
+            #grid[original][original] = " " blank
+            #grid[original - 1][original - 1] = b or r
+
+        #update grid
+        b_grid[split_fromY][split_fromX] = " "
+
     elif user_input == '2':
-        print ("\nhaha farewell\n")
+        print ("\nlol bye\n")
     else:
         break
 print ("\nThanks for playing!\n")

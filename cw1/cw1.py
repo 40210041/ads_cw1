@@ -82,32 +82,45 @@ user_input = input("Please press enter to start: \n")
 while (user_input != 'exit'):
     print_grid()
 
+    print ("Type move to move a piece")
     user_input = input("> ")
     if user_input == 'rules':
         rules()
 
     elif user_input == 'move':
         #co-ord to move from
-        print("Please enter the co-ordinates of the piece you would like to move (along(x),up/down(y)): ")
+        print("\nPlease enter the co-ordinates of the piece you would like to move: ")
         move_from = input("> ") #input co-ord to move from
         split_from = move_from.split(',') #var to split by comma (creates into array)
         split_fromX = int(split_from[0])
         split_fromY = int(split_from[1])
 
         #co-ord to move to
-        print ("Where would you like to move your choice?")
+        print ("\nWhere would you like to move your choice?")
         print ("1   2")
         print ("  "+ player_1 +"  ") ###### change to current_player
-        print ("3   4")
-        move_to = input("Please enter your choice: ")
+        print ("3   4\n")
+        move_to = input("Please enter your choice: \n")
         if (move_to == '1'):
+            if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
+                #update grid
+                b_grid[split_fromY][split_fromX] = " "
+                b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
+            else:
+                print ("This space is not empty\n")
+
+        elif (move_to == '2'):
+            if (b_grid[split_fromY - 1][split_fromX + 1]) == " ":
+                b_grid[split_fromY][split_fromX] = " "
+                b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
+            else:
+                print ("This space is not empty\n")
             #check that grid square -1,-1 is free
             #to move the piece change...
             #grid[original][original] = " " blank
             #grid[original - 1][original - 1] = b or r
 
-        #update grid
-        b_grid[split_fromY][split_fromX] = " "
+
 
     elif user_input == '2':
         print ("\nlol bye\n")
