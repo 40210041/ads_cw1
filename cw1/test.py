@@ -1,13 +1,14 @@
 #cw1.py
 #create a game like checkers
 
-# Your game should record play history, i.e. the sequence of moves that the players make during a game,
+# record play history, i.e. the sequence of moves that the players make during a game,
 # so that each game that is played can be recorded and replayed.
-# Your game should support undo and redo, again selecting the most appropriate data structures
-# to enable these functionalities.
-# Finally, your game should implement an algorithm that enables the computer to choose
-# which moves to make during their own turn, i.e. a simple AI player. Your choice
-# of algorithm for the AI player may be from the literature, or of your own design. Whichever your
+
+# undo and redo, again selecting the most appropriate data structures to enable these functionalities.
+# implement an algorithm that enables the computer to choose which moves to make during their own turn,
+# i.e. a simple AI player.
+
+# Your choice of algorithm for the AI player may be from the literature, or of your own design. Whichever your
 # choice you must be able to evaluate and justify your selection of both data structures and algorithms.
 # The game should run from the command line, using a text based interface in the first instance.
 
@@ -20,8 +21,8 @@
 #http://www.darkfish.com/checkers/rules.html (rules)
 
 #setup vars
-player_1 = "r"
-player_2 = "b"
+player_1 = "r" #red
+player_2 = "b" #black
 move_turn = 0 #var for incrementing turns
 current_turn = 0
 current_player = ""
@@ -37,7 +38,7 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
 
 
-#define functions
+## define functions ##
 
 #print out the rules
 def startup_rules():
@@ -46,6 +47,7 @@ def startup_rules():
     print ("Type 'rules' for how to play.")
     print ("Type 'exit' to quit.\n")
 
+#print out how to play
 def rules():
     print ("\n* RULES *")
     print ("• Player 1 is Red, Player 2 is Black.")
@@ -54,7 +56,6 @@ def rules():
     print ("• King pieces can move back and forth diagonally.\n")
 
 #print board
-#create a loop to print out board using i
 def print_grid():
     print ("    0   1   2   3   4   5   6   7 ")
     print ("  +-------------------------------+")
@@ -77,44 +78,71 @@ def print_grid():
 
 print ("Now playing: Checkers!\n")
 startup_rules()
+print_grid()
 
 user_input = input("Please press enter to start: \n")
 while (user_input != 'exit'):
-    print_grid()
 
+
+    print ("Type move to move a piece")
     user_input = input("> ")
     if user_input == 'rules':
         rules()
 
     elif user_input == 'move':
         #co-ord to move from
-        print("\nPlease enter the co-ordinates of the piece you would like to move: \n")
+        print("\nPlease enter the co-ordinates of the piece you would like to move: ")
         move_from = input("> ") #input co-ord to move from
         split_from = move_from.split(',') #var to split by comma (creates into array)
         split_fromX = int(split_from[0])
         split_fromY = int(split_from[1])
 
         #co-ord to move to
-        print ("Where would you like to move your choice?")
+        print ("\nWhere would you like to move your choice?")
         print ("1   2")
         print ("  "+ player_1 +"  ") ###### change to current_player
         print ("3   4\n")
         move_to = input("Please enter your choice: \n")
         if (move_to == '1'):
             if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
-                (b_grid[split_fromY - 1][split_fromX - 1]) = (player_1)
+                #update grid
+                b_grid[split_fromY][split_fromX] = " "
+                b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
             else:
-                print ("This space is not empty")
-            #check that grid square -1,-1 is free
-            #to move the piece change...
-            #grid[original][original] = " " blank
-            #grid[original - 1][original - 1] = b or r
+                print ("This space is not empty\n")
 
-        #update grid
-        b_grid[split_fromY][split_fromX] = " "
+        elif (move_to == '2'):
+            if (b_grid[split_fromY - 1][split_fromX + 1]) == " ":
+                b_grid[split_fromY][split_fromX] = " "
+                b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
+            else:
+                print ("This space is not empty\n")
+
+        elif (move_to == '3'):
+            if b_grid[split_fromY][split_fromX] == 'R':
+                if (b_grid[split_fromY + 1][split_fromX] - 1) == " ":
+                    b_grid[split_fromY][split_fromX] = " "
+                    b_grid[split_fromY + 1][split_fromX - 1] = "r"
+                else:
+                    print ("This space is not empty\n")
+            else:
+                print ("Only King pieces can move backwards!\n")
+
+        elif (move_to == '4'):
+            if b_grid[split_fromY][split_fromX] == 'R':
+                if (b_grid[split_fromY + 1][split_fromX] + 1) == " ":
+                    b_grid[split_fromY][split_fromX] = " "
+                    b_grid[split_fromY + 1][split_fromX + 1] = "r"
+                else:
+                    print ("This space is not empty\n")
+            else:
+                print ("Only King pieces can move backwards!\n")
 
     elif user_input == '2':
         print ("\nlol bye\n")
     else:
         break
+print_grid()
+
+
 print ("\nThanks for playing!\n")
