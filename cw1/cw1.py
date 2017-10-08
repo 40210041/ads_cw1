@@ -1,4 +1,4 @@
-#cw1.py
+ii#cw1.py
 #prepare urself for some long af code
 
 # record play history, i.e. the sequence of moves that the players make during a game,
@@ -98,81 +98,88 @@ while (user_input != 'exit'):
         #co-ord to move from
         print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
         move_from = input("> ") #input co-ord to move from
-        if move_from == 'cancel' or move_from == '':
+        if move_from == 'cancel' or move_from == '': #allow out of loop
             print ("\nMove cancelled...\n")
-            pass
+            pass #null
+
         else:
-            if move_from == str(""):
-                print ("pls enter numbers")
-            else:
-                split_from = move_from.split(',') #var to split by comma (creates into array)
-                split_fromX = int(split_from[0])
-                split_fromY = int(split_from[1])
+            split_from = move_from.split(',') #var to split by comma (creates into array)
+            split_fromX = int(split_from[0])
+            split_fromY = int(split_from[1])
 
-                #co-ord to move to
-                print ("\nWhere would you like to move your choice?")
-                print ("1   2")
-                print ("  "+ player_1 +"  ") ###### change to current_player
-                print ("3   4\n")
-                move_to = input("Please enter your choice ('cancel to exit'): \n")
+            #check if co-ords are in grid
+            if ((split_fromY >= 0 and split_fromY <= 7) or (split_fromX >= 0 and split_fromX <= 7)):
+                if ((b_grid[split_fromY][split_fromX] == player_1)):
+                    #co-ord to move to
+                    print ("\nWhere would you like to move your choice?")
+                    print ("1   2")
+                    print ("  "+ player_1 +"  ") ###### change to current_player
+                    print ("3   4\n")
+                    move_to = input("Please enter your choice ('cancel to exit'): \n")
 
-                #if user chooses 1
-                if (move_to == '1'):
-                    #if choice is king piece
-                    if (b_grid[split_fromY][split_fromX]) == 'R':
-                        if (b_grid[split_fromY - 1][split_fromX - 1]) == " ": #if empty
-                            b_grid[split_fromY][split_fromX] = " " #update grid
-                            b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
-                        else:
-                            print ("This space is not empty\n") #if not empty
-                    #if choice is not king
-                    elif (b_grid[split_fromY][split_fromX]) == 'r':
-                        if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
-                            b_grid[split_fromY][split_fromX] = " "
-                            b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
-                        else:
-                            print ("This space is not empty\n")
+                    #if user chooses 1
+                    if (move_to == '1'):
+                        if (b_grid[split_fromY][split_fromX] == 'r') or (b_grid[split_fromY][split_fromX] == 'R'): #if own piece
+                            if (b_grid[split_fromY][split_fromY])
+                            #if choice is king piece
+                            if (b_grid[split_fromY][split_fromX]) == 'R':
+                                if (b_grid[split_fromY - 1][split_fromX - 1]) == " ": #if empty
+                                    b_grid[split_fromY][split_fromX] = " " #update grid
+                                    b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+                                else:
+                                    print ("This space is not empty\n") #if not empty
+                            #if choice is not king
+                            elif (b_grid[split_fromY][split_fromX]) == 'r':
+                                if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
+                                    b_grid[split_fromY][split_fromX] = " "
+                                    b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
+                                else:
+                                    print ("This space is not empty\n")
 
-                #if user chooses 2
-                elif (move_to == '2'):
-                    if (b_grid[split_fromY][split_fromX]) == 'R':
-                        if (b_grid[split_fromY - 1][split_fromX + 1]) == " ":
-                            b_grid[split_fromY][split_fromX] = " "
-                            b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
-                        else:
-                            print ("This space is not empty\n")
-                    elif (b_grid[split_fromY][split_fromX]) == 'r':
-                        if (b_grid[split_fromY - 1][split_fromX + 1]) == " ":
-                            b_grid[split_fromY][split_fromX] = " "
-                            b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
-                        else:
-                            print ("This space is not empty\n")
+                        #if user chooses 2
+                        elif (move_to == '2'):
+                            if (b_grid[split_fromY][split_fromX]) == 'R':
+                                if (b_grid[split_fromY - 1][split_fromX + 1]) == " ":
+                                    b_grid[split_fromY][split_fromX] = " "
+                                    b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
+                                else:
+                                    print ("This space is not empty\n")
+                            elif (b_grid[split_fromY][split_fromX]) == 'r':
+                                if (b_grid[split_fromY - 1][split_fromX + 1]) == " ":
+                                    b_grid[split_fromY][split_fromX] = " "
+                                    b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
+                                else:
+                                    print ("This space is not empty\n")
 
-                #if user chooses 3, king only
-                elif (move_to == '3'):
-                    if (b_grid[split_fromY][split_fromX]) == 'R':
-                        if (b_grid[split_fromY + 1][split_fromX - 1]) == " ":
-                            b_grid[split_fromY][split_fromX] = " "
-                            b_grid[split_fromY + 1][split_fromX - 1] = (player_1K)
-                        else:
-                            print ("This space is not empty\n")
+                        #if user chooses 3, king only
+                        elif (move_to == '3'):
+                            if (b_grid[split_fromY][split_fromX]) == 'R':
+                                if (b_grid[split_fromY + 1][split_fromX - 1]) == " ":
+                                    b_grid[split_fromY][split_fromX] = " "
+                                    b_grid[split_fromY + 1][split_fromX - 1] = (player_1K)
+                                else:
+                                    print ("This space is not empty\n")
+                            else:
+                                print ("\nOnly King pieces can move backwards!\n")
+
+                        #if user chooses 4, king only
+                        elif (move_to == '4'):
+                            if (b_grid[split_fromY][split_fromX]) == 'R':
+                                if (b_grid[split_fromY + 1][split_fromX + 1]) == " ":
+                                    b_grid[split_fromY][split_fromX] = " "
+                                    b_grid[split_fromY + 1][split_fromX + 1] = "R"
+                                else:
+                                    print ("This space is not empty\n")
+                            else:
+                                print ("\nOnly King pieces can move backwards!\n")
+
+                        elif move_to == 'cancel' or move_to == '':
+                            print ("\nMove cancelled...\n")
+                            pass
                     else:
-                        print ("\nOnly King pieces can move backwards!\n")
-
-                #if user chooses 4, king only
-                elif (move_to == '4'):
-                    if (b_grid[split_fromY][split_fromX]) == 'R':
-                        if (b_grid[split_fromY + 1][split_fromX + 1]) == " ":
-                            b_grid[split_fromY][split_fromX] = " "
-                            b_grid[split_fromY + 1][split_fromX + 1] = "R"
-                        else:
-                            print ("This space is not empty\n")
-                    else:
-                        print ("\nOnly King pieces can move backwards!\n")
-
-                elif move_to == 'cancel' or move_to == '':
-                    print ("\nMove cancelled...\n")
-                    pass
+                        print ("You do not have a piece here!\n")
+                else:
+                    print ("This co-ordinate is out the grid!\n")
 
     #if user wants to see rules
     elif user_input == 'rules':
