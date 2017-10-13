@@ -140,8 +140,28 @@ while (user_input != 'exit'):
                                     b_grid[split_fromY - 2][split_fromX - 2] = (player_1)
                             else:
                                 print ("You cannot move here! (No empty space)\n ")
+
+                        #if empty space instead
+                        elif ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
+                            print ("ive reached point 3!")
+                            #if y co-ord in direction
+                            if ((split_fromY - 1) == 0):
+                                b_grid[split_fromY][split_fromX] = ' '
+                                b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+
+                            #if already king piece
+                            elif ((b_grid[split_fromY][split_fromX]) == 'R'):
+                                b_grid[split_fromY][split_fromX] = ' '
+                                b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
+
+                            elif ((b_grid[split_fromY][split_fromX]) == 'r'):
+                                b_grid[split_fromY][split_fromX] = ' '
+                                b_grid[split_fromY - 1][split_fromX - 1] = player_1
+
+                            else:
+                                print ("This space is not empty!\n")
                         else:
-                            print ("put the standard output here for if no enemy piece")
+                            print ("You cannot move here!\n")
                     else:
                         print ("Not in the grid!\n")
                 else:
