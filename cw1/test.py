@@ -124,20 +124,35 @@ while (user_input != 'exit'):
 
                 #if user chooses 1
                 if (move_to == '1'):
-                    #if choice is king piece
-                    if (b_grid[split_fromY][split_fromX]) == 'R':
-                        if (b_grid[split_fromY - 1][split_fromX - 1]) == " ": #if empty
-                            b_grid[split_fromY][split_fromX] = " " #update grid
-                            b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+                    if(b_grid[split_fromY - 2][split_fromX - 2] == ' '): #check is space after enemy piece is free
+                        print ("There is an enemy piece that you must take:\n")
+
+                        #if the space is last row (0)
+                        if ((split_fromY - 2) == 0):
+                            b_grid[split_fromY][split_fromX] = ' '
+                            b_grid[split_fromY - 1][split_fromX - 1] = ' '
+                            b_grid[split_fromY - 2][split_fromX - 2] = (player_1K)
+
                         else:
-                            print ("This space is not empty\n") #if not empty
-                    #if choice is not king
-                    elif (b_grid[split_fromY][split_fromX]) == 'r':
-                        if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
-                            b_grid[split_fromY][split_fromX] = " "
-                            b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
-                        else:
-                            print ("This space is not empty\n")
+                            b_grid[split_fromY][split_fromX] == ' '
+                            b_grid[split_fromY - 1][split_fromX - 1] == ' '
+                            b_grid[split_fromY - 2][split_fromX - 2] == (player_1)
+                    else:
+
+                        #if choice is king piece
+                        if (b_grid[split_fromY][split_fromX]) == 'R':
+                            if (b_grid[split_fromY - 1][split_fromX - 1]) == " ": #if empty
+                                b_grid[split_fromY][split_fromX] = " " #update grid
+                                b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+                            else:
+                                print ("This space is not empty\n") #if not empty
+                        #if choice is not king
+                        elif (b_grid[split_fromY][split_fromX]) == 'r':
+                            if (b_grid[split_fromY - 1][split_fromX - 1]) == " ":
+                                b_grid[split_fromY][split_fromX] = " "
+                                b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
+                            else:
+                                print ("This space is not empty\n")
 
                 #if user chooses 2
                 elif (move_to == '2'):
