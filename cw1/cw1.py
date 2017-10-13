@@ -121,15 +121,31 @@ while (user_input != 'exit'):
             if (move_to == '1'):
                 #only player 1 piece or AI King can move in direction 1
                 if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R' or (b_grid[split_fromY][split_fromX]) == 'B'):
-                    if ((split_fromY - 1) >= 0 or (split_fromX - 1) >= 0):
-                    if (b_grid[split_fromY - 1][split_fromX - 1] == 'b'):
-                            print ("ive reached point 1!")
+                    if ((split_fromY - 1) >= 0 or (split_fromX - 1) >= 0): #check that space is in grid
+                        if (b_grid[split_fromY - 1][split_fromX - 1] == 'b'): # check if enemy piece
+                            if ((b_grid[split_fromY - 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
+                                print ("ive reached point 1!")
+                                print ("There's an enemy piece here! You must take it!\n")
+
+                                #if the y co-ord is last row (0)
+                                if ((split_fromY - 2) == 0):
+                                    b_grid[split_fromY][split_fromX] = ' '
+                                    b_grid[split_fromY - 1][split_fromX - 1] = ' '
+                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_1K)
+
+                                else:
+                                    print ("ive reached point 2!")
+                                    b_grid[split_fromY][split_fromX] = ' '
+                                    b_grid[split_fromY - 1][split_fromX - 1] = ' '
+                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_1)
+                            else:
+                                print ("You cannot move here! (No empty space)\n ")
                         else:
-                            print ("")
+                            print ("put the standard output here for if no enemy piece")
                     else:
-                        print ("Its not in the grid!")
+                        print ("Not in the grid!\n")
                 else:
-                    print ("This piece cannot mpve in that direction!\n")
+                    print ("This piece cannot move in that direction!\n")
 
             #if user chooses 2
             elif (move_to == '2'):
