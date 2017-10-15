@@ -30,9 +30,9 @@ current_turn = 0
 current_player = ""
 
 #create grid
-b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
-          ['b','r','b',' ','b',' ','b',' '],
-          [' ','b',' ',' ',' ','b',' ','b'],
+b_grid = [[' ','b',' ','b',' ',' ',' ','b'], #[0][0] to [0][7]
+          ['b',' ','b',' ','b',' ','b',' '],
+          [' ','b',' ','r',' ','b',' ','b'],
           [' ',' ','b',' ',' ',' ',' ',' '],
           [' ','r',' ',' ',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
@@ -225,7 +225,7 @@ while (user_input != 'exit'):
                 #only AI piece or player 1 King can move in direction 3
                 if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B' or (b_grid[split_fromY][split_fromX]) == 'R'):
                     if ((split_fromY + 1) <= 7 or (split_fromX - 1) <= 0): #check that space is in grid
-                        if (b_grid[split_fromY + 1][split_fromX - 1] == 'r' or (b_grid [split_fromY + 1][split_fromX - 1]) == 'R'): # check if enemy piece
+                        if ((b_grid[split_fromY + 1][split_fromX - 1]) == 'r' or (b_grid [split_fromY + 1][split_fromX - 1]) == 'R'): # check if enemy piece
                             if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
                                 print ("ive reached point 1.5.2!")
                                 print ("There's an enemy piece here! You must take it!\n")
@@ -241,7 +241,7 @@ while (user_input != 'exit'):
                             else:
                                 print ("You cannot move here! (No empty space)\n ")
 
-                        elif ((b_grid[split_fromY + 1][split_fromX] - 1) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'): #if player 1 piece
+                        elif ((b_grid[split_fromY + 1][split_fromX - 1] == 'b') or (b_grid[split_fromY + 1][split_fromX - 1]) == 'B'): #if player 1 piece
                             if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '):
                                 print ("ive reached point 4.5")
                                 print ("There is an enemy piece here! You must take it!\n")
@@ -260,7 +260,7 @@ while (user_input != 'exit'):
                         elif ((b_grid[split_fromY + 1][split_fromX - 1]) == ' '):
                             print ("ive reached point 3.5.2!")
                             b_grid[split_fromY][split_fromX] = ' '
-                            b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+                            b_grid[split_fromY + 1][split_fromX - 1] = (player_1K)
                         else:
                             print ("You cannot move here! (No empty space)\n")
                     else:
