@@ -255,6 +255,8 @@ while (user_input != 'exit'):
                                 #if AI piece
                                 elif ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
                                     print ("You cannot move here! (No empty space)\n")
+                            else:
+                                print ("You cannot move here! (No empty space)\n")
 
                         #if empty space instead
                         elif ((b_grid[split_fromY + 1][split_fromX - 1]) == ' '):
@@ -304,6 +306,8 @@ while (user_input != 'exit'):
                                 #if AI piece
                                 elif ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
                                     print ("You cannot move here! (No empty space)\n")
+                            else:
+                                print ("You cannot move here! (No empty space)\n")
 
                         #if empty space instead
                         elif ((b_grid[split_fromY + 1][split_fromX + 1]) == ' '):
