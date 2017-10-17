@@ -82,7 +82,8 @@ def update_move():
 
 #when player wants to make a move
 def make_move():
-    global move_turn
+    global move_turn # set global
+
     print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
     move_from = input("> ") #input co-ord to move from
     if move_from == 'cancel' or move_from == '': #allow out of loop
@@ -91,8 +92,11 @@ def make_move():
 
     else:
         split_from = move_from.split(',') #var to split by comma (creates into array)
-        split_fromX = int(split_from[0])
-        split_fromY = int(split_from[1])
+        if (len(split_from) = 3):
+            split_fromX = int(split_from[0])
+            split_fromY = int(split_from[1])
+        else:
+            print ("Please enter in the format 'x,y'")
 
         #check if co-ords are in grid
         # if ((split_fromY) >= 0 and (split_fromY) <= 7 or (split_fromX) >= 0 and (split_fromX) <= 7):
@@ -150,7 +154,7 @@ def make_move():
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
                                 move_turn += 1 #update the turn
-                                
+
                         else:
                             print ("This space is not empty!\n")
                     else:
@@ -175,12 +179,14 @@ def make_move():
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX + 1] = ' '
                                 b_grid[split_fromY - 2][split_fromX + 2] = (player_1K)
+                                move_turn += 1 #update the turn
 
                             else:
                                 print ("ive reached point 2.5!")
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX + 1] = ' '
                                 b_grid[split_fromY - 2][split_fromX + 2] = (player_1)
+                                move_turn += 1 #update the turn
                         else:
                             print ("You cannot move here! (No empty space)\n ")
 
@@ -191,6 +197,7 @@ def make_move():
                         if ((b_grid[split_fromY][split_fromX]) == 'R'):
                             b_grid[split_fromY][split_fromX] = ' '
                             b_grid[split_fromY - 1][split_fromX + 1] = (player_1K)
+                            move_turn += 1 #update the turn
 
                         #if normal piece
                         elif ((b_grid[split_fromY][split_fromX]) == 'r'):
@@ -198,9 +205,11 @@ def make_move():
                             if ((split_fromY - 1) == 0):
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX + 1] = (player_1K)
+                                move_turn += 1 #update the turn
                             else:
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX + 1] = (player_1)
+                                move_turn += 1 #update the turn
 
                         else:
                             print ("This space is not empty!\n")
@@ -226,6 +235,7 @@ def make_move():
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY + 1][split_fromX - 1] = ' '
                                 b_grid[split_fromY + 2][split_fromX - 2] = (player_1K)
+                                move_turn += 1 #update the turn
 
                             #if piece is player 1s piece
                             elif ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R'):
@@ -243,6 +253,7 @@ def make_move():
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY + 1][split_fromX - 1] = ' '
                                 b_grid[split_fromY + 2][split_fromX - 2] = (player_1K)
+                                move_turn += 1 #update the turn
 
                             #if AI piece
                             elif ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
@@ -255,6 +266,7 @@ def make_move():
                         print ("ive reached point 3.5.2!")
                         b_grid[split_fromY][split_fromX] = ' '
                         b_grid[split_fromY + 1][split_fromX - 1] = (player_1K)
+                        move_turn += 1 #update the turn
                     else:
                         print ("You cannot move here! (No empty space)\n")
                 else:
@@ -277,6 +289,7 @@ def make_move():
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY + 1][split_fromX + 1] = ' '
                                 b_grid[split_fromY + 2][split_fromX + 2] = (player_1K)
+                                move_turn += 1 #update the turn
 
                             #if piece is player 1s piece
                             elif ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R'):
@@ -294,6 +307,7 @@ def make_move():
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY + 1][split_fromX + 1] = ' '
                                 b_grid[split_fromY + 2][split_fromX + 2] = (player_1K)
+                                move_turn += 1 #update the turn
 
                             #if AI piece
                             elif ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
@@ -306,6 +320,7 @@ def make_move():
                             print ("ive reached point 3.5.3!")
                             b_grid[split_fromY][split_fromX] = ' '
                             b_grid[split_fromY + 1][split_fromX + 1] = (player_1K)
+                            move_turn += 1 #update the turn
                     else:
                         print ("You cannot move here! (No empty space)\n")
                 else:
