@@ -28,6 +28,12 @@ player_2K = "B" #BONELESS
 move_turn = 1 #var for incrementing turns
 current_turn = 1
 current_player = ""
+enemy_player = ""
+player_X = "" #controlling player
+player_XK = "" #controlling player (if king piece)
+player_Y = "" #other player
+player_YK = "" #other player (if king piece)
+
 
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
@@ -76,9 +82,17 @@ def print_grid():
 
 def update_move():
     if move_turn % 2 == 0:
-            current_player == (player_2)
+        player_X = (player_2)
+        current_player == (player_X)
+        enemy_player == (player_Y)
     else:
             current_player = (player_1)
+
+def make_king():
+    if ((b_grid[split_fromY][split_fromX]) == player_X and (split_fromY) == 0):
+        current_player == player_XK
+
+
 
 #when player wants to make a move
 def make_move():
@@ -115,8 +129,6 @@ def make_move():
                 if ((split_fromY - 1) >= 0 or (split_fromX - 1) >= 0): #check that space is in grid
                     if ((b_grid[split_fromY - 1][split_fromX - 1]) == 'b' or (b_grid[split_fromY - 1] [split_fromX - 1]) == 'B'): # check if enemy piece
                         if ((b_grid[split_fromY - 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
-                            print ("ive reached point 1!")
-                            print ("You too the enemy piece!\n")
 
                             #if the y co-ord is last row (0)
                             if ((split_fromY - 2) == 0):
@@ -126,7 +138,6 @@ def make_move():
                                 move_turn += 1 #update the turn
 
                             else:
-                                print ("ive reached point 2!")
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX - 1] = ' '
                                 b_grid[split_fromY - 2][split_fromX - 2] = (player_1)
@@ -136,7 +147,6 @@ def make_move():
 
                     #if empty space instead
                     elif ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
-                        print ("ive reached point 3!")
                         #if already king piece
                         if ((b_grid[split_fromY][split_fromX]) == 'R'):
                             b_grid[split_fromY][split_fromX] = ' '
@@ -171,8 +181,6 @@ def make_move():
                 if ((split_fromY - 1) >= 0 or (split_fromX + 1) <= 7): #check that space is in grid
                     if (b_grid[split_fromY - 1][split_fromX + 1] == 'b'): # check if enemy piece
                         if ((b_grid[split_fromY - 2][split_fromX + 2]) == ' '): #if the space after enemy piece is free
-                            print ("ive reached point 1.5!")
-                            print ("You too the enemy piece!\n")
 
                             #if the y co-ord is last row (0)
                             if ((split_fromY - 2) == 0):
@@ -182,7 +190,6 @@ def make_move():
                                 move_turn += 1 #update the turn
 
                             else:
-                                print ("ive reached point 2.5!")
                                 b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX + 1] = ' '
                                 b_grid[split_fromY - 2][split_fromX + 2] = (player_1)
@@ -192,7 +199,6 @@ def make_move():
 
                     #if empty space instead
                     elif ((b_grid[split_fromY - 1][split_fromX + 1]) == ' '):
-                        print ("ive reached point 3.5!")
                         #if already king piece
                         if ((b_grid[split_fromY][split_fromX]) == 'R'):
                             b_grid[split_fromY][split_fromX] = ' '
@@ -228,8 +234,7 @@ def make_move():
                 if ((split_fromY + 1) <= 7 or (split_fromX - 1) >= 0): #check that space is in grid
                     if ((b_grid[split_fromY + 1][split_fromX - 1]) == 'r' or (b_grid [split_fromY + 1][split_fromX - 1]) == 'R'): # check if enemy piece
                         if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
-                            print ("ive reached point 1.5.2!")
-                            print ("You too the enemy piece!\n")
+
                             #if piece is AI
                             if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
                                 b_grid[split_fromY][split_fromX] = ' '
@@ -245,8 +250,6 @@ def make_move():
 
                     elif ((b_grid[split_fromY + 1][split_fromX - 1] == 'b') or (b_grid[split_fromY + 1][split_fromX - 1]) == 'B'): #if player 1 piece
                         if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '):
-                            print ("ive reached point 4.5")
-                            print ("There is an enemy piece here! You must take it!\n")
 
                             #if player piece
                             if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R'):
@@ -263,7 +266,6 @@ def make_move():
 
                     #if empty space instead
                     elif ((b_grid[split_fromY + 1][split_fromX - 1]) == ' '):
-                        print ("ive reached point 3.5.2!")
                         b_grid[split_fromY][split_fromX] = ' '
                         b_grid[split_fromY + 1][split_fromX - 1] = (player_1K)
                         move_turn += 1 #update the turn
@@ -282,8 +284,7 @@ def make_move():
                 if ((split_fromY + 1) <= 7 or (split_fromX + 1) <= 7): #check that space is in grid
                     if ((b_grid[split_fromY + 1][split_fromX + 1]) == 'r' or (b_grid [split_fromY + 1][split_fromX + 1]) == 'R'): # check if enemy piece
                         if ((b_grid[split_fromY + 2][split_fromX + 2]) == ' '): #if the space after enemy piece is free
-                            print ("ive reached point 1.5.3!")
-                            print ("You too the enemy piece!\n")
+
                             #if piece is AI
                             if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
                                 b_grid[split_fromY][split_fromX] = ' '
@@ -317,7 +318,6 @@ def make_move():
 
                     #if empty space instead
                     elif ((b_grid[split_fromY + 1][split_fromX + 1]) == ' '):
-                            print ("ive reached point 3.5.3!")
                             b_grid[split_fromY][split_fromX] = ' '
                             b_grid[split_fromY + 1][split_fromX + 1] = (player_1K)
                             move_turn += 1 #update the turn
