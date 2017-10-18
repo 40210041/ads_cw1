@@ -80,18 +80,25 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
-def update_move():
-    if move_turn % 2 == 0:
-        player_X = (player_2)
-        current_player == (player_X)
-        enemy_player == (player_Y)
-    else:
-            current_player = (player_1)
+# def update_player():
+#     global player_1
+#     global player_1K
+#     global player_2
+#     global player_2K
+#     global move_turn
+#
+#     if move_turn % 2 == 0:
+#         player_X = (player_2)
+#         player_Y = (player_1)
+#         current_player == (player_X)
+#         enemy_player == (player_Y)
+#     else:
+#         player_X = (player_1)
+#         player_Y = (player_2)
+#         current_player = (player_X)
+#         enemy_player = (player_Y)
 
-def make_king():
-    if ((b_grid[split_fromY][split_fromX]) == player_X and (split_fromY) == 0):
-        current_player == player_XK
-
+def get_input():
 
 
 #when player wants to make a move
@@ -101,14 +108,14 @@ def make_move():
     print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
     move_from = input("> ") #input co-ord to move from
     if move_from == 'cancel' or move_from == '': #allow out of loop
-        print ("\nMove cancelled...\n")
+        print ("Move cancelled...\n")
         pass #null
-
     else:
         split_from = move_from.split(',') #var to split by comma (creates into array)
-        if (len(split_from) = 3):
+        if (len(move_from) == 3):
             split_fromX = int(split_from[0])
             split_fromY = int(split_from[1])
+            print (len(move_from))
         else:
             print ("Please enter in the format 'x,y'")
 
@@ -353,8 +360,10 @@ while (user_input != 'exit'):
 
     #if user wants to move a piece
     elif user_input == 'move':
+        #update_player()
         make_move()
         print ("Turns taken: " + str(move_turn))
+        print ("Curent player: " + str(current_player)+ "\n")
 
     #if user wants to see rules
     elif user_input == 'rules':
