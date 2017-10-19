@@ -363,7 +363,7 @@ while (user_input != 'exit'):
         #update_player()
         make_move()
         print ("Turns taken: " + str(move_turn))
-        print ("Curent player: " + str(current_player)+ "\n")
+        print ("Current player: " + str(current_player)+ "\n")
 
     #if user wants to see rules
     elif user_input == 'rules':

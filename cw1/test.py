@@ -20,6 +20,8 @@
 
 #http://www.darkfish.com/checkers/rules.html (rules)
 
+import sys
+
 #setup vars
 player_1 = "r" #red
 player_1K = "R" #Red.
@@ -80,6 +82,14 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
+def start_up():
+    global user_input
+
+    user_input = input("Please press enter to start: \n")
+    while (user_input != 'exit'):
+        print_grid()
+
+
 # def update_player():
 #     global player_1
 #     global player_1K
@@ -104,19 +114,21 @@ def get_input():
 
     print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
     move_from = input("> ") #input co-ord to move from
-    if move_from == 'cancel' or move_from == '': #allow out of loop
-        print ("Move cancelled...\n")
-        
+    while (len(move_from) != 3):
+        if(move_from == 'cancel' or move_from == ''): #allow out of loop
+            print ("Move cancelled...\n")
+            make_move()
 
+        coord_input = input("Please enter x,y: >")
+        if (len(coord_input) == 3):
+            move_from = coord_input
     else:
-        if (len(move_from) == 3):
-            split_from = move_from.split(',') #var to split by comma (creates into array)
-            split_fromX = int(split_from[0])
-            split_fromY = int(split_from[1])
-            print (len(move_from))
-        else:
-            print ("Please enter in the format x,y")
-            move_from = ''
+        split_from = move_from.split(',') #var to split by comma (creates into array)
+        split_fromX = int(split_from[0])
+        split_fromY = int(split_from[1])
+        print (len(move_from))
+
+
 
 def get_dir():
     global current_player
@@ -359,14 +371,7 @@ def make_move():
 
 print ("** Now playing: Checkers! **\n")
 startup_rules()
-
-user_input = input("Please press enter to start: \n")
-while (user_input != 'exit'):
-    print_grid()
-
-    #to start game, move a piece
-    print ("Type move to move a piece")
-    user_input = input("> ")
+start_up()
 
     if user_input == 'rules':
         rules()
