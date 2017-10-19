@@ -20,7 +20,7 @@
 
 #http://www.darkfish.com/checkers/rules.html (rules)
 
-import sys
+import sys # used for breaking loops in function
 
 #setup vars
 player_1 = "r" #red
@@ -82,14 +82,6 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
-def start_up():
-    global user_input
-
-    user_input = input("Please press enter to start: \n")
-    while (user_input != 'exit'):
-        print_grid()
-
-
 # def update_player():
 #     global player_1
 #     global player_1K
@@ -114,21 +106,28 @@ def get_input():
 
     print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
     move_from = input("> ") #input co-ord to move from
-    while (len(move_from) != 3):
-        if(move_from == 'cancel' or move_from == ''): #allow out of loop
+
+    while (len(move_from) != 3): #keep looping until string meets requirements
+        if (move_from == 'cancel' or move_from == ''): #allow out of loop
             print ("Move cancelled...\n")
             make_move()
+        elif (move_from == 'exit'): #if player wants to quit
+            print ("Thanks for playing!\n")
+            sys.exit()
 
-        coord_input = input("Please enter x,y: >")
-        if (len(coord_input) == 3):
+        #ask user to reinput co-ords
+        print ("Please enter in the format x,y: ")
+        coord_input = input("> ")
+        if (len(coord_input) == 3): #if meets requirements then convert
             move_from = coord_input
+        elif (coord_input == 'exit'): #allow user to quit
+            print ("Thanks for playing!\n")
+            sys.exit()
     else:
         split_from = move_from.split(',') #var to split by comma (creates into array)
         split_fromX = int(split_from[0])
         split_fromY = int(split_from[1])
         print (len(move_from))
-
-
 
 def get_dir():
     global current_player
@@ -371,7 +370,14 @@ def make_move():
 
 print ("** Now playing: Checkers! **\n")
 startup_rules()
-start_up()
+
+user_input = input("Please press enter to start: \n")
+while (user_input != 'exit'):
+    print_grid()
+
+    #to start game, move a piece
+    print ("Type move to move a piece")
+    user_input = input("> ")
 
     if user_input == 'rules':
         rules()
@@ -384,8 +390,8 @@ start_up()
         print ("Curent player: " + str(current_player)+ "\n")
 
     #if user wants to see rules
-    elif user_input == 'rules':
-        rules()
+    elif user_input == 'print':
+        print_grid()
 
     #if user wants to quit
     else:
