@@ -355,6 +355,12 @@ def make_move():
                         b_grid[split_fromY + 1][split_fromX + 1] = (player_1K)
                         move_turn += 1 #update the turn
                 else:
+                #to do mandatory takes
+                # i in grid
+                # j in i
+                # if the spaces surrounding it
+
+
                     print ("You cannot move here! (No empty space)\n")
             else:
                 print ("This is not in the grid!\n")
