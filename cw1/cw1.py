@@ -29,8 +29,8 @@ player_2 = "b" #black
 player_2K = "B" #BONELESS
 move_turn = 1 #var for incrementing turns
 current_turn = 1
-current_player = ""
-enemy_player = ""
+current_player = (player_1)
+enemy_player = (player_2)
 player_X = "" #controlling player
 player_XK = "" #controlling player (if king piece)
 player_Y = "" #other player
@@ -83,24 +83,7 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
-# def update_player():
-#     global player_1
-#     global player_1K
-#     global player_2
-#     global player_2K
-#     global move_turn
-#
-#     if move_turn % 2 == 0:
-#         player_X = (player_2)
-#         player_Y = (player_1)
-#         current_player == (player_X)
-#         enemy_player == (player_Y)
-#     else:
-#         player_X = (player_1)
-#         player_Y = (player_2)
-#         current_player = (player_X)
-#         enemy_player = (player_Y)
-
+#get coord for moving a piece
 def get_input():
     global split_fromX
     global split_fromY
@@ -133,6 +116,7 @@ def get_input():
         else:
             get_input() #if conditions not met out of loop, go back to beginning
 
+#get direction to move piece
 def get_dir():
     global current_player
     global move_to
@@ -143,8 +127,7 @@ def get_dir():
     print ("3   4\n")
     move_to = input("Please enter your choice ('cancel to exit'): \n")
 
-
-#when player wants to make a move
+#maake a move
 def make_move():
     global move_turn # set global
     global split_fromX
@@ -374,12 +357,32 @@ def make_move():
         print ("\nMove cancelled...\n")
         pass
 
+#update player
+def update_player():
+    global player_1
+    global player_1K
+    global player_2
+    global player_2K
+    global current_player
+    global enemy_player
+    global move_turn
+
+    if move_turn % 2 == 0:
+        # player_X = (player_2)
+        # player_Y = (player_1)
+        current_player = (player_2)
+        enemy_player = (player_1)
+    else:
+        # player_X = (player_1)
+        # player_Y = (player_2)
+        current_player = (player_1)
+        enemy_player = (player_2)
 
 ########
 # GAME #
 ########
 
-print ("** Now playing: Checkers! **\n")
+print ("\n** Now playing: Checkers! **\n")
 startup_rules()
 
 user_input = input("Please press enter to start: \n")
@@ -397,7 +400,8 @@ while (user_input != 'exit'):
     elif user_input == 'move':
         #update_player()
         make_move()
-        print ("Current turn: " + str(move_turn))
+        update_player()
+        print ("\n\nCurrent turn: " + str(move_turn))
         print ("Current player: " + str(current_player)+ "\n")
 
     #if user wants to see rules
@@ -407,8 +411,6 @@ while (user_input != 'exit'):
     #if user wants to quit
     else:
         break
-    #print ("Current Player: ")
-    #print ("Current Turn: \n")
 
 #when game ends
 print ("\nThanks for playing!\n")
