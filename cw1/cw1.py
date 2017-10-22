@@ -117,18 +117,21 @@ def get_input():
             sys.exit()
 
         #ask user to reinput co-ords
-        print ("\nPlease enter in the format x,y: ")
+        print ("\nPlease enter in the format 'x,y': ")
         coord_input = input("> ")
-        if (len(coord_input) == 3): #if meets requirements then convert
+        if (len(coord_input) == 3 and coord_input[0].isnumeric() and coord_input[2].isnumeric() and coord_input[1] == ','): #if meets requirements then convert
             move_from = coord_input
+
         elif (coord_input == 'exit'): #allow user to quit
             print ("\nThanks for playing!\n")
             sys.exit()
     else:
-        split_from = move_from.split(',') #var to split by comma (creates into array)
-        split_fromX = int(split_from[0])
-        split_fromY = int(split_from[1])
-        print (len(move_from))
+        if (len(move_from) == 3 and move_from[0].isnumeric() and move_from[2].isnumeric() and move_from[1] == ','):
+            split_from = move_from.split(',') #var to split by comma (creates into array)
+            split_fromX = int(split_from[0])
+            split_fromY = int(split_from[1])
+        else:
+            get_input() #if conditions not met out of loop, go back to beginning
 
 def get_dir():
     global current_player

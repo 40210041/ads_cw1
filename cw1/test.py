@@ -119,29 +119,30 @@ def get_input():
     print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
     move_from = input("> ") #input co-ord to move from
 
-    while (len(move_from) != 3 and (move_from[1]) != ','): #keep looping until string meets requirements
+    while (len(move_from) != 3): #keep looping until string meets requirements
         if (move_from == 'cancel' or move_from == ''): #allow out of loop
             print ("Move cancelled...\n")
             make_move()
-
         elif (move_from == 'exit'): #if player wants to quit
             print ("\nThanks for playing!\n")
             sys.exit()
 
         #ask user to reinput co-ords
-        print ("\nPlease enter in the format x,y: ")
+        print ("\nPlease enter in the format 'x,y': ")
         coord_input = input("> ")
-        if (len(coord_input) == 3 and (move_from[1]) == ','): #if meets requirements then convert
+        if (len(coord_input) == 3 and coord_input[0].isnumeric() and coord_input[1] == ',' and coord_input[2].isnumeric()): #if meets requirements then convert
             move_from = coord_input
+
         elif (coord_input == 'exit'): #allow user to quit
             print ("\nThanks for playing!\n")
             sys.exit()
-
     else:
-        split_from = move_from.split(',') #var to split by comma (creates into array)
-        split_fromX = int(split_from[0])
-        split_fromY = int(split_from[1])
-        print (len(move_from))
+        if(len(move_from) == 3 and move_from[0].isnumeric() and move_from[1] == ',' and move_from[2].isnumeric()):
+            split_from = move_from.split(',') #var to split by comma (creates into array)
+            split_fromX = int(split_from[0])
+            split_fromY = int(split_from[1])
+        else:
+            get_input()
 
 def get_dir():
     global current_player
