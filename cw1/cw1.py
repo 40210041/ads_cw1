@@ -83,6 +83,10 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
+#check for pieces that must be taken
+def mandatory_take():
+    pass
+
 #get coord for moving a piece
 def get_input():
     global split_fromX
