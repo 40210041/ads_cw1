@@ -31,11 +31,12 @@ move_turn = 1 #var for incrementing turns
 current_turn = 1
 current_player = (player_1)
 enemy_player = (player_2)
-player_X = "" #controlling player
 player_XK = "" #controlling player (if king piece)
-player_Y = "" #other player
 player_YK = "" #other player (if king piece)
-
+must_take1 = False
+must_take2 = False
+must_take3 = False
+must_take4 = False
 
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
@@ -85,7 +86,20 @@ def print_grid():
 
 #check for pieces that must be taken
 def mandatory_take():
-    pass
+    # global must_take1
+    # global must_take2
+    # global must_take3
+    # global must_take4
+    #
+    # for i in b_grid:
+    #     for j in i:
+    #         if (b_grid[j - 1][j - 1] == 'b' or b_grid[j - 1][j - 1] == 'B' and current_player == (player_1)):
+    #         else:
+    #             print ("")
+    #     else:
+    #         print ("???")
+    # else:
+    #     print ("?????? :)))))")
 
 #get coord for moving a piece
 def get_input():
@@ -139,9 +153,10 @@ def make_move():
     global move_to
 
     get_input()
-        #check if co-ords are in grid
+    #check if coords are in grid
     if ((split_fromY) >= 0 and (split_fromY) <= 7 or (split_fromX) >= 0 and (split_fromX) <= 7):
-        if ((b_grid[split_fromY][split_fromX] == player_1)):
+        #check if oiece belongs to current player
+        if ((b_grid[split_fromY][split_fromX] == current_player)):
 
             #if meets requirements are met then get directon
             get_dir()
