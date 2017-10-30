@@ -24,11 +24,10 @@ import sys
 
 #setup vars
 player_1 = "r" #red
-player_1K = "R" #Red.
+player_1K = "R" #red king
 player_2 = "b" #black
-player_2K = "B" #BONELESS
+player_2K = "B" #black king
 move_turn = 1 #var for incrementing turns
-current_turn = 1
 current_player = (player_1)
 enemy_player = (player_2)
 player_XK = "" #controlling player (if king piece)
@@ -62,10 +61,11 @@ def startup_rules():
 #print out how to play
 def rules():
     print ("\n* RULES *")
-    print ("• You play as Red (r/R), the AI plays as Black(b/B).")
-    print ("• Move the pieces diagonally forward to remove the other players pieces.")
+    print ("• P1 plays as Red (r/R), the AI/P2 plays as Black(b/B).")
+    print ("• Move the pieces forward to remove the other players pieces.")
+    print ("• Type the co-ordinates of the piece that you would like to move.")
     print ("• Type the number of the direction you would like to move.")
-    print ("• Moving a piece to the opponents side will make that piece into a King.")
+    print ("• Moving a piece to the end of the opponents side will make that piece into a King.")
     print ("• King pieces can move back and forth diagonally.\n")
 
 #print board

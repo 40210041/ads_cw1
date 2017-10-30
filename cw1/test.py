@@ -42,8 +42,8 @@ must_take4 = False
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
+          [' ',' ','r',' ',' ',' ',' ',' '],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ','b',' ',' ',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
@@ -109,10 +109,12 @@ def mandatory_take():
                         if ((b_grid[temp_Y - 1][temp_X - 1]) == 'b' or (b_grid[temp_Y - 1][temp_X - 1]) == 'B' and (current_player == (player_1) or (player_1K))):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '):
                                 must_take1 = True
+                                print ("The coords 1r: ", str(temp_Y) , str(temp_X))
                     elif ((b_grid[temp_Y][temp_X]) == (player_2) or (b_grid[temp_Y][temp_X]) == (player_2K)):
                         if((b_grid[temp_Y - 1][temp_X - 1]) == 'r' or (b_grid[temp_Y - 1][temp_X - 1]) == 'R' and current_player == (player_2K)):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '):
                                 must_take1 = True
+                                print ("The coords 1b: ", str(temp_Y) , str(temp_X))
 
             #for must_take2
             if (temp_Y >= 2 and temp_X <= 5): #must stay within grid after moving
@@ -121,10 +123,13 @@ def mandatory_take():
                         if ((b_grid[temp_Y - 1][temp_X + 1]) == 'b' or (b_grid[temp_Y - 1][temp_X + 1]) == 'B' and (current_player == (player_1) or (player_1K))):
                             if (b_grid[temp_Y - 2][temp_X + 2] == ' '):
                                 must_take2 = True
+                                print ("The coords 2r: ", str(temp_Y) , str(temp_X))
+
                     elif ((b_grid[temp_Y][temp_X]) == (player_2) or (b_grid[temp_Y][temp_X]) == (player_2K)):
                         if ((b_grid[temp_Y - 1][temp_X + 1]) == 'r' or (b_grid[temp_Y - 1][temp_X + 1]) == 'B' and current_player == (player_2K)):
                             if ((b_grid[temp_Y - 2][temp_X + 2]) == ' '):
                                 must_take2 = True
+                                print ("The coords 2b: ", str(temp_Y) , str(temp_X))
 
             #for must_take3
             if (temp_Y <= 5 and temp_X >= 2): #must stay in grid after moving
@@ -133,10 +138,13 @@ def mandatory_take():
                         if ((b_grid[temp_Y + 1][temp_X - 1] == 'r' or 'R') and (current_player == (player_2) or (player_2K))):
                             if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
                                 must_take3 = True
+                                print ("The coords 3b: ", str(temp_Y) , str(temp_X))
+
                     elif ((b_grid[temp_Y][temp_X]) == (player_1) or (b_grid[temp_Y][temp_X]) == (player_1K)):
                         if ((b_grid[temp_Y + 1][temp_X - 1] == 'b' or 'B') and (current_player) == (player_1K)):
                             if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
                                 must_take3 = True
+                                print ("The coords 3r: ", str(temp_Y) , str(temp_X))
 
             #for must_take4
             if (temp_Y <= 5 and temp_X <= 5): #must stay in grid after moving
@@ -145,10 +153,13 @@ def mandatory_take():
                         if ((b_grid[temp_Y + 1][temp_X + 1] == 'r' or 'R') and (current_player == (player_2) or (current_player) == (player_2K))):
                             if (b_grid[temp_Y + 2][temp_X + 2] == ' '):
                                 must_take4 = True
+                                print ("The coords 4b: ", str(temp_Y) , str(temp_X))
+
                     elif ((b_grid[temp_Y][temp_X]) == (player_1) or (b_grid[temp_Y][temp_X]) == (player_1K)):
                         if ((b_grid[temp_Y + 1][temp_X + 1] == 'b' or 'B') and (current_player) == (player_1K)):
                             if (b_grid[temp_Y + 2][temp_X + 2] == ' '):
                                 must_take4 = True
+                                print ("The coords 4r: ", str(temp_Y) , str(temp_X))
 
 
             #for each element in i, increase till 7 then start on next line
@@ -210,6 +221,7 @@ def mandatory_take():
             print (temp_Y)
 
         else:
+            print ("You did not choose an option...\n")
             pass
     print_grid()
 
@@ -556,7 +568,6 @@ print ("\n** Now playing: Checkers! **\n")
 startup_rules()
 
 user_input = input("Please press enter to start: \n")
-mandatory_take()
 while (user_input != 'exit'):
     print_grid()
 
@@ -569,7 +580,7 @@ while (user_input != 'exit'):
 
     #if user wants to move a piece
     elif user_input == 'move':
-        # mandatory_take()
+        mandatory_take()
         make_move()
         update_player()
         print ("\n\nCurrent turn: " + str(move_turn))
