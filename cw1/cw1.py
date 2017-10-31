@@ -445,6 +445,8 @@ startup_rules()
 
 user_input = input("Please press enter to start: \n")
 while (user_input != 'exit'):
+    print ("\n\nCurrent turn: " + str(move_turn))
+    print ("Current player: " + str(current_player)+ "\n")
     print_grid()
 
     #to start game, move a piece
@@ -459,8 +461,6 @@ while (user_input != 'exit'):
         #update_player()
         make_move()
         update_player()
-        print ("\n\nCurrent turn: " + str(move_turn))
-        print ("Current player: " + str(current_player)+ "\n")
 
     #if user wants to see rules
     elif user_input == 'check':

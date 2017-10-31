@@ -42,10 +42,10 @@ must_take4 = False
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
-          [' ',' ','r',' ',' ',' ',' ',' '],
-          [' ',' ',' ',' ',' ',' ',' ',' '],
-          ['r',' ','r',' ','r',' ','r',' '],
-          [' ','r',' ','r',' ','r',' ','r'],
+          [' ',' ','r',' ',' ',' ','r',' '],
+          [' ',' ',' ','b',' ',' ',' ',' '],
+          ['r',' ','r',' ',' ',' ','r',' '],
+          [' ',' ',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
 
 
@@ -176,16 +176,16 @@ def mandatory_take():
     if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
         #print out options that can be taken
         if (must_take1 == True):
-            print ("1")
+            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 1")
 
         if (must_take2 == True):
-            print ("2")
+            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 2")
 
         if (must_take3 == True):
-            print ("3")
+            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 3")
 
         if (must_take4 == True):
-            print ("4")
+            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
 
     print (must_take1)
     print (must_take2)
