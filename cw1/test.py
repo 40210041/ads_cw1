@@ -110,6 +110,7 @@ def mandatory_take():
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '):
                                 must_take1 = True
                                 print ("The coords 1r: ", str(temp_Y) , str(temp_X))
+
                     elif ((b_grid[temp_Y][temp_X]) == (player_2) or (b_grid[temp_Y][temp_X]) == (player_2K)):
                         if((b_grid[temp_Y - 1][temp_X - 1]) == 'r' or (b_grid[temp_Y - 1][temp_X - 1]) == 'R' and current_player == (player_2K)):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '):
@@ -135,16 +136,19 @@ def mandatory_take():
             if (temp_Y <= 5 and temp_X >= 2): #must stay in grid after moving
                 if (current_player == (player_2) or (current_player) == (player_2K) or (current_player) == (player_1K)):
                     if ((b_grid[temp_Y][temp_X]) == (player_2) or (b_grid[temp_Y][temp_X]) == (player_2K)):
-                        if ((b_grid[temp_Y + 1][temp_X - 1] == 'r' or 'R') and (current_player == (player_2) or (player_2K))):
+                        print ("current space is b", str(temp_Y), str(temp_X))
+                        if ((b_grid[temp_Y + 1][temp_X - 1]) == 'r' or (b_grid[temp_Y + 1][temp_X - 1]) == 'R' and ((current_player) == (player_2) or (current_player) == (player_2K))):
                             if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
                                 must_take3 = True
                                 print ("The coords 3b: ", str(temp_Y) , str(temp_X))
 
-                    elif ((b_grid[temp_Y][temp_X]) == (player_1) or (b_grid[temp_Y][temp_X]) == (player_1K)):
-                        if ((b_grid[temp_Y + 1][temp_X - 1] == 'b' or 'B') and (current_player) == (player_1K)):
-                            if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
-                                must_take3 = True
-                                print ("The coords 3r: ", str(temp_Y) , str(temp_X))
+                    else:
+                        if ((b_grid[temp_Y][temp_X]) == (player_1) or (b_grid[temp_Y][temp_X]) == (player_1K)):
+                            print ("current space is r", str(temp_Y), str(temp_X))
+                            if ((b_grid[temp_Y + 1][temp_X - 1] == 'b' or 'B') and (current_player) == (player_1K)):
+                                if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
+                                    must_take3 = True
+                                    print ("The coords 3r: ", str(temp_Y) , str(temp_X))
 
             #for must_take4
             if (temp_Y <= 5 and temp_X <= 5): #must stay in grid after moving
@@ -169,60 +173,60 @@ def mandatory_take():
         #increase the current row (i)
         temp_Y += 1
 
-        if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
-            #print out options that can be taken
-            if (must_take1 == True):
-                print ("1")
+    if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
+        #print out options that can be taken
+        if (must_take1 == True):
+            print ("1")
 
-            if (must_take2 == True):
-                print ("2")
+        if (must_take2 == True):
+            print ("2")
 
-            if (must_take3 == True):
-                print ("3")
+        if (must_take3 == True):
+            print ("3")
 
-            if (must_take4 == True):
-                print ("4")
+        if (must_take4 == True):
+            print ("4")
 
-        print (must_take1)
-        print (must_take2)
-        print (must_take3)
-        print (must_take4)
+    print (must_take1)
+    print (must_take2)
+    print (must_take3)
+    print (must_take4)
 
-        print ("Please enter your choice: ")
-        user_take = input("> ")
-        #if the user move and must == true then make move ie starndard move preocedure jhahahahaha
+    print ("Please enter your choice: ")
+    user_take = input("> ")
+    #if the user move and must == true then make move ie starndard move preocedure jhahahahaha
 
-        if (must_take1 == True and user_take == "1"):
-            b_grid[temp_Y][temp_X] == (' ')
-            b_grid[temp_Y - 1][temp_X - 1] == (' ')
-            b_grid[temp_Y - 2][temp_X - 2] == (current_player)
-            print (temp_X)
-            print (temp_Y)
+    if (must_take1 == True and user_take == "1"):
+        b_grid[temp_Y][temp_X] == (' ')
+        b_grid[temp_Y - 1][temp_X - 1] == (' ')
+        b_grid[temp_Y - 2][temp_X - 2] == (current_player)
+        print (temp_X)
+        print (temp_Y)
 
-        elif (must_take2 == True and user_take == "2"):
-            b_grid[temp_Y][temp_X] == (' ')
-            b_grid[temp_Y - 1][temp_X + 1] == (' ')
-            b_grid[temp_Y - 2][temp_X + 2] == (current_player)
-            print (temp_X)
-            print (temp_Y)
+    elif (must_take2 == True and user_take == "2"):
+        b_grid[temp_Y][temp_X] == (' ')
+        b_grid[temp_Y - 1][temp_X + 1] == (' ')
+        b_grid[temp_Y - 2][temp_X + 2] == (current_player)
+        print (temp_X)
+        print (temp_Y)
 
-        elif (must_take3 == True and user_take == '3'):
-            b_grid[temp_Y][temp_X] == ' '
-            b_grid[temp_Y + 1][temp_X - 1] == ' '
-            b_grid[temp_Y + 2][temp_X - 2] == (current_player)
-            print (temp_X)
-            print (temp_Y)
+    elif (must_take3 == True and user_take == '3'):
+        b_grid[temp_Y][temp_X] == ' '
+        b_grid[temp_Y + 1][temp_X - 1] == ' '
+        b_grid[temp_Y + 2][temp_X - 2] == (current_player)
+        print (temp_X)
+        print (temp_Y)
 
-        elif (must_take4 == True and user_take == '4'):
-            b_grid[temp_Y][temp_X] == ' '
-            b_grid[temp_Y + 1][temp_X + 1] == ' '
-            b_grid[temp_Y + 2][temp_X + 2] == (current_player)
-            print (temp_X)
-            print (temp_Y)
+    elif (must_take4 == True and user_take == '4'):
+        b_grid[temp_Y][temp_X] == ' '
+        b_grid[temp_Y + 1][temp_X + 1] == ' '
+        b_grid[temp_Y + 2][temp_X + 2] == (current_player)
+        print (temp_X)
+        print (temp_Y)
 
-        else:
-            print ("You did not choose an option...\n")
-            pass
+    else:
+        print ("You did not choose an option...\n")
+        pass
     print_grid()
 
 #get coord for moving a piece
