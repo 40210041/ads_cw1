@@ -313,8 +313,21 @@ def make_move():
                         if ((b_grid[split_fromY + 1][split_fromX - 1]) == 'r' or (b_grid [split_fromY + 1][split_fromX - 1]) == 'R'): # check if enemy piece
                             if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
 
-                                #if piece is AI
-                                if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
+                                if (split_fromY == 7):
+                                    if ((b_grid[split_fromY][split_fromX]) == 'b'):
+                                        b_grid[split_fromY][split_fromX] = ' '
+                                        b_grid[split_fromY + 1][split_fromX - 1] = ' '
+                                        b_grid[split_fromY + 2][split_fromX - 2] = (player_2K)
+                                        move_turn += 1
+
+                                else:
+                                    if (b_grid[split_fromY][split_fromX]) == 'b'):
+                                    b_grid[split_fromY][split_fromX] = ' '
+                                    b_grid[split_fromY + 1][split_fromX - 1] = ' '
+                                    b_grid[split_fromY + 2][split_fromX - 2] = (player_2)
+                                    move_turn += 1 #update the turn
+
+                                    elif (b_grid[split_fromY][split_fromX]) == 'B'):
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY + 1][split_fromX - 1] = ' '
                                     b_grid[split_fromY + 2][split_fromX - 2] = (player_2K)
@@ -330,7 +343,7 @@ def make_move():
                             if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '):
 
                                 #if player piece
-                                if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R'):
+                                if ((b_grid[split_fromY][split_fromX]) == 'R'):
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY + 1][split_fromX - 1] = ' '
                                     b_grid[split_fromY + 2][split_fromX - 2] = (player_1K)
@@ -364,7 +377,21 @@ def make_move():
                             if ((b_grid[split_fromY + 2][split_fromX + 2]) == ' '): #if the space after enemy piece is free
 
                                 #if piece is AI
-                                if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
+                                if (split_fromY == 7):
+                                    if ((b_grid[split_fromY][split_fromX]) == 'b'):
+                                        b_grid[split_fromY][split_fromX] = ' '
+                                        b_grid[split_fromY + 1][split_fromX + 1] = ' '
+                                        b_grid[split_fromY + 2][split_fromX + 2] = (player_2K)
+                                        move_turn += 1
+
+                                else:
+                                    if (b_grid[split_fromY][split_fromX]) == 'b'):
+                                    b_grid[split_fromY][split_fromX] = ' '
+                                    b_grid[split_fromY + 1][split_fromX + 1] = ' '
+                                    b_grid[split_fromY + 2][split_fromX + 2] = (player_2)
+                                    move_turn += 1 #update the turn
+
+                                    elif (b_grid[split_fromY][split_fromX]) == 'B'):
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY + 1][split_fromX + 1] = ' '
                                     b_grid[split_fromY + 2][split_fromX + 2] = (player_2K)
@@ -382,7 +409,7 @@ def make_move():
                                 print ("There is an enemy piece here! You must take it!\n")
 
                                 #if player piece
-                                if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R'):
+                                if ((b_grid[split_fromY][split_fromX]) == 'R'):
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY + 1][split_fromX + 1] = ' '
                                     b_grid[split_fromY + 2][split_fromX + 2] = (player_1K)

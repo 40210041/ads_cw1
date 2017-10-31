@@ -447,7 +447,13 @@ def make_move():
                             if ((b_grid[split_fromY + 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
 
                                 #if piece is AI
-                                if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B'):
+                                if ((b_grid[split_fromY][split_fromX]) == 'b'):
+                                    b_grid[split_fromY][split_fromX] = ' '
+                                    b_grid[split_fromY + 1][split_fromX - 1] = ' '
+                                    b_grid[split_fromY + 2][split_fromX - 2] = (player_2K)
+                                    move_turn += 1
+
+                                elif (b_grid[split_fromY][split_fromX]) == 'B'):
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY + 1][split_fromX - 1] = ' '
                                     b_grid[split_fromY + 2][split_fromX - 2] = (player_2K)
