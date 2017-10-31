@@ -91,10 +91,10 @@ def mandatory_take():
     global must_take3
     global must_take4
 
-    must_take1 == False
-    must_take2 == False
-    must_take3 == False
-    must_take4 == False
+    must_take1 = False
+    must_take2 = False
+    must_take3 = False
+    must_take4 = False
 
     temp_X = 0 #temp x coord
     temp_Y = 0 #temp y coord
@@ -165,6 +165,66 @@ def mandatory_take():
                                 must_take4 = True
                                 print ("The coords 4r: ", str(temp_Y) , str(temp_X))
 
+                if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
+                    print ("You must choose: ")
+                    #print out options that can be taken
+                    if (must_take1 == True):
+                        print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 1")
+
+                    if (must_take2 == True):
+                        print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 2")
+
+                    if (must_take3 == True):
+                        print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 3")
+
+                    if (must_take4 == True):
+                        print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
+
+                    print (must_take1)
+                    print (must_take2)
+                    print (must_take3)
+                    print (must_take4)
+
+                    print ("Please enter your choice: ")
+                    user_take = input("> ")
+                    #if the user move and must == true then make move ie starndard move preocedure jhahahahaha
+
+                    if (must_take1 == True and user_take == "1"):
+                        b_grid[temp_Y][temp_X] == (' ')
+                        b_grid[temp_Y - 1][temp_X - 1] == (' ')
+                        b_grid[temp_Y - 2][temp_X - 2] == (current_player)
+                        print (temp_X)
+                        print (temp_Y)
+
+                    elif (must_take2 == True and user_take == "2"):
+                        b_grid[temp_Y][temp_X] == (' ')
+                        b_grid[temp_Y - 1][temp_X + 1] == (' ')
+                        b_grid[temp_Y - 2][temp_X + 2] == (current_player)
+                        print (temp_X)
+                        print (temp_Y)
+
+                    elif (must_take3 == True and user_take == '3'):
+                        b_grid[temp_Y][temp_X] == ' '
+                        b_grid[temp_Y + 1][temp_X - 1] == ' '
+                        b_grid[temp_Y + 2][temp_X - 2] == (current_player)
+                        print (temp_X)
+                        print (temp_Y)
+
+                    elif (must_take4 == True and user_take == '4'):
+                        b_grid[temp_Y][temp_X] == ' '
+                        b_grid[temp_Y + 1][temp_X + 1] == ' '
+                        b_grid[temp_Y + 2][temp_X + 2] == (current_player)
+                        print (temp_X)
+                        print (temp_Y)
+
+                    else:
+                        print ("You did not choose an option...\n")
+                        pass
+
+            must_take1 = False
+            must_take2 = False
+            must_take3 = False
+            must_take4 = False
 
             #for each element in i, increase till 7 then start on next line
             temp_X +=1
@@ -172,61 +232,6 @@ def mandatory_take():
                 temp_X = 0
         #increase the current row (i)
         temp_Y += 1
-
-    if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
-        #print out options that can be taken
-        if (must_take1 == True):
-            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 1")
-
-        if (must_take2 == True):
-            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 2")
-
-        if (must_take3 == True):
-            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 3")
-
-        if (must_take4 == True):
-            print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
-
-    print (must_take1)
-    print (must_take2)
-    print (must_take3)
-    print (must_take4)
-
-    print ("Please enter your choice: ")
-    user_take = input("> ")
-    #if the user move and must == true then make move ie starndard move preocedure jhahahahaha
-
-    if (must_take1 == True and user_take == "1"):
-        b_grid[temp_Y][temp_X] == (' ')
-        b_grid[temp_Y - 1][temp_X - 1] == (' ')
-        b_grid[temp_Y - 2][temp_X - 2] == (current_player)
-        print (temp_X)
-        print (temp_Y)
-
-    elif (must_take2 == True and user_take == "2"):
-        b_grid[temp_Y][temp_X] == (' ')
-        b_grid[temp_Y - 1][temp_X + 1] == (' ')
-        b_grid[temp_Y - 2][temp_X + 2] == (current_player)
-        print (temp_X)
-        print (temp_Y)
-
-    elif (must_take3 == True and user_take == '3'):
-        b_grid[temp_Y][temp_X] == ' '
-        b_grid[temp_Y + 1][temp_X - 1] == ' '
-        b_grid[temp_Y + 2][temp_X - 2] == (current_player)
-        print (temp_X)
-        print (temp_Y)
-
-    elif (must_take4 == True and user_take == '4'):
-        b_grid[temp_Y][temp_X] == ' '
-        b_grid[temp_Y + 1][temp_X + 1] == ' '
-        b_grid[temp_Y + 2][temp_X + 2] == (current_player)
-        print (temp_X)
-        print (temp_Y)
-
-    else:
-        print ("You did not choose an option...\n")
-        pass
     print_grid()
 
 #get coord for moving a piece
