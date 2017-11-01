@@ -43,7 +43,7 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ','b',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
@@ -86,6 +86,11 @@ def print_grid():
 
 #check for pieces that must be taken
 def mandatory_take():
+    global current_player
+    global player_1
+    global player_1k
+    global player_2
+    global player_2K
     global must_take1
     global must_take2
     global must_take3
@@ -198,33 +203,33 @@ def mandatory_take():
                 user_take = input("> ")
 
                 if (must_take1 == True and user_take == "1"):
-                    b_grid[temp_Y][temp_X] == (' ')
-                    b_grid[temp_Y - 1][temp_X - 1] == (' ')
-                    b_grid[temp_Y - 2][temp_X - 2] == (current_player)
+                    b_grid[temp_Y][temp_X] = (' ')
+                    b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                    b_grid[temp_Y - 2][temp_X - 2] = (current_player)
                     move_turn += 1
                     print (temp_X)
                     print (temp_Y)
 
                 elif (must_take2 == True and user_take == "2"):
-                    b_grid[temp_Y][temp_X] == (' ')
-                    b_grid[temp_Y - 1][temp_X + 1] == (' ')
-                    b_grid[temp_Y - 2][temp_X + 2] == (current_player)
+                    b_grid[temp_Y][temp_X] = (' ')
+                    b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                    b_grid[temp_Y - 2][temp_X + 2] = (current_player)
                     move_turn += 1
                     print (temp_X)
                     print (temp_Y)
 
                 elif (must_take3 == True and user_take == '3'):
-                    b_grid[temp_Y][temp_X] == ' '
-                    b_grid[temp_Y + 1][temp_X - 1] == ' '
-                    b_grid[temp_Y + 2][temp_X - 2] == (current_player)
+                    b_grid[temp_Y][temp_X] = ' '
+                    b_grid[temp_Y + 1][temp_X - 1] = ' '
+                    b_grid[temp_Y + 2][temp_X - 2] = (current_player)
                     move_turn += 1
                     print (temp_X)
                     print (temp_Y)
 
                 elif (must_take4 == True and user_take == '4'):
-                    b_grid[temp_Y][temp_X] == ' '
-                    b_grid[temp_Y + 1][temp_X + 1] == ' '
-                    b_grid[temp_Y + 2][temp_X + 2] == (current_player)
+                    b_grid[temp_Y][temp_X] = ' '
+                    b_grid[temp_Y + 1][temp_X + 1] = ' '
+                    b_grid[temp_Y + 2][temp_X + 2] = (current_player)
                     move_turn += 1
                     print (temp_X)
                     print (temp_Y)
