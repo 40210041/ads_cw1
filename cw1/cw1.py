@@ -1,18 +1,4 @@
 #cw1.py
-#prepare urself for some long af code
-
-# record play history, i.e. the sequence of moves that the players make during a game,
-# so that each game that is played can be recorded and replayed.
-
-# undo and redo, again selecting the most appropriate data structures to enable these functionalities.
-# implement an algorithm that enables the computer to choose which moves to make during their own turn,
-# i.e. a simple AI player.
-
-# Your choice of algorithm for the AI player may be from the literature, or of your own design. Whichever your
-# choice you must be able to evaluate and justify your selection of both data structures and algorithms.
-# The game should run from the command line, using a text based interface in the first instance.
-
-# PLS LET ME PASS LOL
 
 ##########
 # SETUP #
@@ -85,7 +71,7 @@ def print_grid():
     print ("  +-------------------------------+")
 
 #check for pieces that must be taken
-def mandatory_take():
+#def mandatory_take():
     # global must_take1
     # global must_take2
     # global must_take3
@@ -321,7 +307,7 @@ def make_move():
                                         move_turn += 1
 
                                 else:
-                                    if (b_grid[split_fromY][split_fromX]) == 'b'):
+                                    if ((b_grid[split_fromY][split_fromX]) == 'b'):
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY + 1][split_fromX - 1] = ' '
                                     b_grid[split_fromY + 2][split_fromX - 2] = (player_2)
