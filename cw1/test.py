@@ -43,7 +43,7 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ',' ',' ','b',' ',' ',' ',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
@@ -191,12 +191,12 @@ def mandatory_take():
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
                     must_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
-                ####### REMOVE #########
-                print (must_take)
-                print (must_take1)
-                print (must_take2)
-                print (must_take3)
-                print (must_take4)
+                # ####### REMOVE #########
+                # print (must_take)
+                # print (must_take1)
+                # print (must_take2)
+                # print (must_take3)
+                # print (must_take4)
 
                 # ask user to choose an option depending on results
                 print ("Please enter your choice: ")
@@ -250,7 +250,6 @@ def mandatory_take():
                 temp_X = 0
         #increase the current row (i)
         temp_Y += 1
-    print_grid()
 
 #get coord for moving a piece
 def get_input():
@@ -602,9 +601,11 @@ startup_rules()
 
 user_input = input("Please press enter to start: \n")
 while (user_input != 'exit'):
-    print_grid()
     print ("\n\nCurrent turn: " + str(move_turn))
     print ("Current player: " + str(current_player)+ "\n")
+    print_grid()
+
+    mandatory_take()
 
     #to start game, move a piece
     print ("Type move to move a piece")
@@ -615,7 +616,7 @@ while (user_input != 'exit'):
 
     #if user wants to move a piece
     elif user_input == 'move':
-        mandatory_take()
+        # mandatory_take()
         make_move()
         update_player()
 
