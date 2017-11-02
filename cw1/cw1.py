@@ -268,12 +268,28 @@ def get_input():
 def get_dir():
     global current_player
     global move_to
+    global split_fromY
+    global split_fromX
 
-    print ("\nWhere would you like to move your choice?")
-    print ("1   2")
-    print ("  "+ current_player +"  ") ###### change to current_player
-    print ("3   4\n")
+    print ("\nPlease type the number of the direction you would like to move.")
+
+    #if piece is King piece
+    if (b_grid[split_fromY][split_fromX] == (player_1K) or b_grid[split_fromY][split_fromX] == (player_2K)):
+        print ("1   2")
+        print ("  "+ current_player +"  ")
+        print ("3   4\n")
+
+    #if piece is 'r'
+    elif (b_grid[split_fromY][split_fromX] == (player_1))
+        print print ("1   2")
+        print ("  "+ current_player +"  ")
+
+    elif (b_grid[split_fromY][split_fromX] == (player_2))
+        print ("  "+ current_player +"  ")
+        print ("3   4\n")
+
     move_to = input("Please enter your choice ('cancel to exit'): \n")
+
 
 #make a move
 def make_move():

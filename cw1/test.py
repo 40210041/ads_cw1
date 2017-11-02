@@ -43,7 +43,7 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ','b',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
@@ -294,6 +294,13 @@ def get_dir():
     print ("  "+ current_player +"  ") ###### change to current_player
     print ("3   4\n")
     move_to = input("Please enter your choice ('cancel to exit'): \n")
+
+    #if choice is valid then continue
+    if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
+        pass
+    else:
+        print ("No a valid option!\n") 
+        get_dir() #go back to beginning
 
 #maake a move
 def make_move():
@@ -606,6 +613,7 @@ while (user_input != 'exit'):
     print_grid()
 
     mandatory_take()
+    print_grid()
 
     #to start game, move a piece
     print ("Type move to move a piece")
@@ -619,7 +627,6 @@ while (user_input != 'exit'):
         # mandatory_take()
         make_move()
         update_player()
-
 
     #if user wants to see rules
     elif user_input == 'check':
