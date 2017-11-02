@@ -14,24 +14,23 @@ player_1K = "R" #red king
 player_2 = "b" #black
 player_2K = "B" #black king
 move_turn = 1 #var for incrementing turns
-current_player = (player_1)
-enemy_player = (player_2)
-player_XK = "" #controlling player (if king piece)
-player_YK = "" #other player (if king piece)
+current_player = (player_1) #current player piece
+current_king = (player_1K) #current player king
+enemy_player = (player_2K)
 must_take1 = False
 must_take2 = False
 must_take3 = False
 must_take4 = False
 
 #create grid
-b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
+b_grid = [[' ','b',' ',' ',' ',' ',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
-          [' ','b',' ','b',' ','b',' ','b'],
+          [' ','r',' ','b',' ','b',' ','r'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          ['r',' ','r',' ','r',' ','r',' '],
+          ['b',' ','r',' ','r',' ','b',' '],
           [' ','r',' ','r',' ','r',' ','r'],
-          ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
+          ['r',' ',' ',' ',' ',' ','r',' ']] #[7][0] to [7][7]
 
 
 ## define functions ##
@@ -83,6 +82,7 @@ def mandatory_take():
     global must_take4
     global move_turn
 
+    must_take = False
     must_take1 = False
     must_take2 = False
     must_take3 = False
@@ -102,14 +102,12 @@ def mandatory_take():
                         if ((b_grid[temp_Y - 1][temp_X - 1] == 'b' or b_grid[temp_Y - 1][temp_X - 1] == 'B') and (current_player == (player_1) or current_player == (player_1K))):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '): # if the space after is empty
                                 must_take1 = True
-                                print ("The coords 1r: ", str(temp_Y) , str(temp_X))
-
+                                must_take = True
                     elif (b_grid[temp_Y][temp_X] == (player_2K)):
                         if((b_grid[temp_Y - 1][temp_X - 1] == 'r' or b_grid[temp_Y - 1][temp_X - 1] == 'R') and (current_player == (player_2K))):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '):
                                 must_take1 = True
-                                print ("The coords 1b: ", str(temp_Y) , str(temp_X))
-
+                                must_take = True
             #for must_take2
             if (temp_Y >= 2 and temp_X <= 5): #must stay within grid after moving
                 if (current_player == (player_1) or current_player == (player_1K) or current_player == (player_2K)):
@@ -117,13 +115,13 @@ def mandatory_take():
                         if ((b_grid[temp_Y - 1][temp_X + 1] == 'b' or b_grid[temp_Y - 1][temp_X + 1] == 'B') and (current_player == (player_1) or current_player == (player_1K))):
                             if (b_grid[temp_Y - 2][temp_X + 2] == ' '):
                                 must_take2 = True
-                                print ("The coords 2r: ", str(temp_Y) , str(temp_X))
+                                must_take = True
 
                     elif (b_grid[temp_Y][temp_X] == (player_2K)):
                         if ((b_grid[temp_Y - 1][temp_X + 1] == 'r' or b_grid[temp_Y - 1][temp_X + 1] == 'B') and (current_player == (player_2K))):
                             if ((b_grid[temp_Y - 2][temp_X + 2]) == ' '):
                                 must_take2 = True
-                                print ("The coords 2b: ", str(temp_Y) , str(temp_X))
+                                must_take = True
 
             #for must_take3
             if (temp_Y <= 5 and temp_X >= 2): #must stay in grid after moving
@@ -132,14 +130,14 @@ def mandatory_take():
                         if ((b_grid[temp_Y + 1][temp_X - 1] == 'r' or b_grid[temp_Y + 1][temp_X - 1] == 'R') and (current_player == (player_2) or current_player == (player_2K))):
                             if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
                                 must_take3 = True
-                                print ("The coords 3b: ", str(temp_Y) , str(temp_X))
+                                must_take = True
 
                     else:
                         if ((b_grid[temp_Y][temp_X]) == (player_1K)):
                             if ((b_grid[temp_Y + 1][temp_X - 1] == 'b' or b_grid[temp_Y + 1][temp_X - 1]  ==  'B') and (current_player == (player_1K))):
                                 if (b_grid[temp_Y + 2][temp_X - 2] == ' '):
                                     must_take3 = True
-                                    print ("The coords 3r: ", str(temp_Y) , str(temp_X))
+                                    must_take = True
 
             #for must_take4
             if (temp_Y <= 5 and temp_X <= 5): #must stay in grid after moving
@@ -148,41 +146,34 @@ def mandatory_take():
                         if ((b_grid[temp_Y + 1][temp_X + 1] == 'r' or b_grid[temp_Y + 1][temp_X + 1] == 'R') and (current_player == (player_2) or current_player == (player_2K))):
                             if (b_grid[temp_Y + 2][temp_X + 2] == ' '):
                                 must_take4 = True
-                                print ("The coords 4b: ", str(temp_Y) , str(temp_X))
+                                must_take = True
 
                     elif (b_grid[temp_Y][temp_X] == (player_1) or b_grid[temp_Y][temp_X] == (player_1K)):
                         if ((b_grid[temp_Y + 1][temp_X + 1] == 'b' or b_grid[temp_Y + 1][temp_X + 1] == 'B') and (current_player == (player_1K))):
                             if (b_grid[temp_Y + 2][temp_X + 2] == ' '):
                                 must_take4 = True
-                                print ("The coords 4r: ", str(temp_Y) , str(temp_X))
+                                must_take = True
 
+            print ("You must choose to move one of the following pieces: ")
             if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
-                print ("You must choose to move one of the following pieces: ")
-                must_take = []
+                ai_take = []
 
                 #print out options that can be taken
                 if (must_take1 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 1")
-                    must_take.append(''+str(temp_X)+','+str(temp_Y)+'')
+                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 if (must_take2 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 2")
-                    must_take.append(''+str(temp_X)+','+str(temp_Y)+'')
+                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 if (must_take3 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 3")
-                    must_take.append(''+str(temp_X)+','+str(temp_Y)+'')
+                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 if (must_take4 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
-                    must_take.append(''+str(temp_X)+','+str(temp_Y)+'')
-
-                # ####### REMOVE #########
-                # print (must_take)
-                # print (must_take1)
-                # print (must_take2)
-                # print (must_take3)
-                # print (must_take4)
+                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 # ask user to choose an option depending on results
                 print ("Please enter your choice: ")
@@ -190,28 +181,61 @@ def mandatory_take():
 
                 #if the users choice matches with a statement which is true:
                 if (must_take1 == True and user_take == "1"):
-                    b_grid[temp_Y][temp_X] = (' ')
-                    b_grid[temp_Y - 1][temp_X - 1] = (' ')
-                    b_grid[temp_Y - 2][temp_X - 2] = (current_player)
-                    move_turn += 1
+                    if (temp_Y - 2 == 0):
+                        b_grid[temp_Y - 2][temp_X - 2] = (current_king)
+                        b_grid[temp_Y][temp_X] = (' ')
+                        b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                        move_turn += 1
+                        must_take = False
+
+                    else:
+                        b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
+                        b_grid[temp_Y][temp_X] = (' ')
+                        b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                        move_turn += 1
+                        must_take = False
 
                 elif (must_take2 == True and user_take == "2"):
-                    b_grid[temp_Y][temp_X] = (' ')
-                    b_grid[temp_Y - 1][temp_X + 1] = (' ')
-                    b_grid[temp_Y - 2][temp_X + 2] = (current_player)
-                    move_turn += 1
+                    if (temp_Y - 2 == 0):
+                        b_grid[temp_Y - 2][temp_X + 2] = (current_king)
+                        b_grid[temp_Y][temp_X] = (' ')
+                        b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                        move_turn += 1
+                        must_take = False
+                    else:
+                        b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
+                        b_grid[temp_Y][temp_X] = (' ')
+                        b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                        move_turn += 1
+                        must_take = False
 
                 elif (must_take3 == True and user_take == '3'):
-                    b_grid[temp_Y][temp_X] = ' '
-                    b_grid[temp_Y + 1][temp_X - 1] = ' '
-                    b_grid[temp_Y + 2][temp_X - 2] = (current_player)
-                    move_turn += 1
+                    if (temp_Y + 2 == 7):
+                        b_grid[temp_Y + 2][temp_X - 2] = (current_king)
+                        b_grid[temp_Y][temp_X] = ' '
+                        b_grid[temp_Y + 1][temp_X - 1] = ' '
+                        move_turn += 1
+                        must_take = False
+                    else:
+                        b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
+                        b_grid[temp_Y][temp_X] = ' '
+                        b_grid[temp_Y + 1][temp_X - 1] = ' '
+                        move_turn += 1
+                        must_take = False
 
                 elif (must_take4 == True and user_take == '4'):
-                    b_grid[temp_Y][temp_X] = ' '
-                    b_grid[temp_Y + 1][temp_X + 1] = ' '
-                    b_grid[temp_Y + 2][temp_X + 2] = (current_player)
-                    move_turn += 1
+                    if (temp_Y + 2 == 7):
+                        b_grid[temp_Y + 2][temp_X + 2] = (current_king)
+                        b_grid[temp_Y][temp_X] = ' '
+                        b_grid[temp_Y + 1][temp_X + 1] = ' '
+                        move_turn += 1
+                        must_take = False
+                    else:
+                        b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
+                        b_grid[temp_Y][temp_X] = ' '
+                        b_grid[temp_Y + 1][temp_X + 1] = ' '
+                        move_turn += 1
+                        must_take = False
 
                 #if thew user does not choose and option
                 else:
@@ -219,10 +243,18 @@ def mandatory_take():
                     pass
 
             #reset variables to be false
+            must_take = False
             must_take1 = False
             must_take2 = False
             must_take3 = False
             must_take4 = False
+
+            if (temp_Y == 7 and temp_X == 7):
+                if (must_take == True):
+                    print ("\nPlease make a choice: ")
+                    mandatory_take()
+            else:
+                pass
 
             #for each element in i, increase till 7 then start on next line
             temp_X +=1
@@ -280,16 +312,15 @@ def get_dir():
         print ("3   4\n")
 
     #if piece is 'r'
-    elif (b_grid[split_fromY][split_fromX] == (player_1))
-        print print ("1   2")
+    elif (b_grid[split_fromY][split_fromX] == (player_1)):
+        print ("1   2")
         print ("  "+ current_player +"  ")
 
-    elif (b_grid[split_fromY][split_fromX] == (player_2))
+    elif (b_grid[split_fromY][split_fromX] == (player_2)):
         print ("  "+ current_player +"  ")
         print ("3   4\n")
 
     move_to = input("Please enter your choice ('cancel to exit'): \n")
-
 
 #make a move
 def make_move():
@@ -297,35 +328,35 @@ def make_move():
     global split_fromX
     global split_fromY
     global move_to
+    global current_player
+    global current_king
 
     get_input()
     #check if coords are in grid
     if ((split_fromY) >= 0 and (split_fromY) <= 7 or (split_fromX) >= 0 and (split_fromX) <= 7):
         #check if oiece belongs to current player
-        if ((b_grid[split_fromY][split_fromX] == current_player)):
-
-            #if meets requirements are met then get directon
-            get_dir()
+        if (b_grid[split_fromY][split_fromX] == (current_player) or b_grid[split_fromY][split_fromX] == (current_king)):
+            get_dir()#if meets requirements are met then get directon
 
             #if user chooses 1
             if (move_to == '1'):
                 #only player 1 piece or AI King can move in direction 1
                 if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R' or (b_grid[split_fromY][split_fromX]) == 'B'):
-                    if ((split_fromY - 1) >= 0 or (split_fromX - 1) >= 0): #check that space is in grid
+                    if (split_fromY - 1 >= 0 or split_fromX - 1 >= 0): #check that space is in grid
                         if ((b_grid[split_fromY - 1][split_fromX - 1]) == 'b' or (b_grid[split_fromY - 1] [split_fromX - 1]) == 'B'): # check if enemy piece
                             if ((b_grid[split_fromY - 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
 
                                 #if the y co-ord is last row (0)
                                 if ((split_fromY - 2) == 0):
+                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_1K)
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY - 1][split_fromX - 1] = ' '
-                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_1K)
                                     move_turn += 1 #update the turn
 
                                 else:
+                                    b_grid[split_fromY - 2][split_fromX - 2] = b_grid[split_fromY][split_fromX]
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY - 1][split_fromX - 1] = ' '
-                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_1)
                                     move_turn += 1 #update the turn
                             else:
                                 print ("You cannot move here! (No empty space)\n ")
@@ -336,15 +367,16 @@ def make_move():
                             if ((b_grid[split_fromY - 1][split_fromX - 1]) == 'b' or  (b_grid[split_fromY][split_fromX]) == 'B'):
                                 print ("You cannot move here! (No free space)\n")
 
+                            #if piece is player 1 and current player is ai
                             elif ((b_grid[split_fromY - 1][split_fromX - 1]) == 'r' or (b_grid[split_fromY - 1][split_fromX - 1]) == 'R'):
                                 if ((b_grid[split_fromY - 2][split_fromX - 2]) == ' '):
+                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_2K)
                                     b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY - 1][split_fromX - 1] = ' '
-                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_2K)
 
                             elif ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
-                                    b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY - 1][split_fromX - 1] = (player_2K)
+                                    b_grid[split_fromY][split_fromX] = ' '
 
                             else:
                                 print ("You do not have a piece here!\n")
@@ -353,20 +385,20 @@ def make_move():
                         elif ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
                             #if already king piece
                             if ((b_grid[split_fromY][split_fromX]) == 'R'):
-                                b_grid[split_fromY][split_fromX] = ' '
                                 b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+                                b_grid[split_fromY][split_fromX] = ' '
                                 move_turn += 1 #update the turn
 
                             #if normal piece
                             elif ((b_grid[split_fromY][split_fromX]) == 'r'):
                                 #if y co-ord in direction is last row
                                 if ((split_fromY - 1) == 0):
-                                    b_grid[split_fromY][split_fromX] = ' '
                                     b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
+                                    b_grid[split_fromY][split_fromX] = ' '
                                     move_turn += 1 #update the turn
                                 else:
+                                    b_grid[split_fromY - 1][split_fromX - 1] = b_grid[split_fromY][split_fromX]
                                     b_grid[split_fromY][split_fromX] = ' '
-                                    b_grid[split_fromY - 1][split_fromX - 1] = (player_1)
                                     move_turn += 1 #update the turn
 
                             else:
@@ -595,18 +627,18 @@ def update_player():
     global player_2
     global player_2K
     global current_player
+    global current_king
     global enemy_player
     global move_turn
 
+    #if move modulo 2 is 0 then player 2's turn
     if move_turn % 2 == 0:
-        # player_X = (player_2)
-        # player_Y = (player_1)
         current_player = (player_2)
+        current_king = (player_2K)
         enemy_player = (player_1)
     else:
-        # player_X = (player_1)
-        # player_Y = (player_2)
         current_player = (player_1)
+        current_king = (player_1K)
         enemy_player = (player_2)
 
 ########

@@ -41,7 +41,7 @@ must_take4 = False
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
-          [' ','b',' ','b',' ','b',' ','b'],
+          [' ','B',' ','b',' ','b',' ','b'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
           [' ',' ',' ','b',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
@@ -289,17 +289,27 @@ def get_dir():
     global current_player
     global move_to
 
-    print ("\nWhere would you like to move your choice?")
-    print ("1   2")
-    print ("  "+ current_player +"  ") ###### change to current_player
-    print ("3   4\n")
+    if (b_grid[split_fromY][split_fromX] == (player_1K) or b_grid[split_fromY][split_fromX] == (player_2K)):
+        print ("\n1   2")
+        print ("  "+ current_player +"  ")
+        print ("3   4\n")
+
+    #if piece is 'r'
+    elif (b_grid[split_fromY][split_fromX] == (player_1)):
+        print ("\n1   2")
+        print ("  "+ current_player +"  \n")
+
+    elif (b_grid[split_fromY][split_fromX] == (player_2)):
+        print ("\n  "+ current_player +"  ")
+        print ("3   4\n")
+
     move_to = input("Please enter your choice ('cancel to exit'): \n")
 
     #if choice is valid then continue
     if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
         pass
     else:
-        print ("No a valid option!\n") 
+        print ("No a valid option!\n")
         get_dir() #go back to beginning
 
 #maake a move
