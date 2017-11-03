@@ -281,6 +281,12 @@ def get_input():
         if (move_from == 'cancel' or move_from == ''): #allow out of loop
             print ("Move cancelled...\n")
             make_move()
+
+        elif (move_from == "check"):
+            print ("\n\nCurrent turn: " + str(move_turn))
+            print ("Current player: " + str(current_player)+ "\n")
+            print_grid()
+
         elif (move_from == 'exit'): #if player wants to quit
             print ("\nThanks for playing!\n")
             sys.exit()
@@ -327,6 +333,11 @@ def get_dir():
         print ("3   4\n")
 
     move_to = input("Please enter your choice ('cancel to exit'): \n")
+    if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
+        pass
+    else:
+        print ("Not a valid option!\n")
+        get_dir() #go back to beginning
 
 #make a move
 def make_move():
@@ -342,6 +353,7 @@ def make_move():
     if ((split_fromY) >= 0 and (split_fromY) <= 7 or (split_fromX) >= 0 and (split_fromX) <= 7):
         #check if oiece belongs to current player
         if (b_grid[split_fromY][split_fromX] == (current_player) or b_grid[split_fromY][split_fromX] == (current_king)):
+
             get_dir()#if meets requirements are met then get directon
 
             #if user chooses 1
@@ -666,26 +678,32 @@ while (user_input != 'exit'):
     mandatory_take()
 
     #to start game, move a piece
-    print ("Type move to move a piece")
+    print ("Type 'move' to move a piece")
     user_input = input("> ")
 
-    if user_input == 'rules':
+    if (user_input == 'rules'):
         rules()
 
     #if user wants to move a piece
-    elif user_input == 'move':
+    elif (user_input == 'move'):
         make_move()
         update_player()
 
     #if user wants to see rules
-    elif user_input == 'check':
-        print ("\n\nCurrent turn: " + str(move_turn))
+    elif (user_input == 'check'):
+        print ("\nCurrent turn: " + str(move_turn))
         print ("Current player: " + str(current_player)+ "\n")
         print_grid()
 
-    #if user wants to quit
+    elif (user_input == '' or user_input == ' '):
+        print ("\nPlease enter your choice!\n")
+
     else:
-        break
+        print ("\nPlease re-enter your choice.\n")
+
+#if user wants to quit
+else:
+    sys.exit()
 
 #when game ends
 print ("\nThanks for playing!\n")
