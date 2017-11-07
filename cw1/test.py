@@ -411,20 +411,12 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X - 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
                 else:
                     b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X - 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
 
@@ -433,20 +425,12 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y - 2][temp_X + 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X + 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
                 else:
                     b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X + 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
 
@@ -455,20 +439,12 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y + 2][temp_X - 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X - 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
                 else:
                     b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X - 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
 
@@ -477,20 +453,12 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y + 2][temp_X + 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X + 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
                 else:
                     b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X + 1] = (' ')
-                    print ("\nCurrent turn: " + str(move_turn))
-                    print ("Current player: " + str(current_player)+ "\n")
-                    print_grid()
-                    move_turn += 1
                     piece_moved = True
                     return
 

@@ -72,12 +72,37 @@ def print_grid():
     print ("  +-------------------------------+")
 
 # #ai
-# def ai_select():
-#     #vars for ai coords
-#     ai_Y = random.randint(0,7)
-#     ai_X = random.randint(0,7)
-#
-#     if (b_grid[ai_Y][ai_X]):
+def ai_select():
+    global ai_selected
+    # #vars for ai coords
+    # ai_Y = random.randint(0,7)
+    # ai_X = random.randint(0,7)
+    #
+    # if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K):
+    #     print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
+    #     make_move()
+    # else:
+    #     ai_select() #call function until
+
+    ai_X = 0
+    ai_Y = 0
+    ai_list = []
+    ai_selected = random.choice(ai.list)
+
+    for i in b_grid:
+        for j in i:
+            if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
+                ai_list.append(str(ai_Y)+","+str(ai_X)) #add the coords to a list
+
+                get_input(ai_selected)
+
+                print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
+
+            ai_X += 1 #increment the X coord
+            if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
+                ai_X = 0
+        ai_Y += 1 #increment Y coord
+
 
 
 ########add second_jump() after each move#########
@@ -317,8 +342,11 @@ def get_input():
     global split_fromX
     global split_fromY
 
-    print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
-    move_from = input("> ") #input co-ord to move from
+    if (current_player == player_2):
+        user_input = ai_selected
+    else:
+        print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
+        move_from = input("> ") #input co-ord to move from
 
     while (len(move_from) != 3): #keep looping until string meets requirements
         if (move_from == 'cancel' or move_from == ''): #allow out of loop
