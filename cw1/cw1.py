@@ -71,30 +71,6 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
-# #ai
-# def ai_select():
-#     global ai_selected
-#
-#     ai_X = 0
-#     ai_Y = 0
-#     ai_list = []
-#     ai_selected = random.choice(ai.list)
-#
-#     for i in b_grid:
-#         for j in i:
-#             if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
-#                 ai_list.append(str(ai_Y)+","+str(ai_X)) #add the coords to a list
-#                 get_input(ai_selected)
-#                 get_dir()
-#                 make_move()
-#                 print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
-#
-#             ai_X += 1 #increment the X coord
-#             if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
-#                 ai_X = 0
-#         ai_Y += 1 #increment Y coord
-
-
 ########add second_jump() after each move#########
 
 #check for pieces that must be taken
@@ -331,6 +307,7 @@ def mandatory_take():
 def get_input():
     global split_fromX
     global split_fromY
+    global move_from
 
     if (current_player == player_2):
         user_input = ai_selected
@@ -699,6 +676,41 @@ def make_move():
     else:
         print ("This is not in the grid!\n")
 
+#ai
+def ai_select():
+    global ai_selected
+    global move_from
+
+    ai_X = 0
+    ai_Y = 0
+    ai_list = []
+    # ai_selected = random.choice(ai_list)
+
+    for i in b_grid:
+        for j in i:
+            if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
+                ai_list.append(str(ai_Y)+","+str(ai_X)) #add the coords to a list
+                # ai_selected = random.choice(ai_list)
+                # get_input(ai_selected)
+                # get_dir()
+                # make_move()
+                # print (ai_list)
+                # print (ai_selected)
+                # print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
+
+            ai_X += 1 #increment the X coord
+            if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
+                ai_X = 0
+        ai_Y += 1 #increment Y coord
+
+    ai_selected = random.choice(ai_list)
+    get_input()
+    get_dir()
+    make_move()
+    print (ai_list)
+    print (ai_selected)
+    print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
+
 #update player
 def update_player():
     global player_1
@@ -766,7 +778,7 @@ while (user_input != 'exit'):
 
     # if (piece_moved == False): #checks if a piece has been moved this turn
     #to start game, move a piece
-    if (current_player = player_1):
+    if (current_player == player_1):
         print ("Type 'move' to move a piece")
         user_input = input("> ")
 
@@ -794,10 +806,10 @@ while (user_input != 'exit'):
         # mandatory_take()
 
         #if user wants to quit
-        else:
-            sys.exit()
     else:
         ai_select()
+else:
+    sys.exit()
 
 #when game ends
 print ("\nThanks for playing!\n")
