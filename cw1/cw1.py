@@ -72,37 +72,27 @@ def print_grid():
     print ("  +-------------------------------+")
 
 # #ai
-def ai_select():
-    global ai_selected
-    # #vars for ai coords
-    # ai_Y = random.randint(0,7)
-    # ai_X = random.randint(0,7)
-    #
-    # if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K):
-    #     print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
-    #     make_move()
-    # else:
-    #     ai_select() #call function until
-
-    ai_X = 0
-    ai_Y = 0
-    ai_list = []
-    ai_selected = random.choice(ai.list)
-
-    for i in b_grid:
-        for j in i:
-            if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
-                ai_list.append(str(ai_Y)+","+str(ai_X)) #add the coords to a list
-
-                get_input(ai_selected)
-
-                print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
-
-            ai_X += 1 #increment the X coord
-            if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
-                ai_X = 0
-        ai_Y += 1 #increment Y coord
-
+# def ai_select():
+#     global ai_selected
+#
+#     ai_X = 0
+#     ai_Y = 0
+#     ai_list = []
+#     ai_selected = random.choice(ai.list)
+#
+#     for i in b_grid:
+#         for j in i:
+#             if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
+#                 ai_list.append(str(ai_Y)+","+str(ai_X)) #add the coords to a list
+#                 get_input(ai_selected)
+#                 get_dir()
+#                 make_move()
+#                 print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
+#
+#             ai_X += 1 #increment the X coord
+#             if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
+#                 ai_X = 0
+#         ai_Y += 1 #increment Y coord
 
 
 ########add second_jump() after each move#########
@@ -776,35 +766,38 @@ while (user_input != 'exit'):
 
     # if (piece_moved == False): #checks if a piece has been moved this turn
     #to start game, move a piece
-    print ("Type 'move' to move a piece")
-    user_input = input("> ")
+    if (current_player = player_1):
+        print ("Type 'move' to move a piece")
+        user_input = input("> ")
 
-    if (user_input == 'rules'):
-        rules()
+        if (user_input == 'rules'):
+            rules()
 
-    #if user wants to move a piece
-    elif (user_input == 'move'):
-        make_move()
-        update_player()
+        #if user wants to move a piece
+        elif (user_input == 'move'):
+            make_move()
+            update_player()
 
-    #if user wants to see rules
-    elif (user_input == 'check'):
-        print ("\nCurrent turn: " + str(move_turn))
-        print ("Current player: " + str(current_player)+ "\n")
-        print_grid()
+        #if user wants to see rules
+        elif (user_input == 'check'):
+            print ("\nCurrent turn: " + str(move_turn))
+            print ("Current player: " + str(current_player)+ "\n")
+            print_grid()
 
-    elif (user_input == '' or user_input == ' '):
-        print ("\nPlease enter your choice!\n")
+        elif (user_input == '' or user_input == ' '):
+            print ("\nPlease enter your choice!\n")
 
+        else:
+            print ("\nPlease re-enter your choice.\n")
+        # piece_moved = False
+
+        # mandatory_take()
+
+        #if user wants to quit
+        else:
+            sys.exit()
     else:
-        print ("\nPlease re-enter your choice.\n")
-    # piece_moved = False
-
-    # mandatory_take()
-
-#if user wants to quit
-else:
-    sys.exit()
+        ai_select()
 
 #when game ends
 print ("\nThanks for playing!\n")
