@@ -372,7 +372,7 @@ def get_dir():
 
     move_to = input("Please enter your choice ('cancel to exit'): \n")
     if (current_player == player_2):
-        if (current_king == player_2K)
+        if (current_king == player_2K):
             if (b_grid[split_fromY - 1][split_fromX - 1] == ' '):
                 move_to = "1"
             elif (b_grid[split_fromY - 1][split_fromX + 1] == ' '):
