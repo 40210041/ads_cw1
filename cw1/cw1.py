@@ -371,11 +371,23 @@ def get_dir():
         print ("3   4\n")
 
     move_to = input("Please enter your choice ('cancel to exit'): \n")
-    if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
-        pass
+    if (current_player == player_2):
+        if (current_king == player_2K)
+            if (b_grid[split_fromY - 1][split_fromX - 1] == ' '):
+                move_to = "1"
+            elif (b_grid[split_fromY - 1][split_fromX + 1] == ' '):
+                move_to = "2"
+        elif (b_grid[split_fromY + 1][split_fromX - 1] == ' '):
+            move_to = "3"
+        elif (b_grid[split_fromY + 1][split_fromX + 1] == ' '):
+            move_to = "4"
+
     else:
-        print ("Not a valid option!\n")
-        get_dir() #go back to beginning
+        if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
+            pass
+        else:
+            print ("Not a valid option!\n")
+            get_dir() #go back to beginning
 
 #make a move
 def make_move():
@@ -501,7 +513,7 @@ def make_move():
                                     move_turn += 1
 
                                 elif ((b_grid[split_fromY - 1][split_fromX + 1]) == ' '):
-                                    b_grid[split_fromY - 1][splixst_fromX + 1] = (player_2K)
+                                    b_grid[split_fromY - 1][split_fromX + 1] = (player_2K)
                                     b_grid[split_fromY][split_fromX] = ' '
                                     move_turn += 1
 
@@ -689,27 +701,42 @@ def ai_select():
     for i in b_grid:
         for j in i:
             if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
-                ai_list.append(str(ai_Y)+","+str(ai_X)) #add the coords to a list
-                # ai_selected = random.choice(ai_list)
-                # get_input(ai_selected)
-                # get_dir()
-                # make_move()
-                # print (ai_list)
-                # print (ai_selected)
-                # print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
+
+                #if king piece and 1 is free
+                if (ai_Y >= 2 and ai_X >= 2):
+                    if (b_grid[ai_Y - 1][ai_X - 1] == (player_2K) and b_grid[ai_Y - 1][ai_X - 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y)) #add the coords to a list
+                        ai_selected = random.choice(ai_list) #coords x,y is converted in get_input()
+
+                #if king piece and 2 is free
+                if (ai_Y >= 2 and ai_X <= 5):
+                    if (b_grid[ai_Y - 1][ai_X + 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y))
+                        ai_selected = random.choice(ai_list)
+
+                #if 3 is free
+                if (ai_Y <= 5 and ai_X >= 2):
+                    if (b_grid[ai_Y + 1][ai_X - 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y))
+                        ai_selected = random.choice(ai_list)
+
+                #if 4 is free
+                if (ai_Y <= 5 and ai_X <=5):
+                    if (b_grid[ai_Y + 1][ai_X + 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y))
+                        ai_selected = random.choice(ai_list)
 
             ai_X += 1 #increment the X coord
             if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
                 ai_X = 0
         ai_Y += 1 #increment Y coord
 
-    ai_selected = random.choice(ai_list)
+    print ("Player 2 has chosen: ", str(ai_selected)) #print what ai selects
     get_input()
     get_dir()
     make_move()
     print (ai_list)
     print (ai_selected)
-    print ("Player 2 has chosen: ", str(ai_X)+","+str(ai_Y))
 
 #update player
 def update_player():
@@ -772,44 +799,48 @@ while (user_input != 'exit'):
     print_grid()
     results()
 
+    piece_moved = False
+
     #before user can choose to move piece, check for pieces which must be moved
     mandatory_take()
     print (piece_moved)
 
-    # if (piece_moved == False): #checks if a piece has been moved this turn
-    #to start game, move a piece
-    if (current_player == player_1):
-        print ("Type 'move' to move a piece")
-        user_input = input("> ")
+    if (piece_moved == False): #checks if a piece has been moved this turn
+        #to start game, move a piece
+        if (current_player == player_1):
+            print ("Type 'move' to move a piece")
+            user_input = input("> ")
 
-        if (user_input == 'rules'):
-            rules()
+            if (user_input == 'rules'):
+                rules()
 
-        #if user wants to move a piece
-        elif (user_input == 'move'):
-            make_move()
-            update_player()
+            #if user wants to move a piece
+            elif (user_input == 'move'):
+                make_move()
+                update_player()
 
-        #if user wants to see rules
-        elif (user_input == 'check'):
-            print ("\nCurrent turn: " + str(move_turn))
-            print ("Current player: " + str(current_player)+ "\n")
-            print_grid()
+            #if user wants to see rules
+            elif (user_input == 'check'):
+                print ("\nCurrent turn: " + str(move_turn))
+                print ("Current player: " + str(current_player)+ "\n")
+                print_grid()
 
-        elif (user_input == '' or user_input == ' '):
-            print ("\nPlease enter your choice!\n")
+            elif (user_input == '' or user_input == ' '):
+                print ("\nPlease enter your choice!\n")
+
+            elif (user_input == 'exit'):
+                break
+
+            else:
+                print ("\nPlease re-enter your choice.\n")
 
         else:
-            print ("\nPlease re-enter your choice.\n")
-        # piece_moved = False
-
-        # mandatory_take()
-
-        #if user wants to quit
+            ai_select()
     else:
-        ai_select()
+        pass
+
 else:
-    sys.exit()
+    sys.exit() #if user quits
 
 #when game ends
 print ("\nThanks for playing!\n")
