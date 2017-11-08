@@ -724,46 +724,44 @@ def ai_select():
     global current_player
     global current_king
 
-    ai_X = 3
-    ai_Y = 2
-    ai_selected = (str(ai_X)+','+str(ai_Y))
+    ai_X = 0
+    ai_Y = 0
     ai_list = []
-    # ai_selected = random.choice(ai_list)
 
-    # for i in b_grid:
-    #     for j in i:
-    #         if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
-    #
-    #             #if king piece and 1 is free
-    #             if (ai_Y >= 1 and ai_X >= 1):
-    #                 if (b_grid[ai_Y - 1][ai_X - 1] == (player_2K) and b_grid[ai_Y - 1][ai_X - 1] == ' '):
-    #                     ai_list.append(str(ai_X)+","+str(ai_Y)) #add the coords to a list
-    #                     ai_selected = random.choice(ai_list) #coords x,y is converted in get_input()
-    #
-    #             #if king piece and 2 is free
-    #             if (ai_Y >= 1 and ai_X <= 6):
-    #                 if (b_grid[ai_Y - 1][ai_X + 1] == (player_2K) and b_grid[ai_Y - 1][ai_X + 1] == ' '):
-    #                     ai_list.append(str(ai_X)+","+str(ai_Y))
-    #                     ai_selected = random.choice(ai_list)
-    #
-    #             #if 3 is free
-    #             if (ai_Y <= 6 and ai_X >= 1):
-    #                 if (b_grid[ai_Y + 1][ai_X - 1] == ' '):
-    #                     ai_list.append(str(ai_X)+","+str(ai_Y))
-    #                     ai_selected = random.choice(ai_list)
-    #
-    #             #if 4 is free
-    #             if (ai_Y <= 6 and ai_X <= 6):
-    #                 if (b_grid[ai_Y + 1][ai_X + 1] == ' '):
-    #                     ai_list.append(str(ai_X)+","+str(ai_Y))
-    #                     ai_selected = random.choice(ai_list)
-    #
-    #         ai_X += 1 #increment the X coord
-    #         if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
-    #             ai_X = 0
-    #     ai_Y += 1 #increment Y coord
+    for i in b_grid:
+        for j in i:
+            if (b_grid[ai_Y][ai_X] == player_2 or b_grid[ai_Y][ai_X] == player_2K): #if piece = player 2
 
-    # print ("Player 2 has chosen: ", str(ai_selected)) #print what ai selects
+                #if king piece and 1 is free
+                if (ai_Y >= 1 and ai_X >= 1):
+                    if (b_grid[ai_Y - 1][ai_X - 1] == (player_2K) and b_grid[ai_Y - 1][ai_X - 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y)) #add the coords to a list
+                        ai_selected = random.choice(ai_list) #coords x,y is converted in get_input()
+
+                #if king piece and 2 is free
+                if (ai_Y >= 1 and ai_X <= 6):
+                    if (b_grid[ai_Y - 1][ai_X + 1] == (player_2K) and b_grid[ai_Y - 1][ai_X + 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y))
+                        ai_selected = random.choice(ai_list)
+
+                #if 3 is free
+                if (ai_Y <= 6 and ai_X >= 1):
+                    if (b_grid[ai_Y + 1][ai_X - 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y))
+                        ai_selected = random.choice(ai_list)
+
+                #if 4 is free
+                if (ai_Y <= 6 and ai_X <= 6):
+                    if (b_grid[ai_Y + 1][ai_X + 1] == ' '):
+                        ai_list.append(str(ai_X)+","+str(ai_Y))
+                        ai_selected = random.choice(ai_list)
+
+            ai_X += 1 #increment the X coord
+            if (ai_X > 7): #if X coord is > 7 then reset to 0 for next row
+                ai_X = 0
+        ai_Y += 1 #increment Y coord
+
+    print ("Player 2 has chosen: ", str(ai_selected)) #print what ai selects
     print (ai_list)
     print (ai_selected)
     # get_input()
@@ -849,7 +847,6 @@ while (user_input != 'exit'):
 
         else:
             ai_select()
-            break
     else:
         pass
 
