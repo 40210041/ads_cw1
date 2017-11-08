@@ -175,10 +175,9 @@ def mandatory_take():
 
 
             if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
-                must_take = True
-                print ("\nThere are pieces which must be taken!\n")
+                print ("\n* There are pieces which must be taken! *\n")
                 print ("Press enter to view another choice (if more than one)")
-                print ("You must choose to move one of the following pieces: ")
+                print ("You must choose to move one of the following pieces: \n")
                 ai_take = []
 
                 #print out options that can be taken
@@ -201,7 +200,7 @@ def mandatory_take():
                 # ask user to choose an option depending on results
                 print ("Please enter your choice: ")
                 user_take = input("> ")
-                if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4"):
+                if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "" or user_take == " "):
 
                     #if the users choice matches with a statement which is true:
                     if (must_take1 == True and user_take == "1"):
@@ -300,11 +299,14 @@ def mandatory_take():
                             print_grid()
                             return
 
-                    #if thew user does not choose and option
+                    elif (user_take == "" or user_take == " "):
+                        print ("Please enter a choice or cycle through the choices (if more than one)\n")
+
+                    #if the user does not choose and option
                     else:
-                        print ("You did not choose an option...\n")
+                        print ("\nYou did not choose an option...\n")
                 else:
-                    print ("Not a valid choice! (1, 2, 3 or 4)\n")
+                    print ("\nNot a valid choice! (1, 2, 3 or 4)\n")
 
             if (temp_Y == 7 and temp_X == 7):
                 if (must_take == True):
@@ -386,27 +388,30 @@ def get_dir():
     elif (b_grid[split_fromY][split_fromX] == (player_1)):
         print ("1   2")
         print ("  "+ current_player +"  ")
-
-    else:
-        if (b_grid[split_fromY][split_fromX] == 'b'):
-            print ("  "+ current_player +"  ")
-            print ("3   4\n")
-
-    move_to = input("Please enter your choice ('cancel to exit'): \n")
+    #
+    # else:
+    #     if (b_grid[split_fromY][split_fromX] == 'b'):
+    #         print ("  "+ current_player +"  ")
+    #         print ("3   4\n")
 
     if (current_player == player_2):
-        if (current_king == player_2K):
+        if (b_grid[split_fromY][split_fromX] == player_2K):
             if (b_grid[split_fromY - 1][split_fromX - 1] == ' '):
                 move_to = "1"
+                print ("Player 2 chose: 1\n")
             elif (b_grid[split_fromY - 1][split_fromX + 1] == ' '):
                 move_to = "2"
-        else:
+                print ("Player 2 chose: 2\n")
+        elif (b_grid[split_fromY][split_fromX] == player_2):
             if (b_grid[split_fromY + 1][split_fromX - 1] == ' '):
                 move_to = "3"
-
+                print ("Player 2 chose: 3\n")
             elif (b_grid[split_fromY + 1][split_fromX + 1] == ' '):
                 move_to = "4"
+                print ("Player 2 chose: 4\n")
+
     else:
+        move_to = input("Please enter your choice ('cancel to exit'): \n")
         if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
             pass
         else:
@@ -675,8 +680,6 @@ def ai_select():
     print ("Player 2 has chosen: ", str(ai_selected)) #print what ai selects
     print (ai_list)
     print (ai_selected)
-    # get_input()
-    # get_dir()
     make_move()
     update_player()
 
