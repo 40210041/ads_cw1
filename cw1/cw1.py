@@ -517,17 +517,17 @@ def make_move():
                                     move_turn += 1 #update the turn
 
                                 else:
-                                    if (b_grid[split_fromY][split_fromX] == 'r')
-                                    b_grid[split_fromY - 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
-                                    b_grid[split_fromY][split_fromX] = ' '
-                                    move_turn += 1 #update the turn
+                                    if (b_grid[split_fromY][split_fromX] == 'r'):
+                                        b_grid[split_fromY - 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
+                                        b_grid[split_fromY][split_fromX] = ' '
+                                        move_turn += 1 #update the turn
 
-                                    elif (b_grid[split_fromY][split_fromX] == 'R')
-                                    b_grid[split_fromY - 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
-                                    b_grid[split_fromY][split_fromX] = ' '
-                                    move_turn += 1 #update the turn
+                                    elif (b_grid[split_fromY][split_fromX] == 'R'):
+                                        b_grid[split_fromY - 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
+                                        b_grid[split_fromY][split_fromX] = ' '
+                                        move_turn += 1 #update the turn
 
-                            elif ((current_player == player_2):
+                            elif (current_player == player_2):
                                 if (b_grid[split_fromY][split_fromX] == 'B'):
                                     b_grid[split_fromY - 1][split_fromX + 1] == b_grid[split_fromY][split_fromX]
                                     b_grid[split_fromY][split_fromX] == ' '
@@ -587,24 +587,24 @@ def make_move():
                             if (current_player == player_2):
 
                                 if ((split_fromY + 1) == 7): #if end of row
-                                    if ((b_grid[split_fromY][split_fromX]) == 'b' and current_player == player_2):
+                                    if ((b_grid[split_fromY][split_fromX]) == 'b'):
                                         b_grid[split_fromY + 1][split_fromX + 1] = (player_2K)
                                         b_grid[split_fromY][split_fromX] = ' '
                                         move_turn += 1
 
                                 else:
-                                    if ((b_grid[split_fromY][split_fromX]) == 'b' and current_player == player_2):
+                                    if ((b_grid[split_fromY][split_fromX]) == 'b'):
                                         b_grid[split_fromY + 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
                                         b_grid[split_fromY][split_fromX] = ' '
                                         move_turn += 1 #update the turn
 
-                                    elif ((b_grid[split_fromY][split_fromX]) == 'B' and current_player == player_2):
+                                    elif ((b_grid[split_fromY][split_fromX]) == 'B'):
                                         b_grid[split_fromY + 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
                                         b_grid[split_fromY][split_fromX] = ' '
                                         move_turn += 1 #update the turn
 
                             elif (current_player == player_1):
-                                elif ((b_grid[split_fromY][split_fromX]) == 'R' and current_player == player_2): #if player piece
+                                if ((b_grid[split_fromY][split_fromX]) == 'R'): #if player piece
                                     b_grid[split_fromY + 1][split_fromX + 1] = b_grid[split_fromY][split_fromX]
                                     b_grid[split_fromY][split_fromX] = ' '
                                     move_turn += 1
