@@ -28,8 +28,8 @@ must_take4 = False
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
-          [' ',' ',' ',' ',' ',' ','r',' '],
-          [' ',' ',' ','b',' ',' ',' ',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
@@ -653,7 +653,7 @@ def make_move():
             if (move_to == '1'):
                 #only player 1 piece or AI King can move in direction 1
                 if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R' or (b_grid[split_fromY][split_fromX]) == 'B'):
-                    if (split_fromY - 1 >= 0 or split_fromX - 1 >= 0): #check that space is in grid
+                    if ((split_fromY - 1 >= 0) and (split_fromX - 1 >= 0)): #check that space is in grid
                         if ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '): # check if enemy piece
                             if (current_player == player_1):
 
@@ -664,22 +664,22 @@ def make_move():
                                     move_turn += 1 #update the turn
 
                                 else:
-                                    if (b_grid[split_fromY][split_fromX] == "r")
+                                    if (b_grid[split_fromY][split_fromX] == "r"):
                                         b_grid[split_fromY - 1][split_fromX - 1] = b_grid[split_fromY][split_fromX]
                                         b_grid[split_fromY][split_fromX] = ' '
-                                        move_turn += 1 
+                                        move_turn += 1
 
-                                    elif (b_grid[split_fromY][split_fromX] == "R")
+                                    elif (b_grid[split_fromY][split_fromX] == "R"):
                                         b_grid[split_fromY - 1][split_fromX - 1] = b_grid[split_fromY][split_fromX]
                                         b_grid[split_fromY][split_fromX] = ' '
                                         move_turn += 1
 
                             #if piece is ai piece and current player is ai
                             elif (current_player == player_2):
-                                if (b_grid[split_fromY][split_fromX] == 'B')
-                                if ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
-                                        b_grid[split_fromY - 1][split_fromX - 1] = (player_2K)
-                                        b_grid[split_fromY][split_fromX] = ' '
+                                if (b_grid[split_fromY][split_fromX] == 'B'):
+                                    if ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
+                                            b_grid[split_fromY - 1][split_fromX - 1] = (player_2K)
+                                            b_grid[split_fromY][split_fromX] = ' '
 
                         else:
                             print ("\n* You cannot move here! (No empty space) *\n")
@@ -692,7 +692,7 @@ def make_move():
             elif (move_to == '2'):
                 #only player 1 piece or AI King can move in direction 2
                 if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R' or (b_grid[split_fromY][split_fromX]) == 'B'):
-                    if ((split_fromY - 1) >= 0 or (split_fromX + 1) <= 7): #check that space is in grid
+                    if ((split_fromY - 1) >= 0 and (split_fromX + 1) <= 7): #check that space is in grid
                         if (b_grid[split_fromY - 1][split_fromX + 1] == ' '): # check if enemy piece
                             if (current_player == player_1):
 
@@ -731,7 +731,7 @@ def make_move():
             elif (move_to == '3'):
                 #only AI piece or player 1 King can move in direction 3
                 if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B' or (b_grid[split_fromY][split_fromX]) == 'R'):
-                    if ((split_fromY + 1) <= 7 or (split_fromX - 1) >= 0): #check that space is in grid
+                    if ((split_fromY + 1) <= 7 and (split_fromX - 1) >= 0): #check that space is in grid
                         if ((b_grid[split_fromY + 1][split_fromX - 1]) == ' '): #if next space is empty
                             if (current_player == player_2):
                                 if ((split_fromY + 1) == 7): #if end of row
@@ -768,7 +768,7 @@ def make_move():
             elif (move_to == '4'):
                 #only AI piece or player 1 King can move in direction 4
                 if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B' or (b_grid[split_fromY][split_fromX]) == 'R'):
-                    if ((split_fromY + 1) <= 7 or (split_fromX + 1) <= 7): #check that space is in grid
+                    if ((split_fromY + 1) <= 7 and (split_fromX + 1) <= 7): #check that space is in grid
                         if ((b_grid[split_fromY + 1][split_fromX + 1]) == ' '): # if next space is empty
                             if (current_player == player_2):
 
