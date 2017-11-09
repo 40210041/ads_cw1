@@ -29,7 +29,7 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          [' ',' ',' ',' ',' ',' ',' ',' '],
+          [' ',' ',' ','b',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
@@ -206,6 +206,7 @@ def mandatory_take():
 
 
             if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
+                must_take = True
                 print ("\n* There are pieces which must be taken! *\n")
                 print ("Press enter to view another choice (if more than one)")
                 print ("You must choose to move one of the following pieces: \n")
@@ -250,7 +251,7 @@ def mandatory_take():
                     else:
                         user_take = input("> ")
 
-                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "" or user_take == " "):
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4"):
 
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
@@ -359,7 +360,7 @@ def mandatory_take():
 
                     print ("Please enter your choice: ")
                     user_take = input("> ")
-                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "" or user_take == " "):
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" ):
 
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
@@ -457,6 +458,7 @@ def mandatory_take():
                                 print ("Current player: " + str(current_player)+ "\n")
                                 # print_grid()
                                 return
+
                         #if the user does not choose and option
                         else:
                             print ("Please enter a choice or cycle through the choices (if more than one)\n")
@@ -465,7 +467,7 @@ def mandatory_take():
 
             if (temp_Y == 7 and temp_X == 7):
                 if (must_take == True):
-                    print ("\nPlease make a choice: \n")
+                    print ("\n* Please make a choice: *\n")
                     mandatory_take()
 
             #reset variables to be false
@@ -862,6 +864,10 @@ def ai_select():
     make_move()
     update_player()
 
+# def history():
+
+# def undo():
+
 #determine the results
 def results():
     p1_in_grid = False #if p1 is still in the grid
@@ -898,7 +904,7 @@ startup_rules()
 
 user_input = input("Please press enter to start: \n")
 
-ai_p2() #ask user what mode to play in 
+ai_p2() #ask user what mode to play in
 
 while (user_input != 'exit'):
     print ("\n\nCurrent turn: " + str(move_turn))
@@ -908,11 +914,11 @@ while (user_input != 'exit'):
 
     piece_moved = False
 
-    #before user can choose to move piece, check for pieces which must be moved
-    mandatory_take()
-    print (piece_moved)
+    if (against_ai == True and against_p2 == False):
+        #before user can choose to move piece, check for pieces which must be moved
+        mandatory_take()
+        print (piece_moved)
 
-    if (against_ai == True):
         if (piece_moved == False): #checks if a piece has been moved this turn
             #to start game, move a piece
             if (current_player == player_1):
@@ -941,13 +947,16 @@ while (user_input != 'exit'):
 
                 else:
                     print ("\nPlease re-enter your choice.\n")
-
             else:
                 ai_select()
         else:
             pass
 
-    else:
+    elif (against_p2 == True and against_ai == False):
+        #before user can choose to move piece, check for pieces which must be moved
+        mandatory_take()
+        print (piece_moved)
+
         if (piece_moved == False): #checks if a piece has been moved this turn
             #to start game, move a piece
             print ("Type 'move' to move a piece")
@@ -972,7 +981,6 @@ while (user_input != 'exit'):
 
             else:
                 print ("\nPlease re-enter your choice.\n")
-            # piece_moved = False
         else:
              pass
 
