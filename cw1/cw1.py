@@ -643,7 +643,7 @@ def make_move():
     get_input()
 
     #check if coords are in grid
-    if ((split_fromY) >= 0 and (split_fromY) <= 7 or (split_fromX) >= 0 and (split_fromX) <= 7):
+    if ((split_fromY) >= 0 and (split_fromY) <= 7 and (split_fromX) >= 0 and (split_fromX) <= 7):
         #check if oiece belongs to current player
         if (b_grid[split_fromY][split_fromX] == (current_player) or b_grid[split_fromY][split_fromX] == (current_king)):
 
@@ -726,8 +726,7 @@ def make_move():
                 else:
                     print ("\n* This piece cannot move in that direction! (Only player 1 or King pieces) *\n")
 
-
-            #if user chooses 3, AI or king only
+            #if user chooses 3
             elif (move_to == '3'):
                 #only AI piece or player 1 King can move in direction 3
                 if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B' or (b_grid[split_fromY][split_fromX]) == 'R'):
@@ -763,8 +762,7 @@ def make_move():
                 else:
                     print ("\n* This piece cannot move in that direction! (Only AI or King pieces) *\n")
 
-
-            #if user chooses 4, king only
+            #if user chooses 4
             elif (move_to == '4'):
                 #only AI piece or player 1 King can move in direction 4
                 if ((b_grid[split_fromY][split_fromX]) == 'b' or (b_grid[split_fromY][split_fromX]) == 'B' or (b_grid[split_fromY][split_fromX]) == 'R'):
@@ -900,7 +898,7 @@ startup_rules()
 
 user_input = input("Please press enter to start: \n")
 
-ai_p2()
+ai_p2() #ask user what mode to play in 
 
 while (user_input != 'exit'):
     print ("\n\nCurrent turn: " + str(move_turn))
@@ -948,6 +946,7 @@ while (user_input != 'exit'):
                 ai_select()
         else:
             pass
+
     else:
         if (piece_moved == False): #checks if a piece has been moved this turn
             #to start game, move a piece
