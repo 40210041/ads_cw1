@@ -10,6 +10,7 @@ import random
 #http://www.darkfish.com/checkers/rules.html (rules)
 
 #setup vars
+against_ai = False
 player_1 = "r" #red
 player_1K = "R" #red king
 player_2 = "b" #black
@@ -22,13 +23,12 @@ must_take1 = False
 must_take2 = False
 must_take3 = False
 must_take4 = False
-piece_moved = False
 
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
           [' ','b',' ','b',' ','b',' ','b'],
-          [' ',' ',' ',' ',' ',' ','R',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
           [' ',' ',' ','R',' ',' ',' ',' '],
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
@@ -70,6 +70,33 @@ def print_grid():
         i += 1
         j += 1
     print ("  +-------------------------------+")
+
+def ai_p2():
+    global against_ai
+    global against_p2
+
+    against_ai = False
+    against_p2 = False
+
+    print ("Who would you like to play against?")
+    print ("Type '1' to play against an AI\nType '2' to play against another person.")
+    print ("Type 'exit' to quit.")
+    print ("Please enter your choice: ")
+    game_mode = input("> ")
+
+    if (game_mode == "1"):
+        against_ai = True
+        against_p2 = False
+        print ("You are now playing against an AI, good luck!\n")
+
+    elif (game_mode == "2"):
+        against_ai = False
+        against_p2 = True
+        print ("You are now playing against another player, good luck!\n")
+
+    elif (game_mode == 'exit'):
+        print ("\n** Thanks for playing! **\n")
+        sys.exit()
 
 #update player
 def update_player():
@@ -197,116 +224,245 @@ def mandatory_take():
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
                     ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
-                # ask user to choose an option depending on results
-                print ("Please enter your choice: ")
-                user_take = input("> ")
-                if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "" or user_take == " "):
 
-                    #if the users choice matches with a statement which is true:
-                    if (must_take1 == True and user_take == "1"):
-                        if (temp_Y - 2 == 0):
-                            b_grid[temp_Y - 2][temp_X - 2] = (current_king)
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y - 1][temp_X - 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
+                if (against_ai == True): #if playing against ai
+                    # ask user to choose an option depending on results
+                    print ("Please enter your choice: ")
+
+                    if (current_player == player_2):
+                        if (must_take1 == True):
+                            user_take = "1"
+                            print ("\nPlayer 2 chose: 1\n")
+                        elif (must_take2 == True):
+                            user_take= "2"
+                            print ("\nPlayer 2 chose: 2\n")
+                        elif (must_take3 == True):
+                            user_take = "3"
+                            print ("\nPlayer 2 chose: 3\n")
+                        elif (must_take4 == True):
+                            user_take = "4"
+                            print ("\nPlayer 2 chose: 4\n")
+
+                    user_take = input("> ")
+
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "" or user_take == " "):
+
+                        #if the users choice matches with a statement which is true:
+                        if (must_take1 == True and user_take == "1"):
+                            if (temp_Y - 2 == 0):
+                                b_grid[temp_Y - 2][temp_X - 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (must_take2 == True and user_take == "2"):
+                            if (temp_Y - 2 == 0):
+                                b_grid[temp_Y - 2][temp_X + 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (must_take3 == True and user_take == '3'):
+                            if (temp_Y + 2 == 7):
+                                b_grid[temp_Y + 2][temp_X - 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (must_take4 == True and user_take == '4'):
+                            if (temp_Y + 2 == 7):
+                                b_grid[temp_Y + 2][temp_X + 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (user_take == "" or user_take == " "):
+                            print ("Please enter a choice or cycle through the choices (if more than one)\n")
+
+                        #if the user does not choose and option
                         else:
-                            b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y - 1][temp_X - 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-
-                    elif (must_take2 == True and user_take == "2"):
-                        if (temp_Y - 2 == 0):
-                            b_grid[temp_Y - 2][temp_X + 2] = (current_king)
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y - 1][temp_X + 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-                        else:
-                            b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y - 1][temp_X + 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-
-                    elif (must_take3 == True and user_take == '3'):
-                        if (temp_Y + 2 == 7):
-                            b_grid[temp_Y + 2][temp_X - 2] = (current_king)
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y + 1][temp_X - 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-                        else:
-                            b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y + 1][temp_X - 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-
-                    elif (must_take4 == True and user_take == '4'):
-                        if (temp_Y + 2 == 7):
-                            b_grid[temp_Y + 2][temp_X + 2] = (current_king)
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y + 1][temp_X + 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-                        else:
-                            b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
-                            b_grid[temp_Y][temp_X] = (' ')
-                            b_grid[temp_Y + 1][temp_X + 1] = (' ')
-                            move_turn += 1
-                            update_player()
-                            piece_moved = True
-                            print ("\nCurrent turn: " + str(move_turn))
-                            print ("Current player: " + str(current_player)+ "\n")
-                            print_grid()
-                            return
-
-                    elif (user_take == "" or user_take == " "):
-                        print ("Please enter a choice or cycle through the choices (if more than one)\n")
-
-                    #if the user does not choose and option
+                            print ("\nYou did not choose an option...\n")
                     else:
-                        print ("\nYou did not choose an option...\n")
+                        print ("\nNot a valid choice! (1, 2, 3 or 4)\n")
+
                 else:
-                    print ("\nNot a valid choice! (1, 2, 3 or 4)\n")
+                    print ("Please enter your choice: ")
+                    user_take = input("> ")
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "" or user_take == " "):
+
+                        #if the users choice matches with a statement which is true:
+                        if (must_take1 == True and user_take == "1"):
+                            if (temp_Y - 2 == 0):
+                                b_grid[temp_Y - 2][temp_X - 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (must_take2 == True and user_take == "2"):
+                            if (temp_Y - 2 == 0):
+                                b_grid[temp_Y - 2][temp_X + 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (must_take3 == True and user_take == '3'):
+                            if (temp_Y + 2 == 7):
+                                b_grid[temp_Y + 2][temp_X - 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X - 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (must_take4 == True and user_take == '4'):
+                            if (temp_Y + 2 == 7):
+                                b_grid[temp_Y + 2][temp_X + 2] = (current_king)
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+                            else:
+                                b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
+                                b_grid[temp_Y][temp_X] = (' ')
+                                b_grid[temp_Y + 1][temp_X + 1] = (' ')
+                                move_turn += 1
+                                update_player()
+                                piece_moved = True
+                                print ("\nCurrent turn: " + str(move_turn))
+                                print ("Current player: " + str(current_player)+ "\n")
+                                print_grid()
+                                return
+
+                        elif (user_take == "" or user_take == " "):
+                            print ("Please enter a choice or cycle through the choices (if more than one)\n")
+
+                        #if the user does not choose and option
+                        else:
+                            print ("\nYou did not choose an option...\n")
+                    else:
+                        print ("\nNot a valid choice! (1, 2, 3 or 4)\n")
 
             if (temp_Y == 7 and temp_X == 7):
                 if (must_take == True):
@@ -332,42 +488,79 @@ def get_input():
     global split_fromY
     global move_from
 
-    if (current_player == player_2):
-        move_from = ai_selected
+    if (against_ai == True): #if against ai
+        if (current_player == player_2):
+            move_from = ai_selected
+        else:
+            print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
+            move_from = input("> ") #input co-ord to move from
+
+        while (len(move_from) != 3): #keep looping until string meets requirements
+            if (move_from == 'cancel' or move_from == ''): #allow out of loop
+                print ("Move cancelled...\n")
+                make_move()
+
+            elif (move_from == "check"):
+                print ("\n\nCurrent turn: " + str(move_turn))
+                print ("Current player: " + str(current_player)+ "\n")
+                print_grid()
+
+            elif (move_from == 'exit'): #if player wants to quit
+                print ("\n** Thanks for playing! **\n")
+                sys.exit()
+
+            #ask user to reinput co-ords
+            print ("\nPlease enter in the format 'x,y': ")
+            coord_input = input("> ")
+            if (len(coord_input) == 3 and coord_input[0].isnumeric() and coord_input[2].isnumeric() and coord_input[1] == ','): #if meets requirements then convert
+                move_from = coord_input
+
+            elif (coord_input == 'exit'): #allow user to quit
+                print ("\n** Thanks for playing! **\n")
+                sys.exit()
+
+        else:
+            if (len(move_from) == 3 and move_from[0].isnumeric() and move_from[2].isnumeric() and move_from[1] == ','):
+                split_from = move_from.split(',') #var to split by comma (creates into array)
+                split_fromX = int(split_from[0])
+                split_fromY = int(split_from[1])
+            else:
+                get_input() #if conditions not met out of loop, go back to beginning
     else:
         print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
         move_from = input("> ") #input co-ord to move from
 
-    while (len(move_from) != 3): #keep looping until string meets requirements
-        if (move_from == 'cancel' or move_from == ''): #allow out of loop
-            print ("Move cancelled...\n")
-            make_move()
+        while (len(move_from) != 3): #keep looping until string meets requirements
+            if (move_from == 'cancel' or move_from == ''): #allow out of loop
+                print ("Move cancelled...\n")
+                make_move()
 
-        elif (move_from == "check"):
-            print ("\n\nCurrent turn: " + str(move_turn))
-            print ("Current player: " + str(current_player)+ "\n")
-            print_grid()
+            elif (move_from == "check"):
+                print ("\n\nCurrent turn: " + str(move_turn))
+                print ("Current player: " + str(current_player)+ "\n")
+                print_grid()
 
-        elif (move_from == 'exit'): #if player wants to quit
-            print ("\nThanks for playing!\n")
-            sys.exit()
+            elif (move_from == 'exit'): #if player wants to quit
+                print ("\n** Thanks for playing! **\n")
+                sys.exit()
 
-        #ask user to reinput co-ords
-        print ("\nPlease enter in the format 'x,y': ")
-        coord_input = input("> ")
-        if (len(coord_input) == 3 and coord_input[0].isnumeric() and coord_input[2].isnumeric() and coord_input[1] == ','): #if meets requirements then convert
-            move_from = coord_input
+            #ask user to reinput co-ords
+            print ("\nPlease enter in the format 'x,y': ")
+            coord_input = input("> ")
+            if (len(coord_input) == 3 and coord_input[0].isnumeric() and coord_input[2].isnumeric() and coord_input[1] == ','): #if meets requirements then convert
+                move_from = coord_input
 
-        elif (coord_input == 'exit'): #allow user to quit
-            print ("\nThanks for playing!\n")
-            sys.exit()
-    else:
-        if (len(move_from) == 3 and move_from[0].isnumeric() and move_from[2].isnumeric() and move_from[1] == ','):
-            split_from = move_from.split(',') #var to split by comma (creates into array)
-            split_fromX = int(split_from[0])
-            split_fromY = int(split_from[1])
+            elif (coord_input == 'exit'): #allow user to quit
+                print ("\n** Thanks for playing! **\n")
+                sys.exit()
+
         else:
-            get_input() #if conditions not met out of loop, go back to beginning
+            if (len(move_from) == 3 and move_from[0].isnumeric() and move_from[2].isnumeric() and move_from[1] == ','):
+                split_from = move_from.split(',') #var to split by comma (creates into array)
+                split_fromX = int(split_from[0])
+                split_fromY = int(split_from[1])
+            else:
+                get_input() #if conditions not met out of loop, go back to beginning
 
 #get direction to move piece
 def get_dir():
@@ -377,46 +570,67 @@ def get_dir():
     global split_fromX
 
     print ("\nPlease type the number of the direction you would like to move.")
+    if (against_p2 == True):
 
-    #if piece is King piece
-    if (b_grid[split_fromY][split_fromX] == (player_1K) or b_grid[split_fromY][split_fromX] == (player_2K)):
-        print ("1   2")
-        print ("  "+ current_player +"  ")
-        print ("3   4\n")
+        #if piece is King piece
+        if (b_grid[split_fromY][split_fromX] == (player_1K) or b_grid[split_fromY][split_fromX] == (player_2K)):
+            print ("1   2")
+            print ("  "+ current_player +"  ")
+            print ("3   4\n")
 
-    #if piece is 'r'
-    elif (b_grid[split_fromY][split_fromX] == (player_1)):
-        print ("1   2")
-        print ("  "+ current_player +"  ")
-    #
-    # else:
-    #     if (b_grid[split_fromY][split_fromX] == 'b'):
-    #         print ("  "+ current_player +"  ")
-    #         print ("3   4\n")
+        #if piece is 'r'
+        elif (b_grid[split_fromY][split_fromX] == (player_1)):
+            print ("1   2")
+            print ("  "+ current_player +"  ")
+        else:
+            if (b_grid[split_fromY][split_fromX] == 'b'):
+                print ("  "+ current_player +"  ")
+                print ("3   4\n")
 
-    if (current_player == player_2):
-        if (b_grid[split_fromY][split_fromX] == player_2K):
-            if (b_grid[split_fromY - 1][split_fromX - 1] == ' '):
-                move_to = "1"
-                print ("Player 2 chose: 1\n")
-            elif (b_grid[split_fromY - 1][split_fromX + 1] == ' '):
-                move_to = "2"
-                print ("Player 2 chose: 2\n")
-        elif (b_grid[split_fromY][split_fromX] == player_2):
-            if (b_grid[split_fromY + 1][split_fromX - 1] == ' '):
-                move_to = "3"
-                print ("Player 2 chose: 3\n")
-            elif (b_grid[split_fromY + 1][split_fromX + 1] == ' '):
-                move_to = "4"
-                print ("Player 2 chose: 4\n")
-
-    else:
         move_to = input("Please enter your choice ('cancel to exit'): \n")
         if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
             pass
         else:
             print ("Not a valid option!\n")
             get_dir() #go back to beginning
+
+    #if the current player is 2
+    if (against_ai == True): #if against ai
+        if (b_grid[split_fromY][split_fromX] == (player_1K) or b_grid[split_fromY][split_fromX] == (player_2K)):
+            print ("1   2")
+            print ("  "+ current_player +"  ")
+            print ("3   4\n")
+
+        #if piece is 'r'
+        elif (b_grid[split_fromY][split_fromX] == (player_1)):
+            print ("1   2")
+            print ("  "+ current_player +"  ")
+
+        if (current_player == player_2):
+            if (b_grid[split_fromY][split_fromX] == player_2K): #if king piece
+                if (b_grid[split_fromY - 1][split_fromX - 1] == ' '):
+                    move_to = "1"
+                    print ("Player 2 chose: 1\n")
+                elif (b_grid[split_fromY - 1][split_fromX + 1] == ' '):
+                    move_to = "2"
+                    print ("Player 2 chose: 2\n")
+
+            elif (b_grid[split_fromY][split_fromX] == player_2): # if normal piece
+                if (b_grid[split_fromY + 1][split_fromX - 1] == ' '):
+                    move_to = "3"
+                    print ("Player 2 chose: 3\n")
+                elif (b_grid[split_fromY + 1][split_fromX + 1] == ' '):
+                    move_to = "4"
+                    print ("Player 2 chose: 4\n")
+
+        #if player's turn
+        else:
+            move_to = input("Please enter your choice ('cancel to exit'): \n")
+            if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
+                pass
+            else:
+                print ("Not a valid option!\n")
+                get_dir() #go back to beginning
 
 #make a move
 def make_move():
@@ -701,13 +915,13 @@ def results():
     #if player 1 piece in grid and player 2 piece is not then player 1 wins
     if (p2_in_grid == False and p1_in_grid == True):
         print("\nPlayer 1 wins\n")
-        print ("Thanks for playing!\n")
+        print ("** Thanks for playing! **\n")
         sys.exit()
 
     #if player 2 piece in grid and player 1 piece is not then player 2 wins
     if (p1_in_grid == False and p2_in_grid == True):
         print("\nPlayer 2 wins\n")
-        print ("Thanks for playing!\n")
+        print ("** Thanks for playing! **\n")
         sys.exit()
 
 ########
@@ -718,6 +932,10 @@ print ("\n** Now playing: Checkers! **\n")
 startup_rules()
 
 user_input = input("Please press enter to start: \n")
+
+ai_p2()
+
+
 while (user_input != 'exit'):
     print ("\n\nCurrent turn: " + str(move_turn))
     print ("Current player: " + str(current_player)+ "\n")
@@ -730,9 +948,43 @@ while (user_input != 'exit'):
     mandatory_take()
     print (piece_moved)
 
-    if (piece_moved == False): #checks if a piece has been moved this turn
-        #to start game, move a piece
-        if (current_player == player_1):
+    if (against_ai == True):
+        if (piece_moved == False): #checks if a piece has been moved this turn
+            #to start game, move a piece
+            if (current_player == player_1):
+                print ("Type 'move' to move a piece")
+                user_input = input("> ")
+
+                if (user_input == 'rules'):
+                    rules()
+
+                #if user wants to move a piece
+                elif (user_input == 'move'):
+                    make_move()
+                    update_player()
+
+                #if user wants to see rules
+                elif (user_input == 'check'):
+                    print ("\nCurrent turn: " + str(move_turn))
+                    print ("Current player: " + str(current_player)+ "\n")
+                    print_grid()
+
+                elif (user_input == '' or user_input == ' '):
+                    print ("\nPlease enter your choice!\n")
+
+                elif (user_input == 'exit'):
+                    break
+
+                else:
+                    print ("\nPlease re-enter your choice.\n")
+
+            else:
+                ai_select()
+        else:
+            pass
+    else:
+        if (piece_moved == False): #checks if a piece has been moved this turn
+            #to start game, move a piece
             print ("Type 'move' to move a piece")
             user_input = input("> ")
 
@@ -753,19 +1005,14 @@ while (user_input != 'exit'):
             elif (user_input == '' or user_input == ' '):
                 print ("\nPlease enter your choice!\n")
 
-            elif (user_input == 'exit'):
-                break
-
             else:
                 print ("\nPlease re-enter your choice.\n")
-
+            # piece_moved = False
         else:
-            ai_select()
-    else:
-        pass
+             pass
 
 else:
     sys.exit() #if user quits
 
 #when game ends
-print ("\nThanks for playing!\n")
+print ("\n** Thanks for playing! **\n")
