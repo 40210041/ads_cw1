@@ -79,7 +79,7 @@ def ai_p2():
     against_p2 = False
 
     print ("Who would you like to play against?")
-    print ("Type '1' to play against an AI\nType '2' to play against another person.")
+    print ("Type '1' to play against an AI.\nType '2' to play against another person.")
     print ("Type 'exit' to quit.")
     print ("Please enter your choice: ")
     game_mode = input("> ")
@@ -87,12 +87,12 @@ def ai_p2():
     if (game_mode == "1"):
         against_ai = True
         against_p2 = False
-        print ("You are now playing against an AI, good luck!\n")
+        print ("\n** You are now playing against an AI, good luck! **\n")
 
     elif (game_mode == "2"):
         against_ai = False
         against_p2 = True
-        print ("You are now playing against another player, good luck!\n")
+        print ("\n** You are now playing against another player, good luck! **\n")
 
     elif (game_mode == 'exit'):
         print ("\n** Thanks for playing! **\n")
@@ -654,65 +654,33 @@ def make_move():
                 #only player 1 piece or AI King can move in direction 1
                 if ((b_grid[split_fromY][split_fromX]) == 'r' or (b_grid[split_fromY][split_fromX]) == 'R' or (b_grid[split_fromY][split_fromX]) == 'B'):
                     if (split_fromY - 1 >= 0 or split_fromX - 1 >= 0): #check that space is in grid
-                        if ((b_grid[split_fromY - 1][split_fromX - 1]) == 'b' or (b_grid[split_fromY - 1] [split_fromX - 1]) == 'B'): # check if enemy piece
-                            if ((b_grid[split_fromY - 2][split_fromX - 2]) == ' '): #if the space after enemy piece is free
+                        if ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '): # check if enemy piece
+                            if (current_player == player_1):
 
                                 #if the y co-ord is last row (0)
                                 if ((split_fromY - 2) == 0):
-                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_1K)
-                                    b_grid[split_fromY][split_fromX] = ' '
-                                    b_grid[split_fromY - 1][split_fromX - 1] = ' '
-                                    move_turn += 1 #update the turn
-
-                                else:
-                                    b_grid[split_fromY - 2][split_fromX - 2] = b_grid[split_fromY][split_fromX]
-                                    b_grid[split_fromY][split_fromX] = ' '
-                                    b_grid[split_fromY - 1][split_fromX - 1] = ' '
-                                    move_turn += 1 #update the turn
-                            else:
-                                print ("\n* You cannot move here! (No empty space) *\n")
-
-                        #if piece is ai piece and current player is ai
-                        elif ((b_grid[split_fromY][split_fromX]) == 'B' and current_player == (player_2)):
-                            if ((b_grid[split_fromY - 1][split_fromX - 1]) == 'b' or  (b_grid[split_fromY][split_fromX]) == 'B'):
-                                print ("\n* You cannot move here! (No free space) *\n")
-
-                            #if piece is player 1 and current player is ai
-                            elif ((b_grid[split_fromY - 1][split_fromX - 1]) == 'r' or (b_grid[split_fromY - 1][split_fromX - 1]) == 'R'):
-                                if ((b_grid[split_fromY - 2][split_fromX - 2]) == ' '):
-                                    b_grid[split_fromY - 2][split_fromX - 2] = (player_2K)
-                                    b_grid[split_fromY][split_fromX] = ' '
-                                    b_grid[split_fromY - 1][split_fromX - 1] = ' '
-
-                            elif ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
-                                    b_grid[split_fromY - 1][split_fromX - 1] = (player_2K)
-                                    b_grid[split_fromY][split_fromX] = ' '
-
-                            else:
-                                print ("\n* You do not have a piece here! *\n")
-
-                        #if empty space instead
-                        elif ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
-                            #if already king piece
-                            if ((b_grid[split_fromY][split_fromX]) == 'R'):
-                                b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
-                                b_grid[split_fromY][split_fromX] = ' '
-                                move_turn += 1 #update the turn
-
-                            #if normal piece
-                            elif ((b_grid[split_fromY][split_fromX]) == 'r'):
-                                #if y co-ord in direction is last row
-                                if ((split_fromY - 1) == 0):
                                     b_grid[split_fromY - 1][split_fromX - 1] = (player_1K)
                                     b_grid[split_fromY][split_fromX] = ' '
                                     move_turn += 1 #update the turn
-                                else:
-                                    b_grid[split_fromY - 1][split_fromX - 1] = b_grid[split_fromY][split_fromX]
-                                    b_grid[split_fromY][split_fromX] = ' '
-                                    move_turn += 1 #update the turn
 
-                            else:
-                                print ("\n* This space is not empty! *\n")
+                                else:
+                                    if (b_grid[split_fromY][split_fromX] == "r")
+                                        b_grid[split_fromY - 1][split_fromX - 1] = b_grid[split_fromY][split_fromX]
+                                        b_grid[split_fromY][split_fromX] = ' '
+                                        move_turn += 1 
+
+                                    elif (b_grid[split_fromY][split_fromX] == "R")
+                                        b_grid[split_fromY - 1][split_fromX - 1] = b_grid[split_fromY][split_fromX]
+                                        b_grid[split_fromY][split_fromX] = ' '
+                                        move_turn += 1
+
+                            #if piece is ai piece and current player is ai
+                            elif (current_player == player_2):
+                                if (b_grid[split_fromY][split_fromX] == 'B')
+                                if ((b_grid[split_fromY - 1][split_fromX - 1]) == ' '):
+                                        b_grid[split_fromY - 1][split_fromX - 1] = (player_2K)
+                                        b_grid[split_fromY][split_fromX] = ' '
+
                         else:
                             print ("\n* You cannot move here! (No empty space) *\n")
                     else:
@@ -856,21 +824,6 @@ def ai_select():
     ai_X = 0
     ai_Y = 0
     ai_list = []
-
-    if (must_take1 == True):
-        user_take = "1"
-        print ("\nPlayer 2 chose: 1\n")
-    elif (must_take2 == True):
-        user_take= "2"
-        print ("\nPlayer 2 chose: 2\n")
-    elif (must_take3 == True):
-        user_take = "3"
-        print ("\nPlayer 2 chose: 3\n")
-    elif (must_take4 == True):
-        user_take = "4"
-        print ("\nPlayer 2 chose: 4\n")
-
-
 
     for i in b_grid:
         for j in i:
