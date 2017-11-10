@@ -206,9 +206,9 @@ def mandatory_take():
 
 
             if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
-                must_take = True
+                must_take = True #set to true, if user does not pick a choice then loop back
                 print ("\n* There are pieces which must be taken! *\n")
-                print ("Press enter to view another choice (if more than one)")
+                print ("Press enter to view another choice (if more than one).")
                 print ("You must choose to move one of the following pieces: \n")
                 ai_take = []
 
@@ -352,9 +352,9 @@ def mandatory_take():
 
                         #if the user does not choose and option
                         else:
-                            print ("Please enter a choice or cycle through the choices (if more than one)\n")
+                            print ("Please enter a choice or cycle through the choices (if more than one).\n")
                     else:
-                        print ("\nNot a valid choice! (1, 2, 3 or 4)\n")
+                        print ("\nPlease enter '1','2','3' or '4'. Or press enter to cycle through the choices (if more than one).\n")
 
                 else:
 
@@ -461,13 +461,13 @@ def mandatory_take():
 
                         #if the user does not choose and option
                         else:
-                            print ("Please enter a choice or cycle through the choices (if more than one)\n")
+                            print ("Please enter a choice or cycle through the choices (if more than one).\n")
                     else:
-                        print ("\nNot a valid choice! (1, 2, 3 or 4)\n")
+                        print ("\nPlease enter '1','2','3' or '4'. Or press enter to cycle through the choices (if more than one).\n")
 
             if (temp_Y == 7 and temp_X == 7):
                 if (must_take == True):
-                    print ("\n* Please make a choice: *\n")
+                    print ("\n* End of list, please make a choice *\n")
                     mandatory_take()
 
             #reset variables to be false
