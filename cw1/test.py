@@ -405,11 +405,13 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                    additional_takes(temp_Y - 2, temp_X - 2)
                     piece_moved = True
                 else:
                     b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X - 1] = (' ')
+                    additional_takes(temp_Y - 2, temp_X - 2)
                     piece_moved = True
 
             elif (must_take2 == True and user_take == "2"):
@@ -417,11 +419,13 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y - 2][temp_X + 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                    additional_takes(temp_Y - 2, temp_X + 2)
                     piece_moved = True
                 else:
                     b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y - 1][temp_X + 1] = (' ')
+                    additional_takes(temp_Y - 2, temp_X + 2)
                     piece_moved = True
 
             elif (must_take3 == True and user_take == '3'):
@@ -429,11 +433,13 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y + 2][temp_X - 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X - 1] = (' ')
+                    additional_takes(temp_Y + 2, temp_X - 2)
                     piece_moved = True
                 else:
                     b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X - 1] = (' ')
+                    additional_takes(temp_Y + 2, temp_X - 2)
                     piece_moved = True
 
             elif (must_take4 == True and user_take == '4'):
@@ -441,14 +447,16 @@ def additional_takes(temp_Y, temp_X):
                     b_grid[temp_Y + 2][temp_X + 2] = (current_king)
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X + 1] = (' ')
+                    additional_takes(temp_Y + 2, temp_X + x2)
                     piece_moved = True
                 else:
                     b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                     b_grid[temp_Y][temp_X] = (' ')
                     b_grid[temp_Y + 1][temp_X + 1] = (' ')
+                    additional_takes(temp_Y + 2, temp_X + x2)
                     piece_moved = True
 
-        
+
 
     #reset variables to be false
     must_take1 = False
