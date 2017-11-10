@@ -25,12 +25,12 @@ must_take3 = False
 must_take4 = False
 
 #create grid
-b_grid = [[' ','b',' ',' ',' ','b',' ','b'], #[0][0] to [0][7]
+b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['b',' ','b',' ','b',' ','b',' '],
-          [' ',' ',' ','b',' ',' ',' ','b'],
-          [' ',' ','b',' ',' ',' ','b',' '],
+          [' ','b',' ','b',' ','b',' ','b'],
           [' ',' ',' ',' ',' ',' ',' ',' '],
-          ['r',' ','r',' ','r',' ','b',' '],
+          [' ',' ',' ',' ',' ',' ',' ',' '],
+          ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
 
@@ -71,6 +71,7 @@ def print_grid():
         j += 1
     print ("  +-------------------------------+")
 
+#determine whether against ai or another player
 def ai_p2():
     global against_ai
     global against_p2
@@ -261,8 +262,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
@@ -272,8 +271,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         elif (must_take2 == True and user_take == "2"):
@@ -285,8 +282,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
@@ -296,8 +291,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         elif (must_take3 == True and user_take == '3'):
@@ -309,8 +302,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
@@ -320,8 +311,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         elif (must_take4 == True and user_take == '4'):
@@ -333,8 +322,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
@@ -344,8 +331,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         #if the user does not choose and option
@@ -370,8 +355,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
@@ -381,8 +364,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         elif (must_take2 == True and user_take == "2"):
@@ -394,8 +375,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
@@ -405,8 +384,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         elif (must_take3 == True and user_take == '3'):
@@ -418,8 +395,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
@@ -429,8 +404,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         elif (must_take4 == True and user_take == '4'):
@@ -442,8 +415,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
                             else:
                                 b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
@@ -453,8 +424,6 @@ def mandatory_take():
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
-                                print ("\nCurrent turn: " + str(move_turn))
-                                print ("Current player: " + str(current_player)+ "\n")
                                 return
 
                         #if the user does not choose and option
@@ -743,7 +712,8 @@ def get_dir():
                 print ("  "+ current_player +"  ")
                 print ("3   4\n")
 
-        move_to = input("Please enter your choice ('cancel to exit'): \n")
+        print ("Please enter your choice ('cancel to exit'): ")
+        move_to = input("> ")
         if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
             pass
         else:
@@ -781,7 +751,8 @@ def get_dir():
 
         #if player's turn
         else:
-            move_to = input("Please enter your choice ('cancel to exit'): \n")
+            print ("Please enter your choice ('cancel to exit'): ")
+            move_to = input("> ")
             if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
                 pass
             else:
@@ -1013,9 +984,7 @@ def ai_select():
                 ai_X = 0
         ai_Y += 1 #increment Y coord
 
-    print ("Player 2 has chosen: ", str(ai_selected)) #print what ai selects
-    print (ai_list)
-    print (ai_selected)
+    print ("\nPlayer 2 has chosen: ", str(ai_selected)) #print what ai selects
     make_move()
     update_player()
 
