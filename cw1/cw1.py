@@ -18,7 +18,6 @@ player_2K = "B" #black king
 move_turn = 1 #var for incrementing turns
 current_player = (player_1) #current player piece
 current_king = (player_1K) #current player king
-enemy_player = (player_2K)
 must_take1 = False
 must_take2 = False
 must_take3 = False
@@ -111,18 +110,15 @@ def update_player():
     global player_2K
     global current_player
     global current_king
-    global enemy_player
     global move_turn
 
     #if move modulo 2 is 0 then player 2's turn
     if (move_turn % 2 == 0):
         current_player = (player_2)
         current_king = (player_2K)
-        enemy_player = (player_1)
     else:
         current_player = (player_1)
         current_king = (player_1K)
-        enemy_player = (player_2)
 
 #check for pieces that must be taken
 def mandatory_take():
@@ -736,18 +732,18 @@ def get_dir():
             if (b_grid[split_fromY][split_fromX] == player_2K): #if king piece
                 if (b_grid[split_fromY - 1][split_fromX - 1] == ' '):
                     move_to = "1"
-                    print ("Player 2 chose: 1\n")
+                    print ("Player 2 has chosen: 1\n")
                 elif (b_grid[split_fromY - 1][split_fromX + 1] == ' '):
                     move_to = "2"
-                    print ("Player 2 chose: 2\n")
+                    print ("Player 2 has chosen: 2\n")
 
             elif (b_grid[split_fromY][split_fromX] == player_2): # if normal piece
                 if (b_grid[split_fromY + 1][split_fromX - 1] == ' '):
                     move_to = "3"
-                    print ("Player 2 chose: 3\n")
+                    print ("Player 2 has chosen: 3\n")
                 elif (b_grid[split_fromY + 1][split_fromX + 1] == ' '):
                     move_to = "4"
-                    print ("Player 2 chose: 4\n")
+                    print ("Player 2 has chosen: 4\n")
 
         #if player's turn
         else:
