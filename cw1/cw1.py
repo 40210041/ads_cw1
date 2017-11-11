@@ -3,7 +3,7 @@
 ##########
 # SETUP #
 #########
-
+import copy
 import sys
 import random
 
@@ -22,6 +22,9 @@ must_take1 = False
 must_take2 = False
 must_take3 = False
 must_take4 = False
+
+undo_grid = []
+redo_grid = []
 
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
@@ -72,8 +75,7 @@ def print_grid():
 
 #determine whether against ai or another player
 def ai_p2():
-    global against_ai
-    global against_p2
+    global against_ai, against_p2
 
     against_ai = False
     against_p2 = False
@@ -104,13 +106,7 @@ def ai_p2():
 
 #update player
 def update_player():
-    global player_1
-    global player_1K
-    global player_2
-    global player_2K
-    global current_player
-    global current_king
-    global move_turn
+    global player_1, player_1K, player_2, player_2K, current_player, current_king, move_turn
 
     #if move modulo 2 is 0 then player 2's turn
     if (move_turn % 2 == 0):
@@ -122,17 +118,8 @@ def update_player():
 
 #check for pieces that must be taken
 def mandatory_take():
-    global current_player
-    global player_1
-    global player_1k
-    global player_2
-    global player_2K
-    global must_take1
-    global must_take2
-    global must_take3
-    global must_take4
-    global move_turn
-    global piece_moved
+    global current_player, player_1, player_1k, player_2, player_2K
+    global must_take1, must_take2, must_take3, must_take4, move_turn, piece_moved
 
     must_take = False
     must_take1 = False
@@ -605,9 +592,7 @@ def additional_takes(temp_Y, temp_X):
 
 #get coord for moving a piece
 def get_input():
-    global split_fromX
-    global split_fromY
-    global move_from
+    global split_fromX, split_fromY, move_from
 
     if (against_ai == True): #if against ai
         if (current_player == player_2):
@@ -617,8 +602,8 @@ def get_input():
             move_from = input("> ") #input co-ord to move from
 
         while (len(move_from) != 3): #keep looping until string meets requirements
-            if (move_from == 'cancel' or move_from == ''): #allow out of loop
-                print ("Move cancelled...\n")
+            if (move_from == ''): #allow out of loop
+                print ("Please enter in the format 'x,y': \n")
                 make_move()
 
             elif (move_from == "check"):
@@ -631,7 +616,7 @@ def get_input():
                 sys.exit()
 
             #ask user to reinput co-ords
-            print ("\nPlease enter in the format 'x,y': ")
+            print ("\nPlease enter in the format 'x,y': \n")
             coord_input = input("> ")
             if (len(coord_input) == 3 and coord_input[0].isnumeric() and coord_input[2].isnumeric() and coord_input[1] == ','): #if meets requirements then convert
                 move_from = coord_input
@@ -652,8 +637,8 @@ def get_input():
         move_from = input("> ") #input co-ord to move from
 
         while (len(move_from) != 3): #keep looping until string meets requirements
-            if (move_from == 'cancel' or move_from == ''): #allow out of loop
-                print ("Move cancelled...\n")
+            if (move_from == ''): #allow out of loop
+                print ("Please enter in the format 'x,y': ")
                 make_move()
 
             elif (move_from == "check"):
@@ -685,10 +670,7 @@ def get_input():
 
 #get direction to move piece
 def get_dir():
-    global current_player
-    global move_to
-    global split_fromY
-    global split_fromX
+    global current_player, move_to, split_fromY, split_fromX
 
     print ("\nPlease type the number of the direction you would like to move.")
     if (against_p2 == True):
@@ -757,12 +739,7 @@ def get_dir():
 
 #make a move
 def make_move():
-    global move_turn # set global
-    global split_fromX
-    global split_fromY
-    global move_to
-    global current_player
-    global current_king
+    global move_turn, split_fromX, split_fromY, move_to, current_player, current_king
 
     get_input()
 
@@ -934,14 +911,7 @@ def make_move():
 
 #ai function
 def ai_select():
-    global ai_selected
-    global move_from
-    global move_to
-    global move_turn
-    global split_fromX
-    global split_fromY
-    global current_player
-    global current_king
+    global ai_selected, move_from, move_to, move_turn, split_fromX, split_fromY, current_player, current_king
 
     ai_X = 0
     ai_Y = 0
@@ -986,7 +956,44 @@ def ai_select():
 
 # def history():
 
-# def undo():
+def undo():
+    global move_turn, b_grid
+
+    if (b_grid == undo_grid):
+        print ("* Cannot undo any further! *\n")
+
+    else:
+        #confirm if user would like to undo
+        print ("Would you like to undo (yes/no)?")
+        yes_undo = input("> ")
+
+        if (yes_undo == "yes"):
+            b_grid = undo_grid[:] #set grid to
+            b_grid = copy.deepcopy(undo_grid)
+            if move_turn == "1":
+                pass
+            else:
+                move_turn -= 1
+        else:
+            pass
+
+def redo():
+    global move_turn, b_grid
+
+    if (b_grid == redo_grid):
+        print ("* Cannot redo any further! *\n")
+
+    else:
+        #confirm if user would like to undo
+        print ("Would you like to redo (yes/no)?")
+        yes_redo = input("> ")
+
+        if (yes_redo == "yes"):
+            b_grid = redo_grid[:] #set grid to new grid
+            b_grid = copy.deepcopy(redo_grid)
+            move_turn += 1
+        else:
+            pass
 
 #determine the results
 def results():
