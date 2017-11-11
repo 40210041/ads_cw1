@@ -104,6 +104,10 @@ def ai_p2():
         against_p2 = True
         print ("\n** You are now playing against another player, good luck! **\n")
 
+    elif (game_mode == "rules"):
+        rules()
+        ai_p2()
+
     elif (game_mode == 'exit'):
         print ("\n** Thanks for playing! **\n")
         sys.exit()
@@ -126,7 +130,7 @@ def update_player():
 
 #check for pieces that must be taken
 def mandatory_take():
-    global current_player, player_1, player_1k, player_2, player_2K
+    global current_player, player_1, player_1k, player_2, player_2K, undo_grid, redo_grid
     global must_take1, must_take2, must_take3, must_take4, move_turn, piece_moved
 
     must_take = False
@@ -241,24 +245,32 @@ def mandatory_take():
                     else:
                         user_take = input("> ")
 
-                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "exit"):
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "exit" or user_take == "undo" or user_take == "redo"):
 
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
                             if (temp_Y - 2 == 0):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -266,19 +278,27 @@ def mandatory_take():
 
                         elif (must_take2 == True and user_take == "2"):
                             if (temp_Y - 2 == 0):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X + 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -286,19 +306,27 @@ def mandatory_take():
 
                         elif (must_take3 == True and user_take == '3'):
                             if (temp_Y + 2 == 7):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -306,23 +334,37 @@ def mandatory_take():
 
                         elif (must_take4 == True and user_take == '4'):
                             if (temp_Y + 2 == 7):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X + 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
+
+                        elif (user_take == "undo"):
+                            undo()
+
+                        elif (user_take == "redo"):
+                            redo()
 
                         elif (user_take == "exit"):
                             print ("\n** Thanks for playing! **\n")
@@ -338,24 +380,32 @@ def mandatory_take():
 
                     print ("Please enter your choice: ")
                     user_take = input("> ")
-                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "exit" ):
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "exit" or user_take == "undo" or user_take == "redo" ):
 
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
                             if (temp_Y - 2 == 0):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -363,19 +413,27 @@ def mandatory_take():
 
                         elif (must_take2 == True and user_take == "2"):
                             if (temp_Y - 2 == 0):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X + 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -383,19 +441,27 @@ def mandatory_take():
 
                         elif (must_take3 == True and user_take == '3'):
                             if (temp_Y + 2 == 7):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X - 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -403,23 +469,37 @@ def mandatory_take():
 
                         elif (must_take4 == True and user_take == '4'):
                             if (temp_Y + 2 == 7):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X + 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y + 2][temp_X + 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y + 1][temp_X + 1] = (' ')
                                 additional_takes(temp_Y + 2, temp_X + 2)
+                                redo_grid = b_grid[:]
+                                redo_grid = copy.deepcopy(b_grid)
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
                                 return
+
+                        elif (user_take == "undo"):
+                            undo()
+
+                        elif (user_take == "redo"):
+                            redo()
 
                         elif (user_take == "exit"):
                             print ("\n** Thanks for playing! **\n")
@@ -614,7 +694,7 @@ def get_input():
         if (current_player == player_2):
             move_from = ai_selected
         else:
-            print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
+            print("\nPlease enter the co-ordinates of the piece you would like to move: ")
             move_from = input("> ") #input co-ord to move from
 
         while (len(move_from) != 3): #keep looping until string meets requirements
@@ -649,7 +729,7 @@ def get_input():
             else:
                 get_input() #if conditions not met out of loop, go back to beginning
     else:
-        print("\nPlease enter the co-ordinates of the piece you would like to move\n('cancel' to exit): ")
+        print("\nPlease enter the co-ordinates of the piece you would like to move: ")
         move_from = input("> ") #input co-ord to move from
 
         while (len(move_from) != 3): #keep looping until string meets requirements
@@ -706,7 +786,7 @@ def get_dir():
                 print ("  "+ current_player +"  ")
                 print ("3   4\n")
 
-        print ("Please enter your choice ('cancel to exit'): ")
+        print ("Please enter your choice: ")
         move_to = input("> ")
         if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
             pass
@@ -745,7 +825,7 @@ def get_dir():
 
         #if player's turn
         else:
-            print ("Please enter your choice ('cancel to exit'): ")
+            print ("Please enter your choice: ")
             move_to = input("> ")
             if (move_to == "1" or move_to == "2" or move_to == "3" or move_to == "4"):
                 pass
@@ -927,6 +1007,7 @@ def make_move():
 #ai function
 def ai_select():
     global ai_selected, move_from, move_to, move_turn, split_fromX, split_fromY, current_player, current_king
+    global undo_grid, redo_grid
 
     ai_X = 0
     ai_Y = 0
@@ -966,7 +1047,12 @@ def ai_select():
         ai_Y += 1 #increment Y coord
 
     print ("\nPlayer 2 has chosen: ", str(ai_selected)) #print what ai selects
+    undo_grid = b_grid[:] #save the previous state
+    undo_grid = copy.deepcopy(b_grid)
     make_move()
+    update_player()
+    redo_grid = b_grid[:] #save the new state
+    redo_grid = copy.deepcopy(b_grid)
     update_player()
 
 # def history():
@@ -992,18 +1078,24 @@ def undo():
             move_turn -= 1
             update_player()
 
+        elif (yes_undo == "no"):
+            print ("\nYou did not undo.\n")
+
         elif (yes_undo == "exit"):
             print ("\n** Thanks for playing! **\n")
             sys.exit()
 
         else:
-            print ("\nYou did not undo.\n")
+            print ("\nPlease enter 'yes' or 'no'.\n")
 
 def redo():
     global move_turn, b_grid
 
     if (b_grid == redo_grid):
         print ("* Cannot redo any further! *\n")
+
+    elif (redo_grid == undo_grid):
+        print ("\nCannot redo any further!\n")
 
     else:
         #confirm if user would like to undo
@@ -1017,12 +1109,15 @@ def redo():
             move_turn += 1
             update_player()
 
+        elif (yes_redo == "no"):
+            print ("\nYou did not redo.\n")
+
         elif (yes_redo == "exit"):
             print ("\n** Thanks for playing! **\n")
             sys.exit()
 
         else:
-            print ("\nYou did not redo.\n")
+            print ("\nPlease enter 'yes' or 'no'.\n")
 
 #determine the results
 def results():
@@ -1089,7 +1184,7 @@ while (user_input != 'exit'):
                     undo_grid = copy.deepcopy(b_grid)
                     make_move()
                     update_player()
-                    redo_grid = b_grid[:] #save the current state
+                    redo_grid = b_grid[:] #save the new state
                     redo_grid = copy.deepcopy(b_grid)
 
                 #if user wants to see rules
@@ -1137,7 +1232,7 @@ while (user_input != 'exit'):
                 undo_grid = copy.deepcopy(b_grid)
                 make_move()
                 update_player()
-                redo_grid = b_grid[:] #save the current state
+                redo_grid = b_grid[:] #save the new state
                 redo_grid = copy.deepcopy(b_grid)
 
             #if user wants to see rules
