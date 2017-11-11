@@ -43,7 +43,7 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
 def startup_rules():
     print ("Aim to remove all of the opponents pieces!")
     print ("Type 'move' to move a piece")
-    print ("Type 'rules' for how to play.")
+    print ("Type 'rules' for how to play (* NOTE * Please read the rules before playing!).")
     print ("Type 'check' to look at the board.")
     print ("Type 'exit' to quit.\n")
 
@@ -61,6 +61,8 @@ def rules():
     print ("• Type 'check' to look at the current player and board.")
     print ("• Type 'undo' to undo the previous move (one move only per turn).")
     print ("• Type 'redo' to redo the current move if undone (only if the previous move has been undone).")
+    print ("• * NOTE * You cannot undo during a move, only before or after!")
+    print ("• * NOTE * You cannot redo the AI's move!")
     print ("• Type 'exit' to quit the game.\n")
 
 #print board
@@ -1077,14 +1079,28 @@ while (user_input != 'exit'):
 
                 #if user wants to move a piece
                 elif (user_input == 'move'):
+                    undo_grid = b_grid[:] #save the previous state
+                    undo_grid = copy.deepcopy(b_grid)
                     make_move()
                     update_player()
+                    redo_grid = b_grid[:] #save the current state
+                    redo_grid = copy.deepcopy(b_grid)
 
                 #if user wants to see rules
                 elif (user_input == 'check'):
                     print ("\nCurrent turn: " + str(move_turn))
                     print ("Current player: " + str(current_player)+ "\n")
                     print_grid()
+
+                #if user wants to undo a move
+                elif (user_input == "undo"):
+                    undo()
+                    print ("\n* Move undone!*\n")
+
+                #if the user want to redo a move
+                elif (user_input == "redo"):
+                    redo()
+                    print ("\n* Move redone! *\n")
 
                 elif (user_input == '' or user_input == ' '):
                     print ("\nPlease enter your choice!\n")
@@ -1113,14 +1129,28 @@ while (user_input != 'exit'):
 
             #if user wants to move a piece
             elif (user_input == 'move'):
+                undo_grid = b_grid[:] #save the previous state
+                undo_grid = copy.deepcopy(b_grid)
                 make_move()
                 update_player()
+                redo_grid = b_grid[:] #save the current state
+                redo_grid = copy.deepcopy(b_grid)
 
             #if user wants to see rules
             elif (user_input == 'check'):
                 print ("\nCurrent turn: " + str(move_turn))
                 print ("Current player: " + str(current_player)+ "\n")
                 print_grid()
+
+            #if user wants to undo a move
+            elif (user_input == "undo"):
+                undo()
+                print ("\n* Move undone!*\n")
+
+            #if the user want to redo a move
+            elif (user_input == "redo"):
+                redo()
+                print ("\n* Move redone! *\n")
 
             elif (user_input == '' or user_input == ' '):
                 print ("\nPlease enter your choice!\n")

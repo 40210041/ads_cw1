@@ -254,6 +254,8 @@ def mandatory_take():
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
                             if (temp_Y - 2 == 0):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
@@ -263,6 +265,8 @@ def mandatory_take():
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
@@ -347,6 +351,8 @@ def mandatory_take():
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
                             if (temp_Y - 2 == 0):
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
@@ -356,6 +362,8 @@ def mandatory_take():
                                 piece_moved = True
                                 return
                             else:
+                                undo_grid = b_grid[:]
+                                undo_grid = copy.deepcopy(b_grid)
                                 b_grid[temp_Y - 2][temp_X - 2] = b_grid[temp_Y][temp_X]
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
