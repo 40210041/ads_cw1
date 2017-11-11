@@ -56,6 +56,12 @@ def rules():
     print ("• Type the number of the direction you would like to move.")
     print ("• Moving a piece to the end of the opponents side will make that piece into a King.")
     print ("• King pieces can move back and forth diagonally.\n")
+    print ("* HOW TO PLAY *")
+    print ("• Type 'move' to move a piece.")
+    print ("• Type 'check' to look at the current player and board.")
+    print ("• Type 'undo' to undo the previous move (one move only per turn).")
+    print ("• Type 'redo' to redo the current move if undone (only if the previous move has been undone).")
+    print ("• Type 'exit' to quit the game.\n")
 
 #print board
 def print_grid():
@@ -233,7 +239,7 @@ def mandatory_take():
                     else:
                         user_take = input("> ")
 
-                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4"):
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "exit"):
 
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
@@ -315,6 +321,10 @@ def mandatory_take():
                                 update_player()
                                 piece_moved = True
                                 return
+
+                        elif (user_take == "exit"):
+                            print ("\n** Thanks for playing! **\n")
+                            sys.exit()
 
                         #if the user does not choose and option
                         else:
@@ -326,7 +336,7 @@ def mandatory_take():
 
                     print ("Please enter your choice: ")
                     user_take = input("> ")
-                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" ):
+                    if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4" or user_take == "exit" ):
 
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
@@ -408,6 +418,10 @@ def mandatory_take():
                                 update_player()
                                 piece_moved = True
                                 return
+
+                        elif (user_take == "exit"):
+                            print ("\n** Thanks for playing! **\n")
+                            sys.exit()
 
                         #if the user does not choose and option
                         else:
@@ -1044,7 +1058,6 @@ while (user_input != 'exit'):
     if (against_ai == True and against_p2 == False):
         #before user can choose to move piece, check for pieces which must be moved
         mandatory_take()
-        print (piece_moved)
 
         if (piece_moved == False): #checks if a piece has been moved this turn
             #to start game, move a piece
@@ -1082,7 +1095,6 @@ while (user_input != 'exit'):
     elif (against_p2 == True and against_ai == False):
         #before user can choose to move piece, check for pieces which must be moved
         mandatory_take()
-        print (piece_moved)
 
         if (piece_moved == False): #checks if a piece has been moved this turn
             #to start game, move a piece
