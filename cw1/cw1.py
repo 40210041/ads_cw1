@@ -975,7 +975,10 @@ def undo():
     global move_turn, b_grid
 
     if (b_grid == undo_grid):
-        print ("* Cannot undo any further! *\n")
+        print ("\n* Cannot undo any further! *\n")
+
+    elif (move_turn == 1):
+        print ("\n* Cannot undo any further! *\n")
 
     else:
         #confirm if user would like to undo
@@ -983,18 +986,18 @@ def undo():
         yes_undo = input("> ")
 
         if (yes_undo == "yes"):
+            print ("\n* Move undone! *\n")
             b_grid = undo_grid[:] #set grid to
             b_grid = copy.deepcopy(undo_grid)
-            if move_turn == "1":
-                pass
-            else:
-                move_turn -= 1
+            move_turn -= 1
+            update_player()
+
         elif (yes_undo == "exit"):
             print ("\n** Thanks for playing! **\n")
             sys.exit()
 
         else:
-            pass
+            print ("\nYou did not undo.\n")
 
 def redo():
     global move_turn, b_grid
@@ -1008,15 +1011,18 @@ def redo():
         yes_redo = input("> ")
 
         if (yes_redo == "yes"):
+            print ("\n* Move redone! *\n")
             b_grid = redo_grid[:] #set grid to new grid
             b_grid = copy.deepcopy(redo_grid)
             move_turn += 1
+            update_player()
 
         elif (yes_redo == "exit"):
             print ("\n** Thanks for playing! **\n")
             sys.exit()
+
         else:
-            pass
+            print ("\nYou did not redo.\n")
 
 #determine the results
 def results():
@@ -1095,12 +1101,10 @@ while (user_input != 'exit'):
                 #if user wants to undo a move
                 elif (user_input == "undo"):
                     undo()
-                    print ("\n* Move undone!*\n")
 
                 #if the user want to redo a move
                 elif (user_input == "redo"):
                     redo()
-                    print ("\n* Move redone! *\n")
 
                 elif (user_input == '' or user_input == ' '):
                     print ("\nPlease enter your choice!\n")
@@ -1145,15 +1149,16 @@ while (user_input != 'exit'):
             #if user wants to undo a move
             elif (user_input == "undo"):
                 undo()
-                print ("\n* Move undone!*\n")
 
             #if the user want to redo a move
             elif (user_input == "redo"):
                 redo()
-                print ("\n* Move redone! *\n")
 
             elif (user_input == '' or user_input == ' '):
                 print ("\nPlease enter your choice!\n")
+
+            elif (user_input == 'exit'):
+                break
 
             else:
                 print ("\nPlease re-enter your choice.\n")
