@@ -914,10 +914,9 @@ def make_move():
                 else:
                     print ("\n* This piece cannot move in that direction! (Only AI or King pieces) *\n")
 
-            # if the user wants to quit
-            elif move_to == 'cancel' or move_to == '':
-                print ("\nMove cancelled...\n")
-                pass
+            elif (move_to == "exit"):
+                print ("\n** Thanks for playing! **\n")
+                sys.exit()
         else:
             print ("\n* You do not have a piece here! *\n")
     else:
@@ -988,6 +987,10 @@ def undo():
                 pass
             else:
                 move_turn -= 1
+        elif (yes_undo == "exit"):
+            print ("\n** Thanks for playing! **\n")
+            sys.exit()
+
         else:
             pass
 
@@ -1006,6 +1009,10 @@ def redo():
             b_grid = redo_grid[:] #set grid to new grid
             b_grid = copy.deepcopy(redo_grid)
             move_turn += 1
+
+        elif (yes_redo == "exit"):
+            print ("\n** Thanks for playing! **\n")
+            sys.exit()
         else:
             pass
 
