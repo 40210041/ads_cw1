@@ -7,8 +7,6 @@ import copy
 import sys
 import random
 
-#http://www.darkfish.com/checkers/rules.html (rules)
-
 #setup vars
 against_ai = False
 player_1 = "r" #red
@@ -23,8 +21,8 @@ must_take2 = False
 must_take3 = False
 must_take4 = False
 
-undo_grid = []
-redo_grid = []
+undo_grid = [] #store the previous board state
+redo_grid = [] #store the next board state
 
 #create grid
 b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
@@ -59,7 +57,7 @@ def rules():
     print ("* HOW TO PLAY *")
     print ("• Type 'move' to move a piece.")
     print ("• Type 'check' to look at the current player and board.")
-    print ("• Type 'undo' to undo the previous move (one move only per turn).")
+    print ("• Type 'undo' to undo the previous move (one undo only per turn).")
     print ("• Type 'redo' to redo the current move if undone (only if the previous move has been undone).")
     print ("• * NOTE * You cannot undo during a move, only before or after!")
     print ("• * NOTE * You cannot redo the AI's move!")
@@ -90,6 +88,7 @@ def ai_p2():
 
     print ("Who would you like to play against?")
     print ("Type '1' to play against an AI.\nType '2' to play against another person.")
+    print ("Type 'rules' to check the rules and how to play.")
     print ("Type 'exit' to quit.")
     print ("Please enter your choice: ")
     game_mode = input("> ")
@@ -204,24 +203,19 @@ def mandatory_take():
                 print ("\n* There are pieces which must be taken! *\n")
                 print ("Press enter to view another choice (if more than one).")
                 print ("You must choose to move one of the following pieces: \n")
-                ai_take = []
 
                 #print out options that can be taken
                 if (must_take1 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 1")
-                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 if (must_take2 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 2")
-                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 if (must_take3 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 3")
-                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
                 if (must_take4 == True):
                     print ("For "+ str(temp_X) +"," + str(temp_Y), "you can choose: 4")
-                    ai_take.append(''+str(temp_X)+','+str(temp_Y)+'')
 
 
                 if (against_ai == True): #if playing against ai
@@ -593,24 +587,19 @@ def additional_takes(temp_Y, temp_X):
 
 
     if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
-        ai_take = []
 
         #print out options that can be taken
         if (must_take1 == True):
             user_take = "1"
-            ai_take.append(str(temp_X)+','+str(temp_Y))
 
         if (must_take2 == True):
             user_take = "2"
-            ai_take.append(str(temp_X)+','+str(temp_Y))
 
         if (must_take3 == True):
             user_take = "3"
-            ai_take.append(str(temp_X)+','+str(temp_Y))
 
         if (must_take4 == True):
             user_take = "4"
-            ai_take.append(str(temp_X)+','+str(temp_Y))
 
         # ask user to choose an option depending on results
         if (user_take == "1" or user_take == "2" or user_take == "3" or user_take == "4"):

@@ -126,7 +126,7 @@ def update_player():
 
 #check for pieces that must be taken
 def mandatory_take():
-    global current_player, player_1, player_1k, player_2, player_2K
+    global current_player, player_1, player_1k, player_2, player_2K, undo_grid
     global must_take1, must_take2, must_take3, must_take4, move_turn, piece_moved
 
     must_take = False
