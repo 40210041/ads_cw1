@@ -1044,8 +1044,7 @@ def ai_select():
     redo_grid = copy.deepcopy(b_grid)
     update_player()
 
-# def history():
-
+#undo feature
 def undo():
     global move_turn, b_grid
 
@@ -1077,6 +1076,7 @@ def undo():
         else:
             print ("\nPlease enter 'yes' or 'no'.\n")
 
+#redo feature
 def redo():
     global move_turn, b_grid
 
@@ -1125,13 +1125,13 @@ def results():
 
     #if player 1 piece in grid and player 2 piece is not then player 1 wins
     if (p2_in_grid == False and p1_in_grid == True):
-        print("\nPlayer 1 wins\n")
+        print("\n** Player 1 wins **\n")
         print ("** Thanks for playing! **\n")
         sys.exit()
 
     #if player 2 piece in grid and player 1 piece is not then player 2 wins
     if (p1_in_grid == False and p2_in_grid == True):
-        print("\nPlayer 2 wins\n")
+        print("\n** Player 2 wins **\n")
         print ("** Thanks for playing! **\n")
         sys.exit()
 
