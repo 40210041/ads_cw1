@@ -9,6 +9,7 @@ import random
 
 #setup vars
 against_ai = False
+against_p2 = False
 player_1 = "r" #red
 player_1K = "R" #red king
 player_2 = "b" #black
@@ -33,6 +34,24 @@ b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
           ['r',' ','r',' ','r',' ','r',' '],
           [' ','r',' ','r',' ','r',' ','r'],
           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
+
+# b_grid = [[' ','b',' ',' ',' ','b',' ','b'], #[0][0] to [0][7]
+#           ['b',' ','b',' ','b',' ','b',' '],
+#           [' ',' ',' ','b',' ',' ',' ','b'],
+#           [' ',' ',' ',' ',' ',' ','b',' '], #test for r add take
+#           [' ',' ',' ',' ',' ',' ',' ',' '],
+#           ['r',' ','r',' ','r',' ','b',' '],
+#           [' ','r',' ','r',' ','r',' ','r'],
+#           ['r',' ','r',' ','r',' ','r',' ']] #[7][0] to [7][7]
+
+# b_grid = [[' ','b',' ','b',' ','b',' ','b'], #[0][0] to [0][7]
+#           ['b',' ','b',' ','b',' ','b',' '],
+#           [' ','r',' ','b',' ','b',' ','b'],
+#           [' ',' ',' ',' ',' ',' ',' ',' '], #test for b add take
+#           [' ','r',' ',' ',' ',' ',' ',' '],
+#           ['r',' ',' ',' ','r',' ',' ',' '],
+#           [' ','r',' ','r',' ','r',' ','r'],
+#           ['r',' ','r',' ',' ',' ','r',' ']] #[7][0] to [7][7]
 
 
 ## define functions ##
@@ -83,6 +102,7 @@ def print_grid():
 def ai_p2():
     global against_ai, against_p2
 
+    #vars for the game mode
     against_ai = False
     against_p2 = False
 
@@ -93,11 +113,13 @@ def ai_p2():
     print ("Please enter your choice: ")
     game_mode = input("> ")
 
+    #if input = 1 then set p2 to ai
     if (game_mode == "1"):
         against_ai = True
         against_p2 = False
         print ("\n** You are now playing against an AI, good luck! **\n")
 
+    #if input = 2 then set p2 to p2
     elif (game_mode == "2"):
         against_ai = False
         against_p2 = True
@@ -132,6 +154,7 @@ def mandatory_take():
     global current_player, player_1, player_1k, player_2, player_2K, undo_grid, redo_grid
     global must_take1, must_take2, must_take3, must_take4, move_turn, piece_moved
 
+    #set vars to false
     must_take = False
     must_take1 = False
     must_take2 = False
@@ -152,7 +175,7 @@ def mandatory_take():
                         if ((b_grid[temp_Y - 1][temp_X - 1] == 'b' or b_grid[temp_Y - 1][temp_X - 1] == 'B') and (current_player == (player_1))):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '): # if the space after is empty
                                 must_take1 = True
-                    elif (b_grid[temp_Y][temp_X] == (player_2K)):
+                    elif (b_grid[temp_Y][temp_X] == (player_2K)): #if the piece is p2
                         if((b_grid[temp_Y - 1][temp_X - 1] == 'r' or b_grid[temp_Y - 1][temp_X - 1] == 'R') and (current_king == (player_2K))):
                             if (b_grid[temp_Y - 2][temp_X - 2] == ' '):
                                 must_take1 = True
@@ -244,14 +267,14 @@ def mandatory_take():
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
                             if (temp_Y - 2 == 0):
-                                undo_grid = b_grid[:]
-                                undo_grid = copy.deepcopy(b_grid)
+                                undo_grid = b_grid[:] #set undo grid to current grid state
+                                undo_grid = copy.deepcopy(b_grid) #copy
                                 b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X - 2)
-                                redo_grid = b_grid[:]
-                                redo_grid = copy.deepcopy(b_grid)
+                                redo_grid = b_grid[:] #set redo grid to new state
+                                redo_grid = copy.deepcopy(b_grid) # copy
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -379,14 +402,14 @@ def mandatory_take():
                         #if the users choice matches with a statement which is true:
                         if (must_take1 == True and user_take == "1"):
                             if (temp_Y - 2 == 0):
-                                undo_grid = b_grid[:]
-                                undo_grid = copy.deepcopy(b_grid)
+                                undo_grid = b_grid[:] #set undo grid to current grid state
+                                undo_grid = copy.deepcopy(b_grid) #copy
                                 b_grid[temp_Y - 2][temp_X - 2] = (current_king)
                                 b_grid[temp_Y][temp_X] = (' ')
                                 b_grid[temp_Y - 1][temp_X - 1] = (' ')
                                 additional_takes(temp_Y - 2, temp_X - 2)
-                                redo_grid = b_grid[:]
-                                redo_grid = copy.deepcopy(b_grid)
+                                redo_grid = b_grid[:] #set redo grid to new state
+                                redo_grid = copy.deepcopy(b_grid) # copy
                                 move_turn += 1
                                 update_player()
                                 piece_moved = True
@@ -505,6 +528,7 @@ def mandatory_take():
                     else:
                         print ("\nPlease enter '1','2','3' or '4'. Or press enter to cycle through the choices (if more than one).\n")
 
+            #if i and j have reached 7, must take is true and choice has not been made, then loop back
             if (temp_Y == 7 and temp_X == 7):
                 if (must_take == True):
                     print ("\n* End of list, please make a choice *\n")
@@ -588,7 +612,7 @@ def additional_takes(temp_Y, temp_X):
 
     if (must_take1 == True or must_take2 == True or must_take3 == True or must_take4 == True): #if one of the statements are true
 
-        #print out options that can be taken
+        #take the first choice
         if (must_take1 == True):
             user_take = "1"
 
